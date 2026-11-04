@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <rect width="600" height="400" fill="#1C2522"/>
+  <!-- Light Oak Movement Floor -->
+  <rect x="0" y="240" width="600" height="160" fill="#BFA37E"/>
+  <!-- Garden Courtyard Outlook Glazing -->
+  <rect x="40" y="40" width="520" height="200" fill="#283E34"/>
+  <!-- Lush Greenery Outside -->
+  <circle cx="120" cy="140" r="60" fill="#1D3328"/>
+  <circle cx="260" cy="130" r="75" fill="#243F32"/>
+  <circle cx="420" cy="135" r="70" fill="#1D3328"/>
+  <!-- Bronze Window Mullions -->
+  <g stroke="#6E523A" stroke-width="4">
+    <rect x="40" y="40" width="520" height="200" fill="none"/>
+    <line x1="210" y1="40" x2="210" y2="240"/>
+    <line x1="380" y1="40" x2="380" y2="240"/>
+  </g>
+  <!-- Fluted Oak Wall Ribs (Left & Right) -->
+  <rect x="0" y="40" width="40" height="200" fill="#5A432F"/>
+  <rect x="560" y="40" width="40" height="200" fill="#5A432F"/>
+  <!-- Movement Benches -->
+  <rect x="180" y="290" width="100" height="30" fill="#4B3929" rx="3"/>
+  <rect x="340" y="290" width="100" height="30" fill="#4B3929" rx="3"/>
+</svg>

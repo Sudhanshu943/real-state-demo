@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <filter id="travertineGrain" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04 0.008" numOctaves="5" result="noise" />
+      <feColorMatrix type="matrix" values="
+        0 0 0 0 0.82
+        0 0 0 0 0.77
+        0 0 0 0 0.69
+        0 0 0 0.45 0" result="coloredNoise" />
+      <feBlend mode="multiply" in="SourceGraphic" in2="coloredNoise" />
+    </filter>
+    <linearGradient id="travBase" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EBE5D8"/>
+      <stop offset="25%" stop-color="#DFD8C9"/>
+      <stop offset="50%" stop-color="#D4CBBB"/>
+      <stop offset="75%" stop-color="#DFD8C9"/>
+      <stop offset="100%" stop-color="#E8E2D4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base Travertine Bed -->
+  <rect width="800" height="600" fill="url(#travBase)"/>
+  <rect width="800" height="600" fill="#D6CDBC" filter="url(#travertineGrain)" opacity="0.85"/>
+
+  <!-- Distinct Horizontal Veining Stratifications -->
+  
+    <path d="M 0 45 Q 200 53 400 47 T 800 41" 
+          stroke="#B8AD9C" 
+          stroke-width="3" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 47 Q 250 57 550 39 T 800 49" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 95 Q 200 87 400 97 T 800 91" 
+          stroke="#C8BEAE" 
+          stroke-width="1.5" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 97 Q 250 107 550 89 T 800 99" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 140 Q 200 148 400 142 T 800 136" 
+          stroke="#C8BEAE" 
+          stroke-width="3" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 142 Q 250 152 550 134 T 800 144" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 185 Q 200 177 400 187 T 800 181" 
+          stroke="#B8AD9C" 
+          stroke-width="1.5" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 187 Q 250 197 550 179 T 800 189" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 230 Q 200 238 400 232 T 800 226" 
+          stroke="#C8BEAE" 
+          stroke-width="3" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 232 Q 250 242 550 224 T 800 234" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 275 Q 200 267 400 277 T 800 271" 
+          stroke="#C8BEAE" 
+          stroke-width="1.5" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 277 Q 250 287 550 269 T 800 279" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 320 Q 200 328 400 322 T 800 316" 
+          stroke="#B8AD9C" 
+          stroke-width="3" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 322 Q 250 332 550 314 T 800 324" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 365 Q 200 357 400 367 T 800 361" 
+          stroke="#C8BEAE" 
+          stroke-width="1.5" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 367 Q 250 377 550 359 T 800 369" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 410 Q 200 418 400 412 T 800 406" 
+          stroke="#C8BEAE" 
+          stroke-width="3" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 412 Q 250 422 550 404 T 800 414" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 455 Q 200 447 400 457 T 800 451" 
+          stroke="#B8AD9C" 
+          stroke-width="1.5" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 457 Q 250 467 550 449 T 800 459" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 500 Q 200 508 400 502 T 800 496" 
+          stroke="#C8BEAE" 
+          stroke-width="3" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 502 Q 250 512 550 494 T 800 504" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+    <path d="M 0 545 Q 200 537 400 547 T 800 541" 
+          stroke="#C8BEAE" 
+          stroke-width="1.5" 
+          fill="none" 
+          opacity="0.65" />
+    <path d="M 0 547 Q 250 557 550 539 T 800 549" 
+          stroke="#9E9281" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.35" />
+  
+
+  <!-- Porous Micro-Cavities & Natural Fossil Voids -->
+  
+    <ellipse cx="120" cy="140" rx="18" ry="5" fill="#948877" opacity="0.55"/>
+    <ellipse cx="121" cy="141" rx="12.6" ry="3.5" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="280" cy="90" rx="24" ry="6" fill="#948877" opacity="0.55"/>
+    <ellipse cx="281" cy="91" rx="16.799999999999997" ry="4.199999999999999" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="420" cy="210" rx="16" ry="4" fill="#948877" opacity="0.55"/>
+    <ellipse cx="421" cy="211" rx="11.2" ry="2.8" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="640" cy="180" rx="28" ry="7" fill="#948877" opacity="0.55"/>
+    <ellipse cx="641" cy="181" rx="19.599999999999998" ry="4.8999999999999995" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="90" cy="340" rx="22" ry="6" fill="#948877" opacity="0.55"/>
+    <ellipse cx="91" cy="341" rx="15.399999999999999" ry="4.199999999999999" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="310" cy="410" rx="30" ry="8" fill="#948877" opacity="0.55"/>
+    <ellipse cx="311" cy="411" rx="21" ry="5.6" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="540" cy="370" rx="20" ry="5" fill="#948877" opacity="0.55"/>
+    <ellipse cx="541" cy="371" rx="14" ry="3.5" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="710" cy="450" rx="25" ry="6" fill="#948877" opacity="0.55"/>
+    <ellipse cx="711" cy="451" rx="17.5" ry="4.199999999999999" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="190" cy="490" rx="26" ry="7" fill="#948877" opacity="0.55"/>
+    <ellipse cx="191" cy="491" rx="18.2" ry="4.8999999999999995" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="450" cy="530" rx="18" ry="4" fill="#948877" opacity="0.55"/>
+    <ellipse cx="451" cy="531" rx="12.6" ry="2.8" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="620" cy="80" rx="15" ry="5" fill="#948877" opacity="0.55"/>
+    <ellipse cx="621" cy="81" rx="10.5" ry="3.5" fill="#7A6F5F" opacity="0.6"/>
+  
+    <ellipse cx="360" cy="280" rx="32" ry="9" fill="#948877" opacity="0.55"/>
+    <ellipse cx="361" cy="281" rx="22.4" ry="6.3" fill="#7A6F5F" opacity="0.6"/>
+  
+</svg>

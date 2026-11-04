@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <defs>
+    <linearGradient id="twilightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141E1A"/>
+      <stop offset="45%" stop-color="#22322A"/>
+      <stop offset="85%" stop-color="#7C4E3A"/>
+      <stop offset="100%" stop-color="#C27A52"/>
+    </linearGradient>
+    <linearGradient id="plungePool" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2D5A50"/>
+      <stop offset="100%" stop-color="#16312B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Twilight Sky Arc -->
+  <rect width="800" height="360" fill="url(#twilightSky)"/>
+
+  <!-- Distant City Horizon Silhouette -->
+  <path d="M 0 310 L 200 310 L 200 270 L 280 270 L 280 310 L 480 310 L 480 250 L 550 250 L 550 310 L 800 310 L 800 360 L 0 360 Z" fill="#18221D"/>
+
+  <!-- Penthouse Wrap-around Sky Terrace (36 m2) -->
+  <rect x="0" y="340" width="800" height="180" fill="#D2CABA"/>
+  <line x1="0" y1="410" x2="800" y2="410" stroke="#ABA08E" stroke-width="1.5"/>
+
+  <!-- Private Rooftop Infinity Plunge Pool -->
+  <rect x="460" y="355" width="300" height="135" fill="url(#plungePool)" rx="3"/>
+  <rect x="456" y="351" width="308" height="6" fill="#EDE7DA"/>
+
+  <!-- Cantilevered Bronze Crown Pergola Over Sky Terrace -->
+  <rect x="40" y="60" width="440" height="20" fill="#6A4E35"/>
+  
+    <rect x="60" y="40" width="8" height="40" fill="#4B3624" />
+  
+    <rect x="130" y="40" width="8" height="40" fill="#4B3624" />
+  
+    <rect x="200" y="40" width="8" height="40" fill="#4B3624" />
+  
+    <rect x="270" y="40" width="8" height="40" fill="#4B3624" />
+  
+    <rect x="340" y="40" width="8" height="40" fill="#4B3624" />
+  
+    <rect x="410" y="40" width="8" height="40" fill="#4B3624" />
+  
+    <rect x="470" y="40" width="8" height="40" fill="#4B3624" />
+  
+  <!-- Pergola Support Columns -->
+  <rect x="60" y="80" width="16" height="270" fill="#4B3624"/>
+  <rect x="440" y="80" width="16" height="270" fill="#4B3624"/>
+
+  <!-- Double-Height Penthouse Glass Aperture (Left) -->
+  <rect x="80" y="80" width="350" height="260" fill="rgba(255,224,180,0.85)"/>
+  <!-- Bronze Mullions -->
+  <line x1="195" y1="80" x2="195" y2="340" stroke="#4B3624" stroke-width="4"/>
+  <line x1="310" y1="80" x2="310" y2="340" stroke="#4B3624" stroke-width="4"/>
+  <line x1="80" y1="210" x2="430" y2="210" stroke="#4B3624" stroke-width="4"/>
+
+  <!-- Interior Penthouse Chandelier -->
+  <circle cx="250" cy="140" r="14" fill="#FFF2DF" filter="drop-shadow(0 0 8px #FFDCA8)"/>
+  <line x1="250" y1="80" x2="250" y2="130" stroke="#6A4E35" stroke-width="1.5"/>
+
+  <!-- Terrace Outdoor Daybed & Loungers -->
+  <rect x="180" y="390" width="110" height="70" fill="#EAE5DC" rx="4" stroke="#5A432F" stroke-width="2"/>
+  <rect x="310" y="400" width="90" height="55" fill="#EAE5DC" rx="4" stroke="#5A432F" stroke-width="2"/>
+</svg>

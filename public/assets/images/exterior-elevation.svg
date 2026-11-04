@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <rect width="800" height="1000" fill="#F4F0E8"/>
+  <g transform="translate(200, 100)">
+    <rect x="0" y="0" width="400" height="800" fill="#E8E3D8" stroke="#18221F" stroke-width="2"/>
+    <line x1="-20" y1="0" x2="420" y2="0" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="61.5" x2="420" y2="61.5" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="123" x2="420" y2="123" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="184.5" x2="420" y2="184.5" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="246" x2="420" y2="246" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="307.5" x2="420" y2="307.5" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="369" x2="420" y2="369" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="430.5" x2="420" y2="430.5" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="492" x2="420" y2="492" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="553.5" x2="420" y2="553.5" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="615" x2="420" y2="615" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="676.5" x2="420" y2="676.5" stroke="#28463C" stroke-width="3"/><line x1="-20" y1="738" x2="420" y2="738" stroke="#28463C" stroke-width="3"/>
+    <text x="200" y="-30" text-anchor="middle" font-family="serif" font-size="24" fill="#18221F">AUREL TOWER ELEVATION</text>
+  </g>
+</svg>

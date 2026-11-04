@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "id": "aurel",
+    "name": "AUREL",
+    "tagline": "A different perspective on home.",
+    "isDemo": true,
+    "locationLabel": "An illustrative urban garden district",
+    "currency": "INR",
+    "areaUnit": "m2",
+    "areaDefinitionLabel": "Illustrative internal area; terraces shown separately",
+    "priceDisclosure": "Sample pricing and availability — concept demonstration only",
+    "geographyDisclosure": "Illustrative setting, not a geographic map",
+    "heroAssetId": "exterior-hero-desktop",
+    "heroMobileAssetId": "exterior-hero-mobile"
+  },
+  "building": {
+    "id": "aurel-a",
+    "residentialFloors": 12,
+    "exampleFloors": [4, 8, 12],
+    "widthM": 28,
+    "depthM": 20,
+    "lobbyHeightM": 4.6,
+    "floorHeightM": 3.4,
+    "northAxis": "negative-z",
+    "fallbackAssetId": "exterior-fallback"
+  },
+  "collections": [
+    {"id":"garden","name":"Garden Residence","bedrooms":2,"internalAreaM2":160,"terraceAreaM2":24,"planId":"plan-garden","thumbnailAssetId":"collection-garden","description":"A two-bedroom concept with a generous planted terrace."},
+    {"id":"skyline","name":"Skyline Residence","bedrooms":3,"internalAreaM2":192,"terraceAreaM2":12,"planId":"plan-skyline","thumbnailAssetId":"collection-skyline","description":"A three-bedroom concept framed by open living spaces."},
+    {"id":"penthouse","name":"Terrace Penthouse","bedrooms":3,"internalAreaM2":192,"terraceAreaM2":36,"planId":"plan-penthouse","thumbnailAssetId":"collection-penthouse","description":"A top-floor concept with an extended outdoor terrace."}
+  ],
+  "units": [
+    {"id":"A0401","buildingId":"aurel-a","floor":4,"collectionId":"garden","position":"west","bedrooms":2,"internalAreaM2":160,"terraceAreaM2":24,"areaDefinition":"illustrative-internal","status":"available","samplePriceINR":42500000,"planId":"plan-garden","planOrientation":"west","sceneNodeId":"unit_A0401","tourId":"skyline-show-residence","tourRelationship":"representative","isDemo":true},
+    {"id":"A0402","buildingId":"aurel-a","floor":4,"collectionId":"garden","position":"east","bedrooms":2,"internalAreaM2":160,"terraceAreaM2":24,"areaDefinition":"illustrative-internal","status":"reserved","samplePriceINR":43500000,"planId":"plan-garden","planOrientation":"east","sceneNodeId":"unit_A0402","tourId":"skyline-show-residence","tourRelationship":"representative","isDemo":true},
+    {"id":"A0801","buildingId":"aurel-a","floor":8,"collectionId":"skyline","position":"west","bedrooms":3,"internalAreaM2":192,"terraceAreaM2":12,"areaDefinition":"illustrative-internal","status":"available","samplePriceINR":56000000,"planId":"plan-skyline","planOrientation":"west","sceneNodeId":"unit_A0801","tourId":"skyline-show-residence","tourRelationship":"representative","isDemo":true},
+    {"id":"A0802","buildingId":"aurel-a","floor":8,"collectionId":"skyline","position":"east","bedrooms":3,"internalAreaM2":192,"terraceAreaM2":12,"areaDefinition":"illustrative-internal","status":"sold","samplePriceINR":57500000,"planId":"plan-skyline","planOrientation":"east","sceneNodeId":"unit_A0802","tourId":"skyline-show-residence","tourRelationship":"representative","isDemo":true},
+    {"id":"A1201","buildingId":"aurel-a","floor":12,"collectionId":"penthouse","position":"west","bedrooms":3,"internalAreaM2":192,"terraceAreaM2":36,"areaDefinition":"illustrative-internal","status":"available","samplePriceINR":82500000,"planId":"plan-penthouse","planOrientation":"west","sceneNodeId":"unit_A1201","tourId":"skyline-show-residence","tourRelationship":"representative","isDemo":true},
+    {"id":"A1202","buildingId":"aurel-a","floor":12,"collectionId":"penthouse","position":"east","bedrooms":3,"internalAreaM2":192,"terraceAreaM2":36,"areaDefinition":"illustrative-internal","status":"reserved","samplePriceINR":84500000,"planId":"plan-penthouse","planOrientation":"east","sceneNodeId":"unit_A1202","tourId":"skyline-show-residence","tourRelationship":"representative","isDemo":true}
+  ],
+  "plans": [
+    {"id":"plan-garden","collectionId":"garden","assetId":"plan-garden-source","schematic":true,"northAxis":"negative-z","roomIds":["living","kitchen","primary-bedroom","bedroom-2","bath-1","bath-2","entry","terrace"],"tourRoomMapping":{}},
+    {"id":"plan-skyline","collectionId":"skyline","assetId":"plan-skyline-source","schematic":true,"northAxis":"negative-z","roomIds":["living","kitchen","primary-bedroom","bedroom-2","bedroom-3","bath-1","bath-2","entry","balcony"],"tourRoomMapping":{"living":"living","primary-bedroom":"bedroom","balcony":"balcony"}},
+    {"id":"plan-penthouse","collectionId":"penthouse","assetId":"plan-penthouse-source","schematic":true,"northAxis":"negative-z","roomIds":["living","kitchen","primary-bedroom","bedroom-2","bedroom-3","bath-1","bath-2","entry","terrace"],"tourRoomMapping":{}}
+  ],
+  "tours": [
+    {
+      "id":"skyline-show-residence",
+      "name":"Skyline show residence",
+      "relationship":"representative",
+      "disclosure":"Representative Skyline interior; layout and view vary by home.",
+      "defaultRoomId":"living",
+      "rooms":[
+        {"id":"living","label":"Living room","stillAssetId":"tour-living-still","panoramaAssetId":"tour-living-panorama","cameraNodeId":"interior_living","hotspots":[{"targetRoomId":"bedroom","label":"Go to bedroom"},{"targetRoomId":"balcony","label":"Step onto balcony"}]},
+        {"id":"bedroom","label":"Primary bedroom","stillAssetId":"tour-bedroom-still","panoramaAssetId":"tour-bedroom-panorama","cameraNodeId":"interior_bedroom","hotspots":[{"targetRoomId":"living","label":"Return to living room"}]},
+        {"id":"balcony","label":"Balcony","stillAssetId":"tour-balcony-still","panoramaAssetId":"tour-balcony-panorama","cameraNodeId":"interior_balcony","hotspots":[{"targetRoomId":"living","label":"Return inside"}]}
+      ]
+    }
+  ],
+  "landmarks": [
+    {"id":"garden-park","name":"Garden park","description":"An illustrative green space within the concept district.","position":[-95,0,-60]},
+    {"id":"transit-square","name":"Transit square","description":"A conceptual transit connection; no real service or travel time is claimed.","position":[90,0,-80]},
+    {"id":"arts-court","name":"Arts court","description":"A small cultural courtyard imagined as part of the neighbourhood.","position":[75,0,65]},
+    {"id":"market-lane","name":"Market lane","description":"An illustrative cluster of cafes and everyday shops.","position":[-80,0,70]},
+    {"id":"work-quarter","name":"Work quarter","description":"A conceptual employment district shown for context.","position":[120,0,10]}
+  ],
+  "amenities": [
+    {"id":"roof-garden","name":"Roof garden","description":"Planted seating spaces above the neighbourhood.","assetId":"amenity-roof"},
+    {"id":"resident-lounge","name":"Resident lounge","description":"A calm shared setting for conversation and reading.","assetId":"amenity-lounge"},
+    {"id":"wellness-studio","name":"Wellness studio","description":"A light-filled concept space for everyday movement.","assetId":"amenity-wellness"},
+    {"id":"shaded-arrival","name":"Shaded arrival","description":"A landscaped entrance framed by stone and planting.","assetId":"amenity-arrival"}
+  ]
+}

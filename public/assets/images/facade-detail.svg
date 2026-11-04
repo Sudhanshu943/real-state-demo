@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <linearGradient id="stoneClose" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EDE7DB"/>
+      <stop offset="60%" stop-color="#DCD5C6"/>
+      <stop offset="100%" stop-color="#C5BCAB"/>
+    </linearGradient>
+    <linearGradient id="bronzeProfile" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7B6145"/>
+      <stop offset="40%" stop-color="#5E4632"/>
+      <stop offset="100%" stop-color="#3D2E20"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="800" fill="#202A26"/>
+
+  <!-- Massive Honed Travertine Pier (Left 220px) -->
+  <rect x="0" y="0" width="220" height="800" fill="url(#stoneClose)"/>
+  <!-- Travertine Fluting & Chamfer Details -->
+  
+    <line x1="30" y1="0" x2="30" y2="800" stroke="#ABA08E" stroke-width="2" />
+    <line x1="32" y1="0" x2="32" y2="800" stroke="#FFF" stroke-width="1" opacity="0.4" />
+  
+    <line x1="70" y1="0" x2="70" y2="800" stroke="#ABA08E" stroke-width="2" />
+    <line x1="72" y1="0" x2="72" y2="800" stroke="#FFF" stroke-width="1" opacity="0.4" />
+  
+    <line x1="110" y1="0" x2="110" y2="800" stroke="#ABA08E" stroke-width="2" />
+    <line x1="112" y1="0" x2="112" y2="800" stroke="#FFF" stroke-width="1" opacity="0.4" />
+  
+    <line x1="150" y1="0" x2="150" y2="800" stroke="#ABA08E" stroke-width="2" />
+    <line x1="152" y1="0" x2="152" y2="800" stroke="#FFF" stroke-width="1" opacity="0.4" />
+  
+    <line x1="190" y1="0" x2="190" y2="800" stroke="#ABA08E" stroke-width="2" />
+    <line x1="192" y1="0" x2="192" y2="800" stroke="#FFF" stroke-width="1" opacity="0.4" />
+  
+
+  <!-- Bronze Reveal Channel (Shadow Gap) -->
+  <rect x="220" y="0" width="24" height="800" fill="url(#bronzeProfile)"/>
+
+  <!-- Floor Slab Edge with Deep Shadow -->
+  <rect x="220" y="360" width="380" height="48" fill="url(#stoneClose)"/>
+  <rect x="220" y="408" width="380" height="12" fill="#2C231A"/>
+
+  <!-- High-Performance Acoustic Glazing with Warm Interior Glow -->
+  <rect x="244" y="40" width="356" height="320" fill="#283A34"/>
+  <rect x="244" y="420" width="356" height="340" fill="#E8B574" opacity="0.85"/>
+
+  <!-- Bronze Mullion & Louver Profile -->
+  <rect x="360" y="0" width="16" height="800" fill="url(#bronzeProfile)"/>
+  <rect x="376" y="0" width="4" height="800" fill="#1C150E"/>
+
+  <!-- Cantilevered Bronze Glass Balustrade -->
+  <rect x="244" y="320" width="356" height="40" fill="rgba(200,230,240,0.3)"/>
+  <rect x="244" y="318" width="356" height="6" fill="url(#bronzeProfile)"/>
+
+  <!-- Inset Annotation Labels -->
+  <rect x="24" y="730" width="280" height="42" fill="rgba(18,26,23,0.9)" rx="3"/>
+  <text x="40" y="756" fill="#F4EFE6" font-family="sans-serif" font-size="12" font-weight="600" letter-spacing="0.5">
+    FACADE REVEAL &amp; MULLION DETAIL
+  </text>
+</svg>

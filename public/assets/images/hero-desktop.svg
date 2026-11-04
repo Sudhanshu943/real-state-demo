@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" width="1920" height="1200">
+  <defs>
+    <radialGradient id="skyGrad" cx="70%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#2D3D36"/>
+      <stop offset="45%" stop-color="#1B2823"/>
+      <stop offset="85%" stop-color="#111A17"/>
+      <stop offset="100%" stop-color="#0B1210"/>
+    </radialGradient>
+    <linearGradient id="horizonGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C77D55" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#E8A87C" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="travertine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D5CEBF"/>
+      <stop offset="50%" stop-color="#C2B8A5"/>
+      <stop offset="100%" stop-color="#AEA390"/>
+    </linearGradient>
+    <linearGradient id="bronzeLustre" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8A6D4B"/>
+      <stop offset="60%" stop-color="#5E4632"/>
+      <stop offset="100%" stop-color="#3D2E20"/>
+    </linearGradient>
+    <linearGradient id="windowWarm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE0B2" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#E29C46" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="waterReflect" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A2D25"/>
+      <stop offset="100%" stop-color="#0E1914"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky Backdrop -->
+  <rect width="1920" height="1200" fill="url(#skyGrad)"/>
+  <rect x="0" y="700" width="1920" height="400" fill="url(#horizonGlow)"/>
+
+  <!-- Distant City Silhouette -->
+  <path d="M 0 950 L 300 950 L 300 910 L 380 910 L 380 930 L 520 930 L 520 890 L 640 890 L 640 950 L 900 950 L 900 920 L 1050 920 L 1050 950 L 1920 950 L 1920 1200 L 0 1200 Z" fill="#141E1A" opacity="0.8"/>
+
+  <!-- Ground Plinth & Reflecting Pool -->
+  <rect x="700" y="980" width="1220" height="220" fill="#16201C"/>
+  <rect x="800" y="1030" width="340" height="120" fill="url(#waterReflect)"/>
+
+  <!-- AUREL Tower Composition (Framed right 55%) -->
+  <g transform="translate(1120, 140)">
+    <!-- Main Tower Mass -->
+    <rect x="0" y="0" width="560" height="880" fill="url(#travertine)" rx="2"/>
+
+    <!-- Floor Slabs & Shadow Reveals -->
+    
+      <rect x="-18" y="0" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="16" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="68" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="84" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="136" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="152" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="204" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="220" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="272" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="288" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="340" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="356" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="408" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="424" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="476" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="492" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="544" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="560" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="612" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="628" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="680" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="696" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="748" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="764" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+      <rect x="-18" y="816" width="596" height="16" fill="#EDE7DA" />
+      <rect x="-18" y="832" width="596" height="4" fill="#6A5A48" opacity="0.6" />
+    
+
+    <!-- Vertical Fluted Travertine Piers -->
+    
+      <rect x="30" y="0" width="16" height="880" fill="url(#travertine)" />
+      <rect x="44" y="0" width="2" height="880" fill="#3D2E20" opacity="0.4" />
+    
+      <rect x="130" y="0" width="16" height="880" fill="url(#travertine)" />
+      <rect x="144" y="0" width="2" height="880" fill="#3D2E20" opacity="0.4" />
+    
+      <rect x="230" y="0" width="16" height="880" fill="url(#travertine)" />
+      <rect x="244" y="0" width="2" height="880" fill="#3D2E20" opacity="0.4" />
+    
+      <rect x="330" y="0" width="16" height="880" fill="url(#travertine)" />
+      <rect x="344" y="0" width="2" height="880" fill="#3D2E20" opacity="0.4" />
+    
+      <rect x="430" y="0" width="16" height="880" fill="url(#travertine)" />
+      <rect x="444" y="0" width="2" height="880" fill="#3D2E20" opacity="0.4" />
+    
+      <rect x="520" y="0" width="16" height="880" fill="url(#travertine)" />
+      <rect x="534" y="0" width="2" height="880" fill="#3D2E20" opacity="0.4" />
+    
+
+    <!-- Bronze Vertical Louvers & Fins -->
+    
+      <rect x="75" y="0" width="6" height="880" fill="url(#bronzeLustre)" />
+    
+      <rect x="175" y="0" width="6" height="880" fill="url(#bronzeLustre)" />
+    
+      <rect x="275" y="0" width="6" height="880" fill="url(#bronzeLustre)" />
+    
+      <rect x="375" y="0" width="6" height="880" fill="url(#bronzeLustre)" />
+    
+      <rect x="475" y="0" width="6" height="880" fill="url(#bronzeLustre)" />
+    
+
+    <!-- Illuminated Window Bays (Even floors dusk lit, odd reflective) -->
+    
+      <rect x="48" y="20" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="148" y="20" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="248" y="20" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="348" y="20" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+    
+      <rect x="48" y="88" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="148" y="88" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="248" y="88" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="348" y="88" width="78" height="46" fill="#24342E" opacity="0.9" />
+    
+      <rect x="48" y="156" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="148" y="156" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="248" y="156" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="348" y="156" width="78" height="46" fill="#24342E" opacity="0.9" />
+    
+      <rect x="48" y="224" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="148" y="224" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="248" y="224" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="348" y="224" width="78" height="46" fill="#24342E" opacity="0.9" />
+    
+      <rect x="48" y="292" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="148" y="292" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="248" y="292" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="348" y="292" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+    
+      <rect x="48" y="360" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="148" y="360" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="248" y="360" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="348" y="360" width="78" height="46" fill="#24342E" opacity="0.9" />
+    
+      <rect x="48" y="428" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="148" y="428" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="248" y="428" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="348" y="428" width="78" height="46" fill="#24342E" opacity="0.9" />
+    
+      <rect x="48" y="496" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="148" y="496" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="248" y="496" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="348" y="496" width="78" height="46" fill="#24342E" opacity="0.9" />
+    
+      <rect x="48" y="564" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="148" y="564" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="248" y="564" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="348" y="564" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+    
+      <rect x="48" y="632" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="148" y="632" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="248" y="632" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="348" y="632" width="78" height="46" fill="#24342E" opacity="0.9" />
+    
+      <rect x="48" y="700" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="148" y="700" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="248" y="700" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="348" y="700" width="78" height="46" fill="#24342E" opacity="0.9" />
+    
+      <rect x="48" y="768" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="148" y="768" width="78" height="46" fill="#24342E" opacity="0.9" />
+      <rect x="248" y="768" width="78" height="46" fill="url(#windowWarm)" opacity="0.9" />
+      <rect x="348" y="768" width="78" height="46" fill="#24342E" opacity="0.9" />
+    
+
+    <!-- Balcony Terraces & Bronze Railings -->
+    
+      <rect x="-35" y="48" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="28" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="36" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="116" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="96" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="104" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="184" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="164" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="172" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="252" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="232" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="240" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="320" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="300" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="308" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="388" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="368" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="376" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="456" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="436" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="444" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="524" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="504" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="512" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="592" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="572" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="580" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="660" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="640" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="648" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="728" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="708" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="716" width="30" height="12" fill="#28463C" rx="2" />
+    
+      <rect x="-35" y="796" width="250" height="12" fill="#D5CEBF" />
+      <rect x="-35" y="776" width="250" height="20" fill="none" stroke="url(#bronzeLustre)" stroke-width="2" />
+      <!-- Planter Greenery -->
+      <rect x="-35" y="784" width="30" height="12" fill="#28463C" rx="2" />
+    
+
+    <!-- Crown Pergola Structure (Level 13) -->
+    <rect x="-24" y="-35" width="608" height="35" fill="none" stroke="url(#bronzeLustre)" stroke-width="6" />
+    
+      <rect x="40" y="-35" width="8" height="35" fill="url(#bronzeLustre)" />
+    
+      <rect x="140" y="-35" width="8" height="35" fill="url(#bronzeLustre)" />
+    
+      <rect x="240" y="-35" width="8" height="35" fill="url(#bronzeLustre)" />
+    
+      <rect x="340" y="-35" width="8" height="35" fill="url(#bronzeLustre)" />
+    
+      <rect x="440" y="-35" width="8" height="35" fill="url(#bronzeLustre)" />
+    
+      <rect x="540" y="-35" width="8" height="35" fill="url(#bronzeLustre)" />
+    
+  </g>
+</svg>

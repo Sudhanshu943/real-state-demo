@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <rect width="600" height="400" fill="#1C2622"/>
+  <!-- Smoked Oak Parquetry -->
+  <rect x="0" y="260" width="600" height="140" fill="#8C6E4E"/>
+  <!-- Fluted Walnut Bookcase Wall -->
+  <rect x="40" y="40" width="220" height="230" fill="#3D2C1E"/>
+  <line x1="40" y1="55" x2="260" y2="55" stroke="#7B6145" stroke-width="4"/><line x1="40" y1="100" x2="260" y2="100" stroke="#7B6145" stroke-width="4"/><line x1="40" y1="145" x2="260" y2="145" stroke="#7B6145" stroke-width="4"/><line x1="40" y1="190" x2="260" y2="190" stroke="#7B6145" stroke-width="4"/><line x1="40" y1="235" x2="260" y2="235" stroke="#7B6145" stroke-width="4"/>
+  <!-- Books on shelves -->
+  <rect x="60" y="65" width="25" height="30" fill="#967B5E" rx="1"/><rect x="100" y="65" width="25" height="30" fill="#967B5E" rx="1"/><rect x="140" y="65" width="25" height="30" fill="#967B5E" rx="1"/><rect x="180" y="65" width="25" height="30" fill="#967B5E" rx="1"/><rect x="220" y="65" width="25" height="30" fill="#967B5E" rx="1"/>
+  <!-- Double-Height Limestone Fireplace -->
+  <rect x="320" y="20" width="160" height="250" fill="#D6CFC1"/>
+  <rect x="350" y="160" width="100" height="90" fill="#18130E" rx="2"/>
+  <circle cx="400" cy="210" r="14" fill="#FFB054" filter="drop-shadow(0 0 10px #FF8822)"/>
+  <!-- Velvet Lounge Armchairs -->
+  <rect x="200" y="270" width="80" height="65" fill="#4B5E55" rx="6"/>
+  <rect x="490" y="270" width="80" height="65" fill="#4B5E55" rx="6"/>
+  <!-- Round Bronze Drinks Table -->
+  <circle cx="340" cy="315" r="22" fill="#8A6D4B"/>
+</svg>

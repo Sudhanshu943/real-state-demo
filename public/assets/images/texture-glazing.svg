@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="glassSky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D4440"/>
+      <stop offset="40%" stop-color="#1E312D"/>
+      <stop offset="70%" stop-color="#283F3A"/>
+      <stop offset="100%" stop-color="#14211D"/>
+    </linearGradient>
+    <linearGradient id="specularGleam" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.45)"/>
+      <stop offset="25%" stop-color="rgba(255,255,255,0.1)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0)"/>
+      <stop offset="75%" stop-color="rgba(240,195,145,0.2)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#glassSky)"/>
+  <rect width="800" height="600" fill="url(#specularGleam)"/>
+
+  <!-- Double-Glazed Argon Cavity Shadow Edge -->
+  <rect x="0" y="0" width="16" height="600" fill="#0D1412"/>
+  <line x1="16" y1="0" x2="16" y2="600" stroke="#7A9E96" stroke-width="1.5" opacity="0.6"/>
+  <rect x="784" y="0" width="16" height="600" fill="#0D1412"/>
+  <line x1="784" y1="0" x2="784" y2="600" stroke="#7A9E96" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Diagonal Acoustic Lamination Sheen -->
+  <line x1="100" y1="0" x2="700" y2="600" stroke="rgba(255,255,255,0.18)" stroke-width="8" filter="blur(4px)"/>
+</svg>

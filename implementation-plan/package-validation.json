@@ -1,0 +1,403 @@
+{
+  "scope": "Specification-package checks only; no website exists or was tested",
+  "checks": 99,
+  "failures": [],
+  "results": [
+    {
+      "check": "Unique unit IDs",
+      "passed": true
+    },
+    {
+      "check": "Unique collection IDs",
+      "passed": true
+    },
+    {
+      "check": "Unique plan IDs",
+      "passed": true
+    },
+    {
+      "check": "Unique tour IDs",
+      "passed": true
+    },
+    {
+      "check": "Unique asset IDs",
+      "passed": true
+    },
+    {
+      "check": "Unique landmark IDs",
+      "passed": true
+    },
+    {
+      "check": "Unique amenity IDs",
+      "passed": true
+    },
+    {
+      "check": "Six homes and three collections",
+      "passed": true
+    },
+    {
+      "check": "Canonical example floors",
+      "passed": true
+    },
+    {
+      "check": "Twelve residential floors",
+      "passed": true
+    },
+    {
+      "check": "Five landmarks",
+      "passed": true
+    },
+    {
+      "check": "Four amenities",
+      "passed": true
+    },
+    {
+      "check": "Unique unit scene proxies",
+      "passed": true
+    },
+    {
+      "check": "Two opposite homes on floor 4",
+      "passed": true
+    },
+    {
+      "check": "Two opposite homes on floor 8",
+      "passed": true
+    },
+    {
+      "check": "Two opposite homes on floor 12",
+      "passed": true
+    },
+    {
+      "check": "A0401: references resolve",
+      "passed": true
+    },
+    {
+      "check": "A0401: building and floor valid",
+      "passed": true
+    },
+    {
+      "check": "A0401: status and demo flag",
+      "passed": true
+    },
+    {
+      "check": "A0401: truthful definitions",
+      "passed": true
+    },
+    {
+      "check": "A0401: proxy/orientation mapping",
+      "passed": true
+    },
+    {
+      "check": "A0401: collection metrics match",
+      "passed": true
+    },
+    {
+      "check": "A0401: collection/plan match",
+      "passed": true
+    },
+    {
+      "check": "A0401: positive metrics",
+      "passed": true
+    },
+    {
+      "check": "A0402: references resolve",
+      "passed": true
+    },
+    {
+      "check": "A0402: building and floor valid",
+      "passed": true
+    },
+    {
+      "check": "A0402: status and demo flag",
+      "passed": true
+    },
+    {
+      "check": "A0402: truthful definitions",
+      "passed": true
+    },
+    {
+      "check": "A0402: proxy/orientation mapping",
+      "passed": true
+    },
+    {
+      "check": "A0402: collection metrics match",
+      "passed": true
+    },
+    {
+      "check": "A0402: collection/plan match",
+      "passed": true
+    },
+    {
+      "check": "A0402: positive metrics",
+      "passed": true
+    },
+    {
+      "check": "A0801: references resolve",
+      "passed": true
+    },
+    {
+      "check": "A0801: building and floor valid",
+      "passed": true
+    },
+    {
+      "check": "A0801: status and demo flag",
+      "passed": true
+    },
+    {
+      "check": "A0801: truthful definitions",
+      "passed": true
+    },
+    {
+      "check": "A0801: proxy/orientation mapping",
+      "passed": true
+    },
+    {
+      "check": "A0801: collection metrics match",
+      "passed": true
+    },
+    {
+      "check": "A0801: collection/plan match",
+      "passed": true
+    },
+    {
+      "check": "A0801: positive metrics",
+      "passed": true
+    },
+    {
+      "check": "A0802: references resolve",
+      "passed": true
+    },
+    {
+      "check": "A0802: building and floor valid",
+      "passed": true
+    },
+    {
+      "check": "A0802: status and demo flag",
+      "passed": true
+    },
+    {
+      "check": "A0802: truthful definitions",
+      "passed": true
+    },
+    {
+      "check": "A0802: proxy/orientation mapping",
+      "passed": true
+    },
+    {
+      "check": "A0802: collection metrics match",
+      "passed": true
+    },
+    {
+      "check": "A0802: collection/plan match",
+      "passed": true
+    },
+    {
+      "check": "A0802: positive metrics",
+      "passed": true
+    },
+    {
+      "check": "A1201: references resolve",
+      "passed": true
+    },
+    {
+      "check": "A1201: building and floor valid",
+      "passed": true
+    },
+    {
+      "check": "A1201: status and demo flag",
+      "passed": true
+    },
+    {
+      "check": "A1201: truthful definitions",
+      "passed": true
+    },
+    {
+      "check": "A1201: proxy/orientation mapping",
+      "passed": true
+    },
+    {
+      "check": "A1201: collection metrics match",
+      "passed": true
+    },
+    {
+      "check": "A1201: collection/plan match",
+      "passed": true
+    },
+    {
+      "check": "A1201: positive metrics",
+      "passed": true
+    },
+    {
+      "check": "A1202: references resolve",
+      "passed": true
+    },
+    {
+      "check": "A1202: building and floor valid",
+      "passed": true
+    },
+    {
+      "check": "A1202: status and demo flag",
+      "passed": true
+    },
+    {
+      "check": "A1202: truthful definitions",
+      "passed": true
+    },
+    {
+      "check": "A1202: proxy/orientation mapping",
+      "passed": true
+    },
+    {
+      "check": "A1202: collection metrics match",
+      "passed": true
+    },
+    {
+      "check": "A1202: collection/plan match",
+      "passed": true
+    },
+    {
+      "check": "A1202: positive metrics",
+      "passed": true
+    },
+    {
+      "check": "Unique skyline-show-residence room IDs",
+      "passed": true
+    },
+    {
+      "check": "skyline-show-residence: room set",
+      "passed": true
+    },
+    {
+      "check": "skyline-show-residence/living: hotspot destinations resolve",
+      "passed": true
+    },
+    {
+      "check": "skyline-show-residence/bedroom: hotspot destinations resolve",
+      "passed": true
+    },
+    {
+      "check": "skyline-show-residence/balcony: hotspot destinations resolve",
+      "passed": true
+    },
+    {
+      "check": "plan-garden: mapped rooms exist",
+      "passed": true
+    },
+    {
+      "check": "plan-garden: mapped tour destinations",
+      "passed": true
+    },
+    {
+      "check": "plan-skyline: mapped rooms exist",
+      "passed": true
+    },
+    {
+      "check": "plan-skyline: mapped tour destinations",
+      "passed": true
+    },
+    {
+      "check": "plan-penthouse: mapped rooms exist",
+      "passed": true
+    },
+    {
+      "check": "plan-penthouse: mapped tour destinations",
+      "passed": true
+    },
+    {
+      "check": "All seed asset IDs declared in asset template",
+      "passed": true
+    },
+    {
+      "check": "All asset fallback references resolve",
+      "passed": true
+    },
+    {
+      "check": "Template honestly marks assets uncreated",
+      "passed": true
+    },
+    {
+      "check": "Local link 04-DATA-AND-STATE-CONTRACTS.md -> fixtures/project.seed.json",
+      "passed": true
+    },
+    {
+      "check": "Local link PLAN-AUDIT.md -> package-validation.json",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> 00-ANTIGRAVITY-PLAN-MODE.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> STARTUP-PROMPT.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> 01-PRODUCT-CONTRACT.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> 02-DESIGN-AND-EXPERIENCE.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> 03-TECHNICAL-ARCHITECTURE.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> 04-DATA-AND-STATE-CONTRACTS.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> 05-ASSET-AND-3D-PIPELINE.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> 06-SEQUENTIAL-IMPLEMENTATION.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> 07-TESTING-AND-ACCEPTANCE.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> 08-DELIVERY-AND-RESUME.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> fixtures/project.seed.json",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> fixtures/asset-register.template.json",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> BUILD-TRACKER.md",
+      "passed": true
+    },
+    {
+      "check": "Local link README.md -> PLAN-AUDIT.md",
+      "passed": true
+    },
+    {
+      "check": "Local link STARTUP-PROMPT.md -> 00-ANTIGRAVITY-PLAN-MODE.md",
+      "passed": true
+    },
+    {
+      "check": "18 uniquely named required capabilities",
+      "passed": true
+    },
+    {
+      "check": "All requirements included in verification mapping",
+      "passed": true
+    },
+    {
+      "check": "Sequential phases 0 through 10 present",
+      "passed": true
+    },
+    {
+      "check": "Skyline room zoning covers 192 m2 without rectangle overlap",
+      "passed": true
+    }
+  ]
+}

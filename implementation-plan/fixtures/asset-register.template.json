@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "selectedRoutes": {"building":"undecided","tour":"undecided"},
+  "notes":"Planning checklist only. Paths and provenance must be filled during implementation. Null paths are not existing assets. Panorama entries may become not-required for mesh route.",
+  "requiredRecordFields":["id","kind","requiredFor","status","localPath","sourceCodePath","creator","sourceUrl","license","provenanceEvidence","fallbackId"],
+  "assets":[
+    {"id":"building-master","kind":"model-or-code","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"exterior-fallback"},
+    {"id":"district-master","kind":"model-or-code","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"district-fallback"},
+    {"id":"interior-master","kind":"model-or-code","requiredFor":"mesh","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"tour-living-still"},
+    {"id":"exterior-hero-desktop","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"exterior-hero-mobile","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"exterior-hero-desktop"},
+    {"id":"exterior-fallback","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"district-fallback","kind":"image-or-svg","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"collection-garden","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"exterior-fallback"},
+    {"id":"collection-skyline","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"tour-living-still"},
+    {"id":"collection-penthouse","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"exterior-fallback"},
+    {"id":"plan-garden-source","kind":"svg-or-code","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"plan-skyline-source","kind":"svg-or-code","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"plan-penthouse-source","kind":"svg-or-code","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"tour-living-still","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"tour-bedroom-still","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"tour-balcony-still","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"tour-living-panorama","kind":"panorama","requiredFor":"panorama","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"tour-living-still"},
+    {"id":"tour-bedroom-panorama","kind":"panorama","requiredFor":"panorama","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"tour-bedroom-still"},
+    {"id":"tour-balcony-panorama","kind":"panorama","requiredFor":"panorama","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":"tour-balcony-still"},
+    {"id":"amenity-roof","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"amenity-lounge","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"amenity-wellness","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"amenity-arrival","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null},
+    {"id":"facade-detail","kind":"image","requiredFor":"all","status":"planned","localPath":null,"sourceCodePath":null,"creator":null,"sourceUrl":null,"license":null,"provenanceEvidence":null,"fallbackId":null}
+  ]
+}

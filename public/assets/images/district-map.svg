@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <defs>
+    <linearGradient id="distCanal" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E382F"/>
+      <stop offset="100%" stop-color="#142620"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Terrain -->
+  <rect width="800" height="480" fill="#E2DDD2"/>
+
+  <!-- Paved Boulevards & Streets -->
+  <rect x="0" y="160" width="800" height="30" fill="#C8C0B2"/>
+  <rect x="0" y="340" width="800" height="30" fill="#C8C0B2"/>
+  <rect x="220" y="0" width="30" height="480" fill="#C8C0B2"/>
+  <rect x="560" y="0" width="30" height="480" fill="#C8C0B2"/>
+
+  <!-- Waterway Canal with Bridges -->
+  <path d="M 0 80 Q 400 120 800 60 L 800 110 Q 400 170 0 130 Z" fill="url(#distCanal)"/>
+  <!-- Bridges -->
+  <rect x="215" y="75" width="40" height="50" fill="#AFA594" rx="2"/>
+  <rect x="555" y="65" width="40" height="50" fill="#AFA594" rx="2"/>
+
+  <!-- Botanic Garden Park -->
+  <rect x="60" y="210" width="130" height="110" fill="#2E4D3C" rx="8"/>
+  <text x="125" y="270" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold">Botanical Park</text>
+
+  <!-- Contextual Urban Blocks -->
+  <rect x="60" y="390" width="130" height="65" fill="#BCB5A4" rx="3"/>
+  <rect x="275" y="390" width="115" height="65" fill="#AFA694" rx="3"/>
+  <rect x="410" y="390" width="125" height="65" fill="#BCB5A4" rx="3"/>
+  <rect x="615" y="390" width="135" height="65" fill="#AFA694" rx="3"/>
+
+  <!-- Central AUREL Development Site -->
+  <rect x="330" y="200" width="160" height="130" fill="#FAF6EE" stroke="#A8875F" stroke-width="2" rx="4"/>
+  <rect x="365" y="225" width="90" height="75" fill="#28463C" rx="3"/>
+  <text x="410" y="268" text-anchor="middle" fill="#FFFFFF" font-family="serif" font-size="16" font-weight="bold" letter-spacing="1">AUREL</text>
+  <text x="410" y="284" text-anchor="middle" fill="#D9984C" font-family="sans-serif" font-size="9" font-weight="bold" letter-spacing="1.5">TOWER</text>
+
+  <!-- East Cultural Quarter -->
+  <rect x="615" y="210" width="135" height="110" fill="#C2B8A6" rx="3"/>
+  <text x="682" y="270" text-anchor="middle" fill="#382C22" font-family="sans-serif" font-size="12" font-weight="bold">Cultural Quarter</text>
+</svg>

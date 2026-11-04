@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <linearGradient id="skyRoof" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#182420"/>
+      <stop offset="60%" stop-color="#A56445"/>
+      <stop offset="100%" stop-color="#E29D6E"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="240" fill="url(#skyRoof)"/>
+  <!-- Skyline Silhouettes -->
+  <path d="M 0 210 L 120 210 L 120 180 L 220 180 L 220 210 L 380 210 L 380 170 L 460 170 L 460 210 L 600 210 L 600 240 L 0 240 Z" fill="#1B2521"/>
+  <!-- Roof Travertine Pavers -->
+  <rect x="0" y="240" width="600" height="160" fill="#D8D2C4"/>
+  <!-- Bronze Pergola Canopy -->
+  <rect x="40" y="30" width="520" height="16" fill="#6E523A"/>
+  <rect x="60" y="15" width="8" height="30" fill="#4D3826"/><rect x="140" y="15" width="8" height="30" fill="#4D3826"/><rect x="220" y="15" width="8" height="30" fill="#4D3826"/><rect x="300" y="15" width="8" height="30" fill="#4D3826"/><rect x="380" y="15" width="8" height="30" fill="#4D3826"/><rect x="460" y="15" width="8" height="30" fill="#4D3826"/><rect x="540" y="15" width="8" height="30" fill="#4D3826"/>
+  <rect x="60" y="46" width="14" height="200" fill="#4D3826"/>
+  <rect x="520" y="46" width="14" height="200" fill="#4D3826"/>
+  <!-- Olive Planters -->
+  <rect x="120" y="220" width="50" height="40" fill="#5A432F" rx="2"/>
+  <circle cx="145" cy="195" r="24" fill="#2E4839"/>
+  <rect x="420" y="220" width="50" height="40" fill="#5A432F" rx="2"/>
+  <circle cx="445" cy="195" r="24" fill="#2E4839"/>
+  <!-- Fire Table & Low Armchairs -->
+  <rect x="250" y="270" width="100" height="45" fill="#3D3026" rx="4"/>
+  <circle cx="300" cy="285" r="8" fill="#FFC87A" filter="drop-shadow(0 0 6px #FF9C38)"/>
+</svg>

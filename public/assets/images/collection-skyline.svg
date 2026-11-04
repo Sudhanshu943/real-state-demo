@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <defs>
+    <linearGradient id="skySunset" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E2A26"/>
+      <stop offset="50%" stop-color="#C77D55"/>
+      <stop offset="100%" stop-color="#EDB07E"/>
+    </linearGradient>
+    <linearGradient id="salonOak" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A5845E"/>
+      <stop offset="100%" stop-color="#8B6C47"/>
+    </linearGradient>
+    <linearGradient id="walnutPanels" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#483626"/>
+      <stop offset="100%" stop-color="#342519"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Panoramic Sunset Vista Outside -->
+  <rect width="800" height="340" fill="url(#skySunset)"/>
+
+  <!-- Distant Skyline Silhouette -->
+  <path d="M 0 280 L 120 280 L 120 240 L 180 240 L 180 280 L 320 280 L 320 220 L 380 220 L 380 280 L 520 280 L 520 250 L 600 250 L 600 280 L 800 280 L 800 340 L 0 340 Z" fill="#202A26"/>
+  <!-- Skyline Window Beacons -->
+  
+    <rect x="140" y="250" width="6" height="4" fill="#FFDF9E" />
+  
+    <rect x="160" y="250" width="6" height="4" fill="#FFDF9E" />
+  
+    <rect x="340" y="250" width="6" height="4" fill="#FFDF9E" />
+  
+    <rect x="360" y="250" width="6" height="4" fill="#FFDF9E" />
+  
+    <rect x="540" y="250" width="6" height="4" fill="#FFDF9E" />
+  
+    <rect x="570" y="250" width="6" height="4" fill="#FFDF9E" />
+  
+
+  <!-- Balcony Glass Railing & Handrail -->
+  <rect x="0" y="270" width="800" height="60" fill="rgba(194,220,228,0.25)"/>
+  <rect x="0" y="268" width="800" height="5" fill="#6A5038"/>
+
+  <!-- Interior Living Room Salon (Level 8) -->
+  <!-- Smoked Oak Parquetry Floor -->
+  <rect x="0" y="330" width="800" height="190" fill="url(#salonOak)"/>
+  <g stroke="#785C3A" stroke-width="1" opacity="0.6">
+    <line x1="0" y1="380" x2="800" y2="380"/>
+    <line x1="0" y1="440" x2="800" y2="440"/>
+  </g>
+
+  <!-- Fluted Walnut Feature Wall (Left) -->
+  <rect x="0" y="60" width="220" height="320" fill="url(#walnutPanels)"/>
+  
+    <line x1="6" y1="60" x2="6" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="18" y1="60" x2="18" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="30" y1="60" x2="30" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="42" y1="60" x2="42" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="54" y1="60" x2="54" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="66" y1="60" x2="66" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="78" y1="60" x2="78" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="90" y1="60" x2="90" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="102" y1="60" x2="102" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="114" y1="60" x2="114" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="126" y1="60" x2="126" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="138" y1="60" x2="138" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="150" y1="60" x2="150" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="162" y1="60" x2="162" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="174" y1="60" x2="174" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="186" y1="60" x2="186" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="198" y1="60" x2="198" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+    <line x1="210" y1="60" x2="210" y2="380" stroke="#251A10" stroke-width="2"/>
+  
+
+  <!-- Finished Travertine Ceiling -->
+  <rect x="0" y="0" width="800" height="60" fill="#FAF7F2"/>
+  <rect x="0" y="58" width="800" height="4" fill="#4E3A28"/>
+
+  <!-- Living Room Luxury Furniture -->
+  <!-- Wool Rug -->
+  <rect x="220" y="370" width="460" height="120" fill="#C8C0B2" rx="4"/>
+  <!-- Low-Slung L-Sofa -->
+  <rect x="260" y="360" width="280" height="65" fill="#DDD7CB" rx="4"/>
+  <rect x="490" y="380" width="70" height="85" fill="#DDD7CB" rx="4"/>
+  <!-- Honed Travertine Cocktail Table -->
+  <rect x="330" y="420" width="130" height="40" fill="#E4DED4" rx="2" stroke="#8C775D" stroke-width="1.5"/>
+
+  <!-- Architectural Bronze Reading Floor Lamp -->
+  <line x1="240" y1="300" x2="240" y2="410" stroke="#7E6044" stroke-width="3"/>
+  <polygon points="230,300 250,300 240,285" fill="#7E6044"/>
+
+  <!-- Terracotta Olive Planter on Balcony -->
+  <rect x="710" y="275" width="45" height="50" fill="#A86244" rx="3"/>
+  <circle cx="732" cy="250" r="28" fill="#2E4A3B"/>
+</svg>

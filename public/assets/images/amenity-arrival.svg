@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <linearGradient id="arrSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141E1A"/>
+      <stop offset="100%" stop-color="#2D3D36"/>
+    </linearGradient>
+    <linearGradient id="arrWater" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1B2F27"/>
+      <stop offset="100%" stop-color="#0E1914"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="260" fill="url(#arrSky)"/>
+  <!-- Travertine Arrival Courtyard Paving -->
+  <rect x="0" y="260" width="600" height="140" fill="#D5CEBF"/>
+  <!-- Reflecting Pool Flanking Porte-Cochere -->
+  <rect x="60" y="280" width="180" height="90" fill="url(#arrWater)" rx="2"/>
+  <rect x="360" y="280" width="180" height="90" fill="url(#arrWater)" rx="2"/>
+  <!-- Massive 4.6m Travertine Columns -->
+  <rect x="40" y="40" width="45" height="230" fill="#C5BCAB"/>
+  <rect x="515" y="40" width="45" height="230" fill="#C5BCAB"/>
+  <!-- Cantilevered Bronze Canopy with Warm Recessed Downlighting -->
+  <rect x="20" y="70" width="560" height="28" fill="#75583E"/>
+  <rect x="30" y="94" width="540" height="6" fill="#FFE0B2" opacity="0.85"/>
+  <!-- Warm Illuminated Double-Height Lobby Entrance -->
+  <rect x="180" y="98" width="240" height="165" fill="#F0CA96" opacity="0.9"/>
+  <line x1="300" y1="98" x2="300" y2="263" stroke="#4D3826" stroke-width="4"/>
+</svg>

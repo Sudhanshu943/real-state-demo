@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <defs>
+    <linearGradient id="gardSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A2823"/>
+      <stop offset="100%" stop-color="#34463E"/>
+    </linearGradient>
+    <linearGradient id="warmInterior" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE2B8"/>
+      <stop offset="100%" stop-color="#E8A85C"/>
+    </linearGradient>
+    <linearGradient id="travertineG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#DFD8CB"/>
+      <stop offset="100%" stop-color="#C2B7A3"/>
+    </linearGradient>
+    <linearGradient id="bronzeG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7B6145"/>
+      <stop offset="100%" stop-color="#4A3827"/>
+    </linearGradient>
+    <linearGradient id="poolG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1D332B"/>
+      <stop offset="100%" stop-color="#0E1A15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Sky -->
+  <rect width="800" height="520" fill="url(#gardSky)"/>
+
+  <!-- Interior Salon Background (Warm Glow) -->
+  <rect x="80" y="80" width="440" height="260" fill="url(#warmInterior)"/>
+  <!-- Interior Fluted Timber Wall -->
+  <rect x="80" y="80" width="120" height="260" fill="#4E3929"/>
+  <!-- Interior Low Sofa & Lounge -->
+  <rect x="220" y="240" width="180" height="50" fill="#D8D2C5" rx="4"/>
+  <rect x="240" y="270" width="90" height="30" fill="#BFAF9B" rx="2"/>
+
+  <!-- Bronze Floor-to-Ceiling Glazing Mullions -->
+  <g stroke="url(#bronzeG)" stroke-width="4" fill="none">
+    <rect x="80" y="80" width="440" height="260" />
+    <line x1="220" y1="80" x2="220" y2="340" />
+    <line x1="360" y1="80" x2="360" y2="340" />
+  </g>
+  <!-- Architectural Fluted Travertine Column -->
+  <rect x="60" y="60" width="36" height="300" fill="url(#travertineG)"/>
+  <rect x="500" y="60" width="36" height="300" fill="url(#travertineG)"/>
+
+  <!-- Cantilevered Timber & Bronze Pergola Overhang -->
+  <rect x="40" y="48" width="540" height="24" fill="url(#bronzeG)"/>
+  
+    <rect x="60" y="30" width="8" height="42" fill="#5A432F" />
+  
+    <rect x="140" y="30" width="8" height="42" fill="#5A432F" />
+  
+    <rect x="220" y="30" width="8" height="42" fill="#5A432F" />
+  
+    <rect x="300" y="30" width="8" height="42" fill="#5A432F" />
+  
+    <rect x="380" y="30" width="8" height="42" fill="#5A432F" />
+  
+    <rect x="460" y="30" width="8" height="42" fill="#5A432F" />
+  
+    <rect x="540" y="30" width="8" height="42" fill="#5A432F" />
+  
+
+  <!-- Private Garden Terrace (24 m2) -->
+  <rect x="0" y="340" width="800" height="180" fill="url(#travertineG)"/>
+  <!-- Paving Joint Grid -->
+  <line x1="0" y1="400" x2="800" y2="400" stroke="#ABA08E" stroke-width="1.5"/>
+  <line x1="0" y1="460" x2="800" y2="460" stroke="#ABA08E" stroke-width="1.5"/>
+  
+    <line x1="120" y1="340" x2="120" y2="520" stroke="#ABA08E" stroke-width="1.5" />
+  
+    <line x1="240" y1="340" x2="240" y2="520" stroke="#ABA08E" stroke-width="1.5" />
+  
+    <line x1="360" y1="340" x2="360" y2="520" stroke="#ABA08E" stroke-width="1.5" />
+  
+    <line x1="480" y1="340" x2="480" y2="520" stroke="#ABA08E" stroke-width="1.5" />
+  
+    <line x1="600" y1="340" x2="600" y2="520" stroke="#ABA08E" stroke-width="1.5" />
+  
+    <line x1="720" y1="340" x2="720" y2="520" stroke="#ABA08E" stroke-width="1.5" />
+  
+
+  <!-- Reflecting Garden Pool with Submerged Uplighting & Stone Coping -->
+  <rect x="500" y="360" width="280" height="135" fill="url(#poolG)" rx="2"/>
+  <rect x="496" y="356" width="288" height="6" fill="#EDE7DA"/>
+  <ellipse cx="640" cy="425" rx="80" ry="25" fill="#3D7A68" opacity="0.35"/>
+
+  <!-- Lush Garden Planters & Tiered Botanical Foliage -->
+  <g fill="#243F31">
+    <ellipse cx="560" cy="310" rx="45" ry="55" />
+    <ellipse cx="620" cy="285" rx="60" ry="70" />
+    <ellipse cx="680" cy="315" rx="50" ry="58" />
+    <ellipse cx="740" cy="295" rx="55" ry="65" />
+    <!-- Planter Boxes in Fluted Travertine -->
+    <rect x="500" y="325" width="280" height="35" fill="#D5CEBF" rx="2" />
+    <line x1="500" y1="340" x2="780" y2="340" stroke="#B8AD9C" stroke-width="1.5"/>
+  </g>
+
+  <!-- Outdoor Teak Lounge Setting on Terrace -->
+  <rect x="180" y="375" width="80" height="55" fill="#E2DDD2" rx="4" stroke="#4A3827" stroke-width="2"/>
+  <rect x="190" y="385" width="60" height="35" fill="#C8BEAE" rx="2"/>
+  <rect x="280" y="375" width="80" height="55" fill="#E2DDD2" rx="4" stroke="#4A3827" stroke-width="2"/>
+  <rect x="290" y="385" width="60" height="35" fill="#C8BEAE" rx="2"/>
+  <circle cx="390" cy="405" r="22" fill="#5A432F"/>
+  <circle cx="390" cy="405" r="18" fill="#75563D"/>
+</svg>

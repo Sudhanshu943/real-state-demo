@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#18221F"/>
+  <rect x="50" y="50" width="700" height="400" fill="#22312C" stroke="#A8875F" stroke-width="1"/>
+  <text x="400" y="240" text-anchor="middle" font-family="serif" font-size="32" fill="#F4F0E8">
+    SKYLINE SHOW RESIDENCE
+  </text>
+  <text x="400" y="280" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#A8875F" letter-spacing="2">
+    LIVING PERSPECTIVE
+  </text>
+</svg>

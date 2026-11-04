@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <filter id="oakGrain" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015 0.08" numOctaves="4" result="wood" />
+      <feColorMatrix type="matrix" values="
+        0 0 0 0 0.52
+        0 0 0 0 0.38
+        0 0 0 0 0.24
+        0 0 0 0.40 0" result="coloredWood" />
+      <feBlend mode="multiply" in="SourceGraphic" in2="coloredWood" />
+    </filter>
+    <linearGradient id="oakBase" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8C6A48"/>
+      <stop offset="50%" stop-color="#735436"/>
+      <stop offset="100%" stop-color="#5A4027"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#oakBase)"/>
+  <rect width="800" height="600" fill="#6D4F33" filter="url(#oakGrain)" opacity="0.85"/>
+
+  <!-- Authentic Cathedral Annual Rings & Hardwood Grain -->
+  
+    <path d="M 0 50 C 250 20 550 90 800 35" stroke="#44301E" stroke-width="2.5" fill="none" opacity="0.45"/>
+    <path d="M 0 56 C 260 25 540 85 800 40" stroke="#9C7752" stroke-width="1.2" fill="none" opacity="0.3"/>
+  
+    <path d="M 0 110 C 250 80 550 150 800 95" stroke="#44301E" stroke-width="2.5" fill="none" opacity="0.45"/>
+    <path d="M 0 116 C 260 85 540 145 800 100" stroke="#9C7752" stroke-width="1.2" fill="none" opacity="0.3"/>
+  
+    <path d="M 0 170 C 250 140 550 210 800 155" stroke="#44301E" stroke-width="2.5" fill="none" opacity="0.45"/>
+    <path d="M 0 176 C 260 145 540 205 800 160" stroke="#9C7752" stroke-width="1.2" fill="none" opacity="0.3"/>
+  
+    <path d="M 0 230 C 250 200 550 270 800 215" stroke="#44301E" stroke-width="2.5" fill="none" opacity="0.45"/>
+    <path d="M 0 236 C 260 205 540 265 800 220" stroke="#9C7752" stroke-width="1.2" fill="none" opacity="0.3"/>
+  
+    <path d="M 0 290 C 250 260 550 330 800 275" stroke="#44301E" stroke-width="2.5" fill="none" opacity="0.45"/>
+    <path d="M 0 296 C 260 265 540 325 800 280" stroke="#9C7752" stroke-width="1.2" fill="none" opacity="0.3"/>
+  
+    <path d="M 0 350 C 250 320 550 390 800 335" stroke="#44301E" stroke-width="2.5" fill="none" opacity="0.45"/>
+    <path d="M 0 356 C 260 325 540 385 800 340" stroke="#9C7752" stroke-width="1.2" fill="none" opacity="0.3"/>
+  
+    <path d="M 0 410 C 250 380 550 450 800 395" stroke="#44301E" stroke-width="2.5" fill="none" opacity="0.45"/>
+    <path d="M 0 416 C 260 385 540 445 800 400" stroke="#9C7752" stroke-width="1.2" fill="none" opacity="0.3"/>
+  
+    <path d="M 0 470 C 250 440 550 510 800 455" stroke="#44301E" stroke-width="2.5" fill="none" opacity="0.45"/>
+    <path d="M 0 476 C 260 445 540 505 800 460" stroke="#9C7752" stroke-width="1.2" fill="none" opacity="0.3"/>
+  
+    <path d="M 0 530 C 250 500 550 570 800 515" stroke="#44301E" stroke-width="2.5" fill="none" opacity="0.45"/>
+    <path d="M 0 536 C 260 505 540 565 800 520" stroke="#9C7752" stroke-width="1.2" fill="none" opacity="0.3"/>
+  
+
+  <!-- Planking Joints -->
+  <line x1="260" y1="0" x2="260" y2="600" stroke="#2B1E13" stroke-width="2.5"/>
+  <line x1="540" y1="0" x2="540" y2="600" stroke="#2B1E13" stroke-width="2.5"/>
+</svg>
