@@ -1,0 +1,173 @@
+{
+  "facade": {
+    "id": "facade",
+    "photoId": "0FR6Ky5VpYI",
+    "photographer": "Garvit Nama",
+    "title": "Apartment balconies and glazed facades",
+    "alt": "Modern apartment buildings photographed from below",
+    "position": "50% 45%",
+    "width": 1800,
+    "height": 2699,
+    "sourceUrl": "https://unsplash.com/photos/0FR6Ky5VpYI",
+    "downloadUrl": "https://images.unsplash.com/photo-1776407390625-129064bce056?fm=jpg&fit=max&w=1800&q=88",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "role": "Reference photography; not the AUREL property",
+    "variants": {
+      "640": "/assets/photography/facade-640.webp",
+      "1280": "/assets/photography/facade-1280.webp"
+    }
+  },
+  "living": {
+    "id": "living",
+    "photoId": "yQvGZRrnk30",
+    "photographer": "GoodLifeConstruction",
+    "title": "Light-filled residential living room",
+    "alt": "A photographed living room with pale seating, wood floors and large windows",
+    "position": "50% 58%",
+    "width": 1800,
+    "height": 1200,
+    "sourceUrl": "https://unsplash.com/photos/yQvGZRrnk30",
+    "downloadUrl": "https://images.unsplash.com/photo-1771371097061-3befd4b71b59?fm=jpg&fit=max&w=1800&q=88",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "role": "Reference photography; not the AUREL property",
+    "variants": {
+      "640": "/assets/photography/living-640.webp",
+      "1280": "/assets/photography/living-1280.webp"
+    }
+  },
+  "garden": {
+    "id": "garden",
+    "photoId": "KJ3BwWPA3mI",
+    "photographer": "Georgi Kalaydzhiev",
+    "title": "Planted courtyard and outdoor seating",
+    "alt": "A real planted garden patio with outdoor seating",
+    "position": "50% 55%",
+    "width": 1800,
+    "height": 2574,
+    "sourceUrl": "https://unsplash.com/photos/KJ3BwWPA3mI",
+    "downloadUrl": "https://images.unsplash.com/photo-1762461838534-ca26dfa134a8?fm=jpg&fit=max&w=1800&q=88",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "role": "Reference photography; not the AUREL property",
+    "variants": {
+      "640": "/assets/photography/garden-640.webp",
+      "1280": "/assets/photography/garden-1280.webp"
+    }
+  },
+  "penthouse": {
+    "id": "penthouse",
+    "photoId": "pIwKVAFT0sI",
+    "photographer": "Franco Debartolo",
+    "title": "Contemporary residential interior",
+    "alt": "A photographed contemporary living room with a large sectional sofa and generous windows",
+    "position": "50% 55%",
+    "width": 1800,
+    "height": 2700,
+    "sourceUrl": "https://unsplash.com/photos/pIwKVAFT0sI",
+    "downloadUrl": "https://images.unsplash.com/photo-1778731525306-6e61638ff245?fm=jpg&fit=max&w=1800&q=88",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "role": "Reference photography; not the AUREL property",
+    "variants": {
+      "640": "/assets/photography/penthouse-640.webp",
+      "1280": "/assets/photography/penthouse-1280.webp"
+    }
+  },
+  "roof": {
+    "id": "roof",
+    "photoId": "IFKgs02kdQ0",
+    "photographer": "HANS-Y",
+    "title": "Rooftop garden and pergola",
+    "alt": "A photographed roof garden with planting beds, a path and a timber pergola",
+    "position": "50% 55%",
+    "width": 1800,
+    "height": 1200,
+    "sourceUrl": "https://unsplash.com/photos/IFKgs02kdQ0",
+    "downloadUrl": "https://images.unsplash.com/photo-1784878281083-58f3f8e6d5ab?fm=jpg&fit=max&w=1800&q=88",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "role": "Reference photography; not the AUREL property",
+    "variants": {
+      "640": "/assets/photography/roof-640.webp",
+      "1280": "/assets/photography/roof-1280.webp"
+    }
+  },
+  "lounge": {
+    "id": "lounge",
+    "photoId": "zSG-kd-L6vw",
+    "photographer": "Frames For Your Heart",
+    "title": "Contemporary communal lounge",
+    "alt": "A real hotel lounge with designer seating and warm wood finishes",
+    "position": "50% 55%",
+    "width": 1800,
+    "height": 1200,
+    "sourceUrl": "https://unsplash.com/photos/zSG-kd-L6vw",
+    "downloadUrl": "https://images.unsplash.com/photo-1621293954908-907159247fc8?fm=jpg&fit=max&w=1800&q=88",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "role": "Reference photography; not the AUREL property",
+    "variants": {
+      "640": "/assets/photography/lounge-640.webp",
+      "1280": "/assets/photography/lounge-1280.webp"
+    }
+  },
+  "wellness": {
+    "id": "wellness",
+    "photoId": "EC4mdytpvmk",
+    "photographer": "Palak Pitroda",
+    "title": "Contemporary fitness studio",
+    "alt": "A photographed fitness studio with exercise equipment and large windows",
+    "position": "50% 52%",
+    "width": 1800,
+    "height": 1195,
+    "sourceUrl": "https://unsplash.com/photos/EC4mdytpvmk",
+    "downloadUrl": "https://images.unsplash.com/photo-1775993167276-743bbcde77e1?fm=jpg&fit=max&w=1800&q=88",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "role": "Reference photography; not the AUREL property",
+    "variants": {
+      "640": "/assets/photography/wellness-640.webp",
+      "1280": "/assets/photography/wellness-1280.webp"
+    }
+  },
+  "arrival": {
+    "id": "arrival",
+    "photoId": "E1s8dCPmMI8",
+    "photographer": "Vladimir Ivanenko",
+    "title": "Sunlit arrival and reception",
+    "alt": "A photographed sunlit hotel lobby and reception space",
+    "position": "50% 55%",
+    "width": 1800,
+    "height": 1200,
+    "sourceUrl": "https://unsplash.com/photos/E1s8dCPmMI8",
+    "downloadUrl": "https://images.unsplash.com/photo-1743273291499-e2c1da988688?fm=jpg&fit=max&w=1800&q=88",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "role": "Reference photography; not the AUREL property",
+    "variants": {
+      "640": "/assets/photography/arrival-640.webp",
+      "1280": "/assets/photography/arrival-1280.webp"
+    }
+  },
+  "district": {
+    "id": "district",
+    "photoId": "TH0QnwA_Tl8",
+    "photographer": "Fons Heijnsbroek",
+    "title": "Canalside urban green space",
+    "alt": "A photographed Amsterdam canalside park with mature trees and people relaxing",
+    "position": "50% 50%",
+    "width": 1800,
+    "height": 1352,
+    "sourceUrl": "https://unsplash.com/photos/TH0QnwA_Tl8",
+    "downloadUrl": "https://images.unsplash.com/photo-1649326887647-75e132d19b47?fm=jpg&fit=max&w=1800&q=88",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "role": "Reference photography; not the AUREL property",
+    "variants": {
+      "640": "/assets/photography/district-640.webp",
+      "1280": "/assets/photography/district-1280.webp"
+    }
+  }
+}

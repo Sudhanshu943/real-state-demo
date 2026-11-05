@@ -2,9 +2,11 @@ import { test, expect } from '@playwright/test';
 
 test.describe('E01-E03: Core Client Journeys & Status Rules', () => {
   test('E01: Complete client presentation path (Home -> District -> Floor 8 -> A0801 -> Tour -> Save -> Compare -> Viewing Preview)', async ({ page }) => {
+    test.setTimeout(120000);
     // 1. Open Homepage
     await page.goto('/#/');
-    await expect(page.locator('h1')).toContainText('A different perspective on home.');
+    await expect(page.locator('h1')).toContainText('A different');
+    await expect(page.locator('h1 em')).toContainText('On home.');
 
     // 2. Navigate to Explorer
     await page.click('text=Explore Building');

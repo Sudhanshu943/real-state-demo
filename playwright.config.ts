@@ -6,7 +6,7 @@ export default defineConfig({
   workers: 1,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL: 'http://localhost:4174',
     trace: 'on-first-retry',
     viewport: { width: 1440, height: 900 },
     launchOptions: {
@@ -20,7 +20,7 @@ export default defineConfig({
   },
   webServer: {
     command: 'npm run preview',
-    url: 'http://localhost:4173',
+    url: 'http://localhost:4174',
     reuseExistingServer: false,
     timeout: 30000
   },

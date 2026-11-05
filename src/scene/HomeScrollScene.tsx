@@ -1,9 +1,11 @@
-import { useRef } from 'react';
+import { useRef, Suspense } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Environment } from '@react-three/drei';
 import { BuildingProcedural } from './BuildingProcedural';
-import { InteriorModel } from './InteriorScene';
+import { InteriorModel, SceneReadinessReporter } from './InteriorScene';
 import { StudioLighting } from './StudioLighting';
+import { preloadPlantModel } from './PottedPlantAsset';
 
 interface HomeScrollSceneProps {
   scrollProgress: number; // 0.0 to 1.0
@@ -126,6 +128,11 @@ function HomeScrollCamera({ scrollProgress, isReducedMotion = false }: { scrollP
 }
 
 export function HomeScrollScene({ scrollProgress, isReducedMotion = false }: HomeScrollSceneProps) {
+  // Preload interior assets on approach (s >= 0.40) without mounting hidden geometry prematurely
+  if (scrollProgress >= 0.40 && !isReducedMotion) {
+    preloadPlantModel();
+  }
+
   // Scene handoff threshold: s < 0.51 = Exterior Tower; s >= 0.51 = Furnished Interior
   const isInterior = scrollProgress >= 0.51 && !isReducedMotion;
 
@@ -162,7 +169,14 @@ export function HomeScrollScene({ scrollProgress, isReducedMotion = false }: Hom
         dpr={[1, 1.5]}
       >
         <HomeScrollCamera scrollProgress={scrollProgress} isReducedMotion={isReducedMotion} />
-        <StudioLighting />
+        {!isInterior ? (
+          <Suspense fallback={<StudioLighting />}>
+            <Environment files="/assets/hdri/kloofendal_48d_1k.hdr" background={false} />
+          </Suspense>
+        ) : (
+          <StudioLighting />
+        )}
+        <SceneReadinessReporter roomId={isInterior ? (scrollProgress > 0.82 ? 'balcony' : 'living') : 'exterior'} />
 
         {!isInterior ? (
           <>

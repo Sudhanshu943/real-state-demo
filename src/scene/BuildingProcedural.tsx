@@ -1,9 +1,16 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { FacadeDetails } from './FacadeDetails';
 import { ArrivalGarden } from './ArrivalGarden';
 import { TreeCanopy } from './TreeCanopy';
-import { getTravertineTexture, getBronzeTexture } from './textureGenerators';
+import { FacadeBayModule } from './FacadeBayModule';
+import {
+  getTravertineTexture,
+  getTravertineNormalTexture,
+  getTravertineRoughnessTexture,
+  getBronzeTexture,
+  getBronzeRoughnessTexture
+} from './textureGenerators';
 
 interface BuildingProceduralProps {
   selectedFloor?: number;
@@ -34,13 +41,17 @@ export function BuildingProcedural({
   // Authored Architectural PBR Materials with Procedural Maps
   const materials = useMemo(() => {
     const travertineTex = getTravertineTexture();
+    const travertineNor = getTravertineNormalTexture();
+    const travertineRough = getTravertineRoughnessTexture();
     const bronzeTex = getBronzeTexture();
+    const bronzeRough = getBronzeRoughnessTexture();
 
     return {
       stone: new THREE.MeshStandardMaterial({
         map: travertineTex,
-        bumpMap: travertineTex,
-        bumpScale: .035,
+        normalMap: travertineNor,
+        normalScale: new THREE.Vector2(0.8, 0.8),
+        roughnessMap: travertineRough,
         roughness: 0.65,
         metalness: 0.04
       }),
@@ -63,7 +74,8 @@ export function BuildingProcedural({
       }),
       bronze: new THREE.MeshStandardMaterial({
         map: bronzeTex,
-        roughness: 0.38,
+        roughnessMap: bronzeRough,
+        roughness: 0.35,
         metalness: 0.82
       }),
       darkBronze: new THREE.MeshStandardMaterial({
@@ -71,23 +83,36 @@ export function BuildingProcedural({
         roughness: 0.45,
         metalness: 0.85
       }),
-      // Dielectric crystal architectural glazing
-      glass: new THREE.MeshStandardMaterial({
-        color: '#769490',
-        roughness: 0.06,
-        metalness: 0.08,
-        transparent: true,
-        opacity: 0.40
+      // Exterior tinted glazing: restrained smoke-green, dielectric reflective PBR approximation
+      exteriorGlazing: new THREE.MeshStandardMaterial({
+        color: '#1A2420',
+        roughness: 0.055,
+        metalness: 0.03, // dielectric physics: F0 ~0.04
+        envMapIntensity: 1.55
       }),
-      // Warm amber interior occupied illumination
-      glassLit: new THREE.MeshStandardMaterial({
-        color: '#C5B392',
-        roughness: 0.20,
-        metalness: 0.12,
-        emissive: '#D8BA87',
+      // Window-to-window subtle tone variation (cooler bronze-slate tone)
+      exteriorGlazingVariation: new THREE.MeshStandardMaterial({
+        color: '#1E2723',
+        roughness: 0.065,
+        metalness: 0.025,
+        envMapIntensity: 1.50
+      }),
+      // Subtle occupied window treatment: gentle warm ambient depth without full internal geometry
+      exteriorGlazingOccupied: new THREE.MeshStandardMaterial({
+        color: '#222B27',
+        roughness: 0.075,
+        metalness: 0.02,
+        emissive: '#1A1812',
         emissiveIntensity: 0.22,
+        envMapIntensity: 1.35
+      }),
+      // Balcony & rooftop acoustic balustrades: preserve authentic transparency
+      balustradeGlass: new THREE.MeshStandardMaterial({
+        color: '#7A9690',
+        roughness: 0.04,
+        metalness: 0.04,
         transparent: true,
-        opacity: 0.30
+        opacity: 0.38
       }),
       foliage: new THREE.MeshStandardMaterial({
         color: '#1F3827',
@@ -114,6 +139,8 @@ export function BuildingProcedural({
       })
     };
   }, []);
+
+  useEffect(() => () => Object.values(materials).forEach((m) => m.dispose()), [materials]);
 
   return (
     <group name="aurel-tower" position={[0, 0, 0]}>
@@ -178,7 +205,7 @@ export function BuildingProcedural({
         )}
 
         {/* Double-Height Lobby Glazing */}
-        <mesh position={[0, 0, depth / 2 - 0.2]} receiveShadow material={materials.glassLit}>
+        <mesh position={[0, 0, depth / 2 - 0.2]} receiveShadow material={materials.exteriorGlazingOccupied}>
           <boxGeometry args={[width - 5, lobbyHeight - 0.2, 0.2]} />
         </mesh>
 
@@ -241,7 +268,14 @@ export function BuildingProcedural({
             {/* Recessed side windows framed by genuine stone piers, rather than a blank wall. */}
             {[-1, 1].map(side => <group key={side}>
               {[-6, -2, 2, 6].map(z => <group key={z}>
-                <mesh position={[side * 13.55, 0, z]} material={materials.glass}>
+                <mesh
+                  position={[side * 13.55, 0, z]}
+                  material={
+                    (floorNumber + Math.abs(z)) % 3 === 0
+                      ? materials.exteriorGlazingOccupied
+                      : (floorNumber % 2 === 0 ? materials.exteriorGlazingVariation : materials.exteriorGlazing)
+                  }
+                >
                   <boxGeometry args={[.08, 2.7, 3.25]} />
                 </mesh>
                 <mesh position={[side * 13.9, 0, z - 1.88]} castShadow receiveShadow material={materials.stone}>
@@ -263,46 +297,74 @@ export function BuildingProcedural({
               </mesh>
             ))}
 
-            {/* Vertical Travertine Piers on South Elevation */}
-            {[-9, -4.5, 0, 4.5, 9].map((xPos) => (
-              <mesh key={xPos} position={[xPos, 0, depth / 2]} castShadow receiveShadow material={materials.stone}>
-                <boxGeometry args={[0.75, floorHeight - 0.32, 0.75]} />
-              </mesh>
-            ))}
+            {/* Vertical Travertine Piers on South Elevation (West Level 8 piers articulated inside FacadeBayModule) */}
+            {[-9, -4.5, 0, 4.5, 9].map((xPos) => {
+              if (floorNumber === 8 && xPos < 0) return null;
+              return (
+                <mesh key={xPos} position={[xPos, 0, depth / 2]} castShadow receiveShadow material={materials.stone}>
+                  <boxGeometry args={[0.75, floorHeight - 0.32, 0.75]} />
+                </mesh>
+              );
+            })}
 
             {/* Alternating Bronze Vertical Shading Fins for Facade Rhythm */}
             {floorNumber % 2 === 0 &&
-              [-11.5, -6.8, -2.2, 2.2, 6.8, 11.5].map((xPos) => (
-                <mesh key={`fin-${xPos}`} position={[xPos, 0, depth / 2 + 0.3]} castShadow material={materials.bronze}>
-                  <boxGeometry args={[0.08, floorHeight - 0.32, 0.5]} />
-                </mesh>
-              ))}
+              [-11.5, -6.8, -2.2, 2.2, 6.8, 11.5].map((xPos) => {
+                if (floorNumber === 8 && xPos < 0) return null;
+                return (
+                  <mesh key={`fin-${xPos}`} position={[xPos, 0, depth / 2 + 0.3]} castShadow material={materials.bronze}>
+                    <boxGeometry args={[0.08, floorHeight - 0.32, 0.5]} />
+                  </mesh>
+                );
+              })}
 
             {/* Balconies / Terraces on South Facade with Crystal Balustrades */}
-            {/* West Balcony Terrace */}
-            <mesh position={[-7, -floorHeight / 2 + 0.14, depth / 2 + 1.1]} castShadow receiveShadow material={materials.stone}>
-              <boxGeometry args={[11.5, 0.28, 2.2]} />
-            </mesh>
-            {/* West Balcony Slim Bronze Top Handrail */}
-            <mesh position={[-7, -floorHeight / 2 + 1.1, depth / 2 + 2.15]} castShadow material={materials.darkBronze}>
-              <boxGeometry args={[11.5, 0.04, 0.06]} />
-            </mesh>
-            {/* West Balcony Crystal Glass Infill */}
-            <mesh position={[-7, -floorHeight / 2 + 0.65, depth / 2 + 2.15]} material={materials.glass}>
-              <boxGeometry args={[11.3, 0.88, 0.02]} />
-            </mesh>
-            {/* West Balcony Organic Foliage Cluster */}
-            <group position={[-12, -floorHeight / 2 + 0.4, depth / 2 + 1.7]}>
-              <mesh castShadow receiveShadow material={materials.stone}>
-                <boxGeometry args={[1.4, 0.45, 0.7]} />
-              </mesh>
-              <mesh position={[-0.3, 0.45, 0]} castShadow material={materials.foliage}>
-                <sphereGeometry args={[0.32, 8, 8]} />
-              </mesh>
-              <mesh position={[0.3, 0.52, 0.05]} castShadow material={materials.foliage}>
-                <sphereGeometry args={[0.35, 8, 8]} />
-              </mesh>
-            </group>
+            {/* Level 8 West uses high-detail FacadeBayModule */}
+            {floorNumber === 8 ? (
+              <FacadeBayModule position={[-7, 0, depth / 2]} />
+            ) : (
+              <>
+                {/* West Balcony Terrace */}
+                <mesh position={[-7, -floorHeight / 2 + 0.14, depth / 2 + 1.1]} castShadow receiveShadow material={materials.stone}>
+                  <boxGeometry args={[11.5, 0.28, 2.2]} />
+                </mesh>
+                {/* West Balcony Slim Bronze Top Handrail */}
+                <mesh position={[-7, -floorHeight / 2 + 1.1, depth / 2 + 2.15]} castShadow material={materials.darkBronze}>
+                  <boxGeometry args={[11.5, 0.04, 0.06]} />
+                </mesh>
+                {/* West Balcony Crystal Glass Infill */}
+                <mesh position={[-7, -floorHeight / 2 + 0.65, depth / 2 + 2.15]} material={materials.balustradeGlass}>
+                  <boxGeometry args={[11.3, 0.88, 0.02]} />
+                </mesh>
+                {/* West Balcony Organic Foliage Cluster */}
+                <group position={[-12, -floorHeight / 2 + 0.4, depth / 2 + 1.7]}>
+                  <mesh castShadow receiveShadow material={materials.stone}>
+                    <boxGeometry args={[1.4, 0.45, 0.7]} />
+                  </mesh>
+                  <mesh position={[-0.3, 0.45, 0]} castShadow material={materials.foliage}>
+                    <sphereGeometry args={[0.32, 8, 8]} />
+                  </mesh>
+                  <mesh position={[0.3, 0.52, 0.05]} castShadow material={materials.foliage}>
+                    <sphereGeometry args={[0.35, 8, 8]} />
+                  </mesh>
+                </group>
+
+                {/* West Window Bay (Tinted Glazing with variation) */}
+                <mesh
+                  position={[-7, 0, depth / 2 - 0.1]}
+                  receiveShadow
+                  material={
+                    isPenthouseFloor || floorNumber % 3 === 0
+                      ? materials.exteriorGlazingOccupied
+                      : floorNumber % 2 === 0
+                      ? materials.exteriorGlazingVariation
+                      : materials.exteriorGlazing
+                  }
+                >
+                  <boxGeometry args={[11, floorHeight - 0.5, 0.1]} />
+                </mesh>
+              </>
+            )}
 
             {/* East Balcony Terrace */}
             <mesh position={[7, -floorHeight / 2 + 0.14, depth / 2 + 1.1]} castShadow receiveShadow material={materials.stone}>
@@ -313,7 +375,7 @@ export function BuildingProcedural({
               <boxGeometry args={[11.5, 0.04, 0.06]} />
             </mesh>
             {/* East Balcony Crystal Glass Infill */}
-            <mesh position={[7, -floorHeight / 2 + 0.65, depth / 2 + 2.15]} material={materials.glass}>
+            <mesh position={[7, -floorHeight / 2 + 0.65, depth / 2 + 2.15]} material={materials.balustradeGlass}>
               <boxGeometry args={[11.3, 0.88, 0.02]} />
             </mesh>
             {/* East Balcony Organic Foliage Cluster */}
@@ -329,16 +391,27 @@ export function BuildingProcedural({
               </mesh>
             </group>
 
-            {/* Window Bays (Dielectric glass with occupied warm lighting accents) */}
-            <mesh position={[-7, 0, depth / 2 - 0.1]} receiveShadow material={floorNumber % 2 === 0 || isPenthouseFloor ? materials.glassLit : materials.glass}>
-              <boxGeometry args={[11, floorHeight - 0.5, 0.1]} />
-            </mesh>
-            <mesh position={[7, 0, depth / 2 - 0.1]} receiveShadow material={floorNumber % 3 === 0 || isPenthouseFloor ? materials.glassLit : materials.glass}>
+            {/* East Window Bay (Tinted Glazing with variation) */}
+            <mesh
+              position={[7, 0, depth / 2 - 0.1]}
+              receiveShadow
+              material={
+                floorNumber % 3 === 1
+                  ? materials.exteriorGlazingOccupied
+                  : floorNumber % 2 === 1
+                  ? materials.exteriorGlazingVariation
+                  : materials.exteriorGlazing
+              }
+            >
               <boxGeometry args={[11, floorHeight - 0.5, 0.1]} />
             </mesh>
 
-            {/* North Elevation Windows */}
-            <mesh position={[0, 0, -depth / 2 + 0.1]} receiveShadow material={materials.glass}>
+            {/* North Elevation Windows (Tinted Glazing) */}
+            <mesh
+              position={[0, 0, -depth / 2 + 0.1]}
+              receiveShadow
+              material={floorNumber % 2 === 0 ? materials.exteriorGlazingVariation : materials.exteriorGlazing}
+            >
               <boxGeometry args={[width - 3, floorHeight - 0.5, 0.1]} />
             </mesh>
 
@@ -442,11 +515,11 @@ export function BuildingProcedural({
           <boxGeometry args={[width + 0.6, 1.2, depth + 0.6]} />
         </mesh>
 
-        {/* Bronze Cantilevered Pergola Beams */}
+        {/* Bronze Cantilevered Pergola Beams & Glass Screens */}
         {[-1,1].map(side=><group key={side}>
-          <mesh position={[0,.25,side*9.7]} material={materials.glass}><boxGeometry args={[27,.95,.04]}/></mesh>
+          <mesh position={[0,.25,side*9.7]} material={materials.balustradeGlass}><boxGeometry args={[27,.95,.04]}/></mesh>
           <mesh position={[0,.75,side*9.7]} material={materials.bronze}><boxGeometry args={[27,.05,.07]}/></mesh>
-          <mesh position={[side*13.5,.25,0]} material={materials.glass}><boxGeometry args={[.04,.95,19.4]}/></mesh>
+          <mesh position={[side*13.5,.25,0]} material={materials.balustradeGlass}><boxGeometry args={[.04,.95,19.4]}/></mesh>
           <mesh position={[side*13.5,.75,0]} material={materials.bronze}><boxGeometry args={[.07,.05,19.4]}/></mesh>
         </group>)}
         {[-9, -5.5, -2, 2, 5.5, 9].map((x) => (

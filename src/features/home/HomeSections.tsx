@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, MapPin, Plus } from 'lucide-react';
 import { useExperience } from '../../app/providers';
+import { ReferencePhoto, PhotographyCredits, type ReferencePhotoId } from './ReferencePhoto';
 import '../../styles/home-sections.css';
 
-const image = (name:string) => `/assets/renders/${name}.png`;
-const amenities = [
-  {name:'The roof garden',tag:'01 / Open air',image:'roof',text:'A shaded pergola, planted edges, and room to pause above the neighbourhood.',detail:'Rooftop landscape study'},
-  {name:'The residents’ salon',tag:'02 / Together',image:'living',text:'Soft upholstery, tactile stone, and a quiet setting for reading or conversation.',detail:'Representative shared interior study'},
-  {name:'Space to reset',tag:'03 / Wellbeing',image:'wellness',text:'A light-filled movement space with timber finishes and a calm garden outlook.',detail:'Wellness interior study'},
-  {name:'A considered arrival',tag:'04 / Welcome',image:'arrival',text:'A sheltered entrance framed by stone piers, reflecting water, and landscaped paths.',detail:'Ground-floor arrival study'},
+const amenities: {name:string;tag:string;image:ReferencePhotoId;text:string;detail:string}[] = [
+  {name:'The roof garden',tag:'01 / Open air',image:'roof',text:'A garden above the everyday. Our concept pairs sheltered seating with planted edges and room to pause.',detail:'Rooftop garden inspiration'},
+  {name:'The residents’ salon',tag:'02 / Together',image:'lounge',text:'Warm materials and inviting seating set the tone for a shared space to read, meet, or simply unwind.',detail:'Shared lounge inspiration'},
+  {name:'Space to reset',tag:'03 / Wellbeing',image:'wellness',text:'A considered space for movement and daily wellbeing, imagined as part of the residential experience.',detail:'Fitness studio inspiration'},
+  {name:'A considered arrival',tag:'04 / Welcome',image:'arrival',text:'Natural light, generous proportions, and a calm reception create the first impression we are working toward.',detail:'Arrival & reception inspiration'},
 ];
 const destinations = [
   {name:'Garden park',type:'Nature',text:'A green retreat, woven into the neighbourhood.'},
@@ -44,10 +44,11 @@ export function HomeSections(){
           </dl>
         </div>
         <figure className="architecture-figure">
-          <img src={image('facade')} alt="Recessed glass bays, stone piers and bronze detailing on the AUREL model" loading="lazy"/>
-          <figcaption><span>01.1 / The facade</span><span>Stone, shadow & proportion</span></figcaption>
+          <ReferencePhoto id="facade"/>
+          <figcaption><span>01.1 / Architectural inspiration</span><span>Reference photograph</span></figcaption>
         </figure>
       </div>
+      <p className="reference-photography-note">Real spaces, selected for inspiration. Photography throughout this page does not depict the AUREL development.</p>
       <div className="material-strip" aria-label="Proposed material palette">
         <div className="material-heading"><span className="micro-label">A tactile palette</span><p>Materials that<br/>age with character.</p></div>
         {[
@@ -67,22 +68,22 @@ export function HomeSections(){
         <Chapter number="02">Find your perspective</Chapter>
         <div className="section-heading"><h2>Three ways<br/><em>to call it home.</em></h2><div><p>Different outlooks. The same attention to space, light, and the everyday.</p><Link className="text-link" to="/explore/building">Explore {project.units.length} example homes <ArrowUpRight size={17}/></Link></div></div>
         <article className="residence-feature">
-          <Link to="/explore/floors/8" className="residence-photo"><img src={image('living')} alt="Representative Skyline living room with upholstered seating, travertine table and a planted terrace" loading="lazy"/><span className="image-label">The signature collection / Level 08</span><span className="photo-arrow"><ArrowUpRight/></span></Link>
+          <Link to="/explore/floors/8" className="residence-photo"><ReferencePhoto id="living" sizes="(max-width: 700px) 100vw, 60vw"/><span className="image-label">Interior inspiration / Level 08 concept</span><span className="photo-arrow"><ArrowUpRight/></span></Link>
           <div className="residence-feature-copy"><span className="micro-label">03 bedrooms · Corner living</span><h3>{skyline.name}</h3><p>A generous living salon opens toward the terrace. Soft materials and layered light bring a sense of calm to city living.</p>
             <dl className="residence-facts"><div><dt>{skyline.internalAreaM2} <span>m²</span></dt><dd>Internal area</dd></div><div><dt>{skyline.terraceAreaM2} <span>m²</span></dt><dd>Private terrace</dd></div></dl>
             <Link className="solid-link" to="/explore/floors/8">Discover the Skyline <ArrowRight size={17}/></Link>
           </div>
         </article>
-        <div className="supporting-residences">{['garden','penthouse'].map((id,i)=>{
+        <div className="supporting-residences">{(['garden','penthouse'] as const).map((id,i)=>{
           const c=project.collections.find(c=>c.id===id)!;
           const level=i===0?4:12;
           return <article key={id} className="residence-secondary">
-            <Link className="secondary-photo" to={`/explore/floors/${level}`}><img src={image(id)} alt={`Representative terrace design study for the ${c.name}`} loading="lazy"/><span className="image-label">Level {String(level).padStart(2,'0')}</span></Link>
+            <Link className="secondary-photo" to={`/explore/floors/${level}`}><ReferencePhoto id={id}/><span className="image-label">Design inspiration / Level {String(level).padStart(2,'0')} concept</span></Link>
             <div className="secondary-copy"><div><span className="micro-label">{c.bedrooms} bedrooms / {i===0?'Garden outlook':'At the crown'}</span><h3>{c.name}</h3></div><Link className="round-link" to={`/explore/floors/${level}`} aria-label={`Explore ${c.name}`}><ArrowUpRight size={20}/></Link></div>
             <div className="secondary-caption"><span>{c.internalAreaM2} m² internal</span><span>{c.terraceAreaM2} m² terrace</span></div>
           </article>;
         })}</div>
-        <p className="image-disclosure">Rendered concept studies. Interiors are representative; layouts and views vary by home. Areas are illustrative, with terraces shown separately.</p>
+        <p className="image-disclosure">Reference photography shows real spaces selected for inspiration, not these example homes. Areas are illustrative, with terraces shown separately.</p>
       </div>
     </section>
 
@@ -91,7 +92,7 @@ export function HomeSections(){
         <Chapter number="03">Life beyond your front door</Chapter>
         <div className="section-heading"><h2>Room for<br/><em>the everyday rituals.</em></h2><p>Some spaces bring us together.<br/>Others let us switch off.</p></div>
         <div className="amenity-layout">
-          <figure className="amenity-image"><img key={amenity.image} src={image(amenity.image)} alt={amenity.detail} loading="lazy"/><figcaption><span>{amenity.detail}</span><span>AUREL / Concept</span></figcaption></figure>
+          <figure className="amenity-image"><ReferencePhoto key={amenity.image} id={amenity.image}/><figcaption><span>{amenity.detail}</span><span>Reference photograph</span></figcaption></figure>
           <div className="amenity-accordion">{amenities.map((a,i)=><div className={`amenity-item ${i===activeAmenity?'is-active':''}`} key={a.name}>
             <button onClick={()=>setActiveAmenity(i)} aria-expanded={i===activeAmenity} aria-controls={`amenity-description-${i}`}><span className="micro-label">{a.tag}</span><span className="amenity-title">{a.name}</span><Plus size={19} aria-hidden="true"/></button>
             <div id={`amenity-description-${i}`} hidden={i!==activeAmenity}><p>{a.text}</p><span className="amenity-note">Proposed concept amenity</span></div>
@@ -104,9 +105,10 @@ export function HomeSections(){
       <Chapter number="04">A connected neighbourhood</Chapter>
       <div className="section-heading"><h2>A little closer<br/><em>to what matters.</em></h2><div><p>Green space, culture, and daily life—imagined together in one garden district.</p><Link className="text-link" to="/explore/district"><MapPin size={16}/> Explore the 3D district <ArrowUpRight size={17}/></Link></div></div>
       <div className="district-layout">
-        <figure className="district-figure"><Link to="/explore/district"><img src={image('district')} alt="Three-dimensional concept masterplan showing AUREL, parkland, city blocks and a canal" loading="lazy"/><span className="map-caption"><span>AUREL / The garden district</span><ArrowUpRight size={20}/></span></Link><figcaption>Illustrative masterplan. This is an imagined setting, not a geographic map.</figcaption></figure>
+        <figure className="district-figure"><Link to="/explore/district"><ReferencePhoto id="district"/><span className="map-caption"><span>Green space & city life / Explore the concept district</span><ArrowUpRight size={20}/></span></Link><figcaption>Canalside park photography from Amsterdam, used as neighbourhood inspiration. The 3D district is an imagined setting.</figcaption></figure>
         <ol className="destination-list">{destinations.map((d,i)=><li key={d.name}><span className="destination-number">0{i+1}</span><div><h3>{d.name}</h3><p>{d.text}</p></div><span className="destination-type">{d.type}</span></li>)}</ol>
       </div>
+      <PhotographyCredits/>
     </section>
 
     <section id="enquiry" className="closing-section">

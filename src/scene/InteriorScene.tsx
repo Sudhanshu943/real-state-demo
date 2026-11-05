@@ -5,7 +5,14 @@ import { SkylineBackdrop } from './SkylineBackdrop';
 import { TerraceDetails } from './TerraceDetails';
 import { SalonDetails } from './SalonDetails';
 import type { RoomId } from '../domain/types';
-import { getTravertineTexture, getBronzeTexture, getOakTexture } from './textureGenerators';
+import {
+  getTravertineTexture,
+  getTravertineNormalTexture,
+  getTravertineRoughnessTexture,
+  getBronzeTexture,
+  getOakTexture,
+  getOakNormalTexture
+} from './textureGenerators';
 
 export interface InteriorModelProps {
   roomId?: RoomId;
@@ -23,7 +30,10 @@ export function InteriorModel({
   // Architectural PBR Materials with Procedural Textures
   const materials = useMemo(() => {
     const travertineTex = getTravertineTexture();
+    const travertineNor = getTravertineNormalTexture();
+    const travertineRough = getTravertineRoughnessTexture();
     const oakTex = getOakTexture();
+    const oakNor = getOakNormalTexture();
     const bronzeTex = getBronzeTexture();
 
     return {
@@ -34,6 +44,8 @@ export function InteriorModel({
       }),
       floorOak: new THREE.MeshStandardMaterial({
         map: oakTex,
+        normalMap: oakNor,
+        normalScale: new THREE.Vector2(0.6, 0.6),
         roughness: 0.48,
         metalness: 0.08
       }),
@@ -50,6 +62,9 @@ export function InteriorModel({
       }),
       travertine: new THREE.MeshStandardMaterial({
         map: travertineTex,
+        normalMap: travertineNor,
+        normalScale: new THREE.Vector2(0.7, 0.7),
+        roughnessMap: travertineRough,
         roughness: 0.65,
         metalness: 0.06
       }),
@@ -121,20 +136,39 @@ export function InteriorModel({
     };
   }, []);
 
+  useEffect(() => () => Object.values(materials).forEach((m) => m.dispose()), [materials]);
+
   return (
     <group name="skyline-show-residence" position={[0, 0, 0]}>
       {/* Architectural Lighting */}
       <ambientLight intensity={1.05} color="#FFF5E6" />
-      <directionalLight position={[6, 10, 24]} intensity={1.8} castShadow shadow-camera-left={-18} shadow-camera-right={18} shadow-camera-top={18} shadow-camera-bottom={-18} shadow-mapSize={[2048,2048]} shadow-bias={-0.0002} color="#FFE4C4" />
-      {/* Living Room Downlight */}
-      <pointLight position={[4.8, 2.7, 13.5]} intensity={0.8} color="#FFE3C2" distance={12} />
-      {/* Bedroom Downlight */}
-      <pointLight position={[3.6, 2.7, 3.5]} intensity={0.7} color="#FFE3C2" distance={10} />
-      {/* Bedside Sconces */}
-      <pointLight position={[1.85, 1.45, 2.0]} intensity={0.45} color="#FFD090" distance={4} />
-      <pointLight position={[5.35, 1.45, 2.0]} intensity={0.45} color="#FFD090" distance={4} />
-      {/* Balcony Loggia Terrace Lantern */}
-      <pointLight position={[6.0, 2.5, 16.5]} intensity={1.2} color="#FFD8B0" distance={12} />
+      <directionalLight
+        position={[6, 10, 24]}
+        intensity={1.8}
+        castShadow
+        shadow-camera-left={-18}
+        shadow-camera-right={18}
+        shadow-camera-top={18}
+        shadow-camera-bottom={-18}
+        shadow-mapSize={[2048, 2048]}
+        shadow-bias={-0.0002}
+        color="#FFE4C4"
+      />
+
+      {/* Selective Room Downlights & Accents */}
+      {(roomId === 'living' || roomId === 'balcony') && (
+        <pointLight position={[4.8, 2.7, 13.5]} intensity={0.8} color="#FFE3C2" distance={12} />
+      )}
+      {roomId === 'bedroom' && (
+        <>
+          <pointLight position={[3.6, 2.7, 3.5]} intensity={0.7} color="#FFE3C2" distance={10} />
+          <pointLight position={[1.85, 1.45, 2.0]} intensity={0.45} color="#FFD090" distance={4} />
+          <pointLight position={[5.35, 1.45, 2.0]} intensity={0.45} color="#FFD090" distance={4} />
+        </>
+      )}
+      {(roomId === 'living' || roomId === 'balcony') && (
+        <pointLight position={[6.0, 2.5, 16.5]} intensity={1.2} color="#FFD8B0" distance={12} />
+      )}
 
       {/* 1. ARCHITECTURAL ENVELOPE */}
       <mesh position={[6, 0, 8]} receiveShadow material={materials.floorOak}>
@@ -152,131 +186,141 @@ export function InteriorModel({
       <mesh position={[12, 1.45, 8]} castShadow receiveShadow material={materials.wall}>
         <boxGeometry args={[0.2, 2.9, 16]} />
       </mesh>
-      <mesh position={[11.88, 1.45, 12]} material={materials.flutedWood}>
-        <boxGeometry args={[0.04, 2.7, 6]} />
-      </mesh>
 
-      <mesh position={[6, 1.45, 0]} castShadow receiveShadow material={materials.wall}>
-        <boxGeometry args={[12, 2.9, 0.2]} />
-      </mesh>
+      {roomId !== 'bedroom' && (
+        <mesh position={[11.88, 1.45, 12]} material={materials.flutedWood}>
+          <boxGeometry args={[0.04, 2.7, 6]} />
+        </mesh>
+      )}
 
-      {/* South Sliding Glass Wall to Balcony (Architectural bronze mullions with floor-to-ceiling panoramic glazing) */}
-      <group position={[6, 1.45, 16]}>
-        {/* Top Header & Bottom Sill */}
-        <mesh position={[0, 1.4, 0]} material={materials.darkBronze}>
-          <boxGeometry args={[12, 0.1, 0.12]} />
+      {roomId !== 'balcony' && (
+        <mesh position={[6, 1.45, 0]} castShadow receiveShadow material={materials.wall}>
+          <boxGeometry args={[12, 2.9, 0.2]} />
         </mesh>
-        <mesh position={[0, -1.4, 0]} material={materials.darkBronze}>
-          <boxGeometry args={[12, 0.1, 0.12]} />
-        </mesh>
-        {/* Vertical Bronze Mullions */}
-        <mesh position={[-5.95, 0, 0]} material={materials.darkBronze}>
-          <boxGeometry args={[0.1, 2.7, 0.12]} />
-        </mesh>
-        <mesh position={[5.95, 0, 0]} material={materials.darkBronze}>
-          <boxGeometry args={[0.1, 2.7, 0.12]} />
-        </mesh>
-        <mesh position={[-2.0, 0, 0]} material={materials.darkBronze}>
-          <boxGeometry args={[0.08, 2.7, 0.12]} />
-        </mesh>
-        <mesh position={[2.0, 0, 0]} material={materials.darkBronze}>
-          <boxGeometry args={[0.08, 2.7, 0.12]} />
-        </mesh>
-        {/* High-transparency floor-to-ceiling glass */}
-        <mesh position={[0, 0, 0]} material={materials.glass}>
-          <boxGeometry args={[11.8, 2.7, 0.02]} />
-        </mesh>
-      </group>
+      )}
 
-      {/* 2. BALCONY TERRACE (Travertine deck, bronze slim handrail, crystal glass balustrade) */}
-      <mesh position={[6, -0.05, 17.5]} receiveShadow material={materials.travertine}>
-        <boxGeometry args={[12, 0.1, 3]} />
-      </mesh>
-      {/* Balustrade Top Handrail */}
-      <mesh position={[6, 1.05, 19]} material={materials.darkBronze}>
-        <boxGeometry args={[12, 0.04, 0.08]} />
-      </mesh>
-      {/* Balustrade Base Channel */}
-      <mesh position={[6, 0.05, 19]} material={materials.darkBronze}>
-        <boxGeometry args={[12, 0.05, 0.08]} />
-      </mesh>
-      {/* Crystal Clear Acoustic Glass Balustrade */}
-      <mesh position={[6, 0.55, 18.96]} material={materials.glass}>
-        <boxGeometry args={[11.8, 0.95, 0.02]} />
-      </mesh>
-      {/* Side End Balustrades */}
-      <mesh position={[0, 0.55, 17.5]} material={materials.darkBronze}>
-        <boxGeometry args={[0.08, 1.05, 3]} />
-      </mesh>
-      <mesh position={[12, 0.55, 17.5]} material={materials.darkBronze}>
-        <boxGeometry args={[0.08, 1.05, 3]} />
-      </mesh>
-
-      {furnished && <SalonDetails />}
-
-      {/* 4. PRIMARY BEDROOM SUITE */}
-      <group position={[3.6, 0, 3.0]}>
-        <mesh position={[0, 0.06, 0]} receiveShadow material={materials.rug}>
-          <boxGeometry args={[4.0, 0.02, 3.6]} />
-        </mesh>
-
-        <mesh position={[0, 0.14, -0.1]} castShadow receiveShadow material={materials.flutedWood}>
-          <boxGeometry args={[2.3, 0.24, 2.3]} />
-        </mesh>
-
-        <mesh position={[0, 0.38, -0.05]} castShadow receiveShadow material={materials.duvetLinen}>
-          <boxGeometry args={[2.05, 0.28, 2.15]} />
-        </mesh>
-
-        <mesh position={[0, 0.53, 0.7]} castShadow material={materials.cashmereRunner}>
-          <boxGeometry args={[2.1, 0.04, 0.65]} />
-        </mesh>
-
-        <mesh position={[-0.55, 0.62, -0.85]} rotation={[0.2, 0, 0]} castShadow material={materials.pillowFabric}>
-          <boxGeometry args={[0.75, 0.35, 0.2]} />
-        </mesh>
-        <mesh position={[-0.55, 0.54, -0.6]} rotation={[0.1, 0, 0]} castShadow material={materials.duvetLinen}>
-          <boxGeometry args={[0.7, 0.18, 0.35]} />
-        </mesh>
-
-        <mesh position={[0.55, 0.62, -0.85]} rotation={[0.2, 0, 0]} castShadow material={materials.pillowFabric}>
-          <boxGeometry args={[0.75, 0.35, 0.2]} />
-        </mesh>
-        <mesh position={[0.55, 0.54, -0.6]} rotation={[0.1, 0, 0]} castShadow material={materials.duvetLinen}>
-          <boxGeometry args={[0.7, 0.18, 0.35]} />
-        </mesh>
-
-        <mesh position={[0, 1.15, -1.18]} castShadow receiveShadow material={materials.flutedWood}>
-          <boxGeometry args={[3.4, 1.6, 0.1]} />
-        </mesh>
-        <mesh position={[0, 1.95, -1.13]} material={materials.darkBronze}>
-          <boxGeometry args={[3.4, 0.04, 0.04]} />
-        </mesh>
-
-        <mesh position={[-1.85, 0.35, -0.95]} castShadow receiveShadow material={materials.travertine}>
-          <boxGeometry args={[0.65, 0.3, 0.45]} />
-        </mesh>
-        <mesh position={[1.85, 0.35, -0.95]} castShadow receiveShadow material={materials.travertine}>
-          <boxGeometry args={[0.65, 0.3, 0.45]} />
-        </mesh>
-
-        <group position={[-1.85, 1.45, -1.1]}>
-          <mesh material={materials.darkBronze}>
-            <cylinderGeometry args={[0.02, 0.02, 0.25, 8]} />
+      {/* South Sliding Glass Wall to Balcony (Living & Balcony modes) */}
+      {roomId !== 'bedroom' && (
+        <group position={[6, 1.45, 16]}>
+          <mesh position={[0, 1.4, 0]} material={materials.darkBronze}>
+            <boxGeometry args={[12, 0.1, 0.12]} />
           </mesh>
-          <mesh position={[0, -0.12, 0.08]} material={materials.sconceGlow}>
-            <sphereGeometry args={[0.06, 12, 12]} />
+          <mesh position={[0, -1.4, 0]} material={materials.darkBronze}>
+            <boxGeometry args={[12, 0.1, 0.12]} />
+          </mesh>
+          <mesh position={[-5.95, 0, 0]} material={materials.darkBronze}>
+            <boxGeometry args={[0.1, 2.7, 0.12]} />
+          </mesh>
+          <mesh position={[5.95, 0, 0]} material={materials.darkBronze}>
+            <boxGeometry args={[0.1, 2.7, 0.12]} />
+          </mesh>
+          <mesh position={[-2.0, 0, 0]} material={materials.darkBronze}>
+            <boxGeometry args={[0.08, 2.7, 0.12]} />
+          </mesh>
+          <mesh position={[2.0, 0, 0]} material={materials.darkBronze}>
+            <boxGeometry args={[0.08, 2.7, 0.12]} />
+          </mesh>
+          {/* Panoramic transparent sliding glass */}
+          <mesh position={[0, 0, 0]} material={materials.glass}>
+            <boxGeometry args={[11.8, 2.7, 0.02]} />
           </mesh>
         </group>
-        <group position={[1.85, 1.45, -1.1]}>
-          <mesh material={materials.darkBronze}>
-            <cylinderGeometry args={[0.02, 0.02, 0.25, 8]} />
+      )}
+
+      {/* 2. BALCONY TERRACE (Mounted for Living outlook and Balcony experience) */}
+      {roomId !== 'bedroom' && (
+        <>
+          <mesh position={[6, -0.05, 17.5]} receiveShadow material={materials.travertine}>
+            <boxGeometry args={[12, 0.1, 3]} />
           </mesh>
-          <mesh position={[0, -0.12, 0.08]} material={materials.sconceGlow}>
-            <sphereGeometry args={[0.06, 12, 12]} />
+          <mesh position={[6, 1.05, 19]} material={materials.darkBronze}>
+            <boxGeometry args={[12, 0.04, 0.08]} />
           </mesh>
+          <mesh position={[6, 0.05, 19]} material={materials.darkBronze}>
+            <boxGeometry args={[12, 0.05, 0.08]} />
+          </mesh>
+          <mesh position={[6, 0.55, 18.96]} material={materials.glass}>
+            <boxGeometry args={[11.8, 0.95, 0.02]} />
+          </mesh>
+          <mesh position={[0, 0.55, 17.5]} material={materials.darkBronze}>
+            <boxGeometry args={[0.08, 1.05, 3]} />
+          </mesh>
+          <mesh position={[12, 0.55, 17.5]} material={materials.darkBronze}>
+            <boxGeometry args={[0.08, 1.05, 3]} />
+          </mesh>
+          <TerraceDetails />
+          <SkylineBackdrop />
+        </>
+      )}
+
+      {/* 3. FURNISHED SALON (Mounted only in living room view) */}
+      {roomId === 'living' && furnished && <SalonDetails />}
+
+      {/* 4. PRIMARY BEDROOM SUITE (Mounted only in bedroom view) */}
+      {roomId === 'bedroom' && (
+        <group position={[3.6, 0, 3.0]}>
+          <mesh position={[0, 0.06, 0]} receiveShadow material={materials.rug}>
+            <boxGeometry args={[4.0, 0.02, 3.6]} />
+          </mesh>
+
+          <mesh position={[0, 0.14, -0.1]} castShadow receiveShadow material={materials.flutedWood}>
+            <boxGeometry args={[2.3, 0.24, 2.3]} />
+          </mesh>
+
+          <mesh position={[0, 0.38, -0.05]} castShadow receiveShadow material={materials.duvetLinen}>
+            <boxGeometry args={[2.05, 0.28, 2.15]} />
+          </mesh>
+
+          <mesh position={[0, 0.53, 0.7]} castShadow material={materials.cashmereRunner}>
+            <boxGeometry args={[2.1, 0.04, 0.65]} />
+          </mesh>
+
+          <mesh position={[-0.55, 0.62, -0.85]} rotation={[0.2, 0, 0]} castShadow material={materials.pillowFabric}>
+            <boxGeometry args={[0.75, 0.35, 0.2]} />
+          </mesh>
+          <mesh position={[-0.55, 0.54, -0.6]} rotation={[0.1, 0, 0]} castShadow material={materials.duvetLinen}>
+            <boxGeometry args={[0.7, 0.18, 0.35]} />
+          </mesh>
+
+          <mesh position={[0.55, 0.62, -0.85]} rotation={[0.2, 0, 0]} castShadow material={materials.pillowFabric}>
+            <boxGeometry args={[0.75, 0.35, 0.2]} />
+          </mesh>
+          <mesh position={[0.55, 0.54, -0.6]} rotation={[0.1, 0, 0]} castShadow material={materials.duvetLinen}>
+            <boxGeometry args={[0.7, 0.18, 0.35]} />
+          </mesh>
+
+          <mesh position={[0, 1.15, -1.18]} castShadow receiveShadow material={materials.flutedWood}>
+            <boxGeometry args={[3.4, 1.6, 0.1]} />
+          </mesh>
+          <mesh position={[0, 1.95, -1.13]} material={materials.darkBronze}>
+            <boxGeometry args={[3.4, 0.04, 0.04]} />
+          </mesh>
+
+          <mesh position={[-1.85, 0.35, -0.95]} castShadow receiveShadow material={materials.travertine}>
+            <boxGeometry args={[0.65, 0.3, 0.45]} />
+          </mesh>
+          <mesh position={[1.85, 0.35, -0.95]} castShadow receiveShadow material={materials.travertine}>
+            <boxGeometry args={[0.65, 0.3, 0.45]} />
+          </mesh>
+
+          <group position={[-1.85, 1.45, -1.1]}>
+            <mesh material={materials.darkBronze}>
+              <cylinderGeometry args={[0.02, 0.02, 0.25, 8]} />
+            </mesh>
+            <mesh position={[0, -0.12, 0.08]} material={materials.sconceGlow}>
+              <sphereGeometry args={[0.06, 12, 12]} />
+            </mesh>
+          </group>
+          <group position={[1.85, 1.45, -1.1]}>
+            <mesh material={materials.darkBronze}>
+              <cylinderGeometry args={[0.02, 0.02, 0.25, 8]} />
+            </mesh>
+            <mesh position={[0, -0.12, 0.08]} material={materials.sconceGlow}>
+              <sphereGeometry args={[0.06, 12, 12]} />
+            </mesh>
+          </group>
         </group>
-      </group>
+      )}
 
       <TerraceDetails />
 
@@ -473,6 +517,39 @@ export function TourCameraController({ roomId }: { roomId: RoomId }) {
   return null;
 }
 
+export function SceneReadinessReporter({ roomId }: { roomId?: string }) {
+  const { gl } = useThree();
+  const frameCount = useRef(0);
+
+  useEffect(() => {
+    frameCount.current = 0;
+    if (gl.domElement) {
+      gl.domElement.dataset.sceneReady = 'false';
+      if (roomId) gl.domElement.dataset.activeRoom = roomId;
+    }
+  }, [roomId, gl]);
+
+  useFrame(() => {
+    frameCount.current += 1;
+    if (frameCount.current >= 3 && gl.domElement) {
+      if (gl.domElement.width > 300 && gl.domElement.height > 150) {
+        gl.domElement.dataset.sceneReady = 'true';
+        if (roomId) gl.domElement.dataset.activeRoom = roomId;
+      }
+    }
+    if (typeof window !== 'undefined') {
+      (window as any).__AUREL_METRICS__ = {
+        calls: gl.info.render.calls,
+        triangles: gl.info.render.triangles,
+        geometries: gl.info.memory.geometries,
+        textures: gl.info.memory.textures
+      };
+    }
+  });
+
+  return null;
+}
+
 export interface InteriorSceneProps {
   roomId: RoomId;
   onRoomChange: (roomId: RoomId) => void;
@@ -483,6 +560,7 @@ export function InteriorScene({ roomId, onRoomChange }: InteriorSceneProps) {
   return (
     <>
       <TourCameraController roomId={roomId} />
+      <SceneReadinessReporter roomId={roomId} />
       <InteriorModel roomId={roomId} onRoomChange={onRoomChange} showHotspots={true} />
     </>
   );

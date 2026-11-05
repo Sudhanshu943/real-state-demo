@@ -1,4 +1,5 @@
 import { RoundedBox } from '@react-three/drei';
+import { PottedPlantAsset } from './PottedPlantAsset';
 
 function Cushion({position, size, color = '#c7beb0', rotation = 0}: {position: [number,number,number]; size: [number,number,number]; color?: string; rotation?: number}) {
   return <RoundedBox args={size} radius={.07} smoothness={3} position={position} rotation={[0,rotation,0]} castShadow receiveShadow>
@@ -73,5 +74,8 @@ export function SalonDetails() {
       <mesh position={[-.2,.05,.03]}><circleGeometry args={[.35,48]}/><meshStandardMaterial color="#687863"/></mesh>
       <mesh position={[.25,-.2,.032]}><planeGeometry args={[.65,.3]}/><meshStandardMaterial color="#a28462"/></mesh>
     </group>
+
+    {/* Authored CC0 Potted Plant Asset grounded on oak parquet floor near terrace light */}
+    <PottedPlantAsset position={[1.4, 0, 15.1]} scale={0.92} rotation={[0, 0.4, 0]} />
   </group>;
 }

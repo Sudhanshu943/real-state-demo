@@ -1,11 +1,13 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, Suspense } from 'react';
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
+import { Environment } from '@react-three/drei';
 import { BuildingProcedural } from './BuildingProcedural';
-import { InteriorScene } from './InteriorScene';
+import { InteriorScene, SceneReadinessReporter } from './InteriorScene';
 import { DistrictScene } from './DistrictScene';
 import { CameraRig } from './CameraRig';
 import { SceneBoundary } from './SceneBoundary';
+import { StudioLighting } from './StudioLighting';
 import { useExperience } from '../app/providers';
 import type { Selection, RoomId } from '../domain/types';
 
@@ -108,6 +110,9 @@ export function SceneHost({
                 </>
               ) : (
                 <>
+                  <Suspense fallback={<StudioLighting />}>
+                    <Environment files="/assets/hdri/kloofendal_48d_1k.hdr" background={false} />
+                  </Suspense>
                   <fog attach="fog" args={['#23302B', 70, 220]} />
                   <ambientLight intensity={0.38} color="#E6EDED" />
                   <directionalLight
@@ -137,6 +142,8 @@ export function SceneHost({
             preset={presetCamera}
             onPointerDragChange={setIsPointerDragging}
           />
+
+          <SceneReadinessReporter roomId={selection.kind === 'tour' ? selection.roomId : selection.kind} />
 
           {/* Scene Dispatcher */}
           {selection.kind === 'district' ? (

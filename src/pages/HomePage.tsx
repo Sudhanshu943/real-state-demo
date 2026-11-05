@@ -115,12 +115,22 @@ export function HomePage() {
     window.scrollTo({ top: targetY, behavior: 'smooth' });
   };
 
-  // Synchronized story beat opacities with gentle overlap
+  // Synchronized story beat opacities with crisp non-overlapping transition windows
   const s = scrollProgress;
-  const beat1Opacity = Math.max(1 - s * 4.2, 0);
-  const beat2Opacity = Math.min(Math.max((s - 0.20) * 12, 0), Math.max((0.52 - s) * 12, 0));
-  const beat3Opacity = Math.min(Math.max((s - 0.50) * 12, 0), Math.max((0.80 - s) * 14, 0));
-  const beat4Opacity = Math.min(Math.max((s - 0.80) * 16, 0), Math.max(1 - (s - 0.93) * 16, 0));
+  // Beat 1: Full opacity at hero (0.00), clearing completely by s = 0.16
+  const beat1Opacity = Math.max(0, Math.min(1, 1 - s * 6.25));
+
+  // Beat 2 (Level 8 Loggia): fades in at 0.22, full 0.28–0.45, clears by 0.51
+  const beat2Opacity = Math.max(0, Math.min(1, Math.min((s - 0.22) * 16, (0.51 - s) * 16)));
+
+  // Beat 3 (Living Salon): fades in at 0.54, full 0.60–0.75, clears by 0.81
+  const beat3Opacity = Math.max(0, Math.min(1, Math.min((s - 0.54) * 16, (0.81 - s) * 16)));
+
+  // Beat 4 (Balcony Horizon): fades in at 0.83, full 0.88–0.94, clears by 0.98
+  const beat4Opacity = Math.max(0, Math.min(1, Math.min((s - 0.83) * 16, (0.98 - s) * 20)));
+
+  // Controls (prompt and skip link): fades out as soon as user begins scrolling
+  const controlsOpacity = Math.max(0, Math.min(1, 1 - s * 6.25));
 
   // Current chapter metadata
   const currentChapter =
@@ -254,13 +264,16 @@ export function HomePage() {
                 justifyContent: 'space-between'
               }}
             >
-              {/* BEAT 1: Initial Hero Masthead (s = 0.00 to 0.25) */}
+              {/* BEAT 1: Initial Hero Masthead (s = 0.00 to 0.16) */}
               <div
                 className="hero-masthead"
                 inert={beat1Opacity <= .05}
                 aria-hidden={beat1Opacity <= .05}
                 style={{
                   opacity: beat1Opacity,
+                  visibility: beat1Opacity > 0 ? 'visible' : 'hidden',
+                  display: beat1Opacity > 0 ? 'flex' : 'none',
+                  flexDirection: 'column',
                   transform: `translateY(-${s * 45}px)`,
                   transition: 'opacity 140ms ease-out',
                   pointerEvents: beat1Opacity > 0.05 ? 'auto' : 'none',
@@ -358,7 +371,7 @@ export function HomePage() {
                 </div>
               </div>
 
-              {/* BEAT 2: Facade & Terrace Reveal (s = 0.25 to 0.52) */}
+              {/* BEAT 2: Facade & Terrace Reveal (s = 0.22 to 0.51) */}
               <div
                 className="story-card"
                 inert={beat2Opacity <= .05}
@@ -376,9 +389,11 @@ export function HomePage() {
                   color: '#FFFFFF',
                   boxShadow: '0 24px 48px rgba(0,0,0,0.45)',
                   opacity: beat2Opacity,
+                  visibility: beat2Opacity > 0 ? 'visible' : 'hidden',
+                  display: beat2Opacity > 0 ? 'block' : 'none',
                   transform: `translateY(${s < 0.25 ? 20 : s > 0.48 ? -20 : 0}px)`,
                   transition: 'opacity 160ms ease-out',
-                  pointerEvents: beat2Opacity > 0.1 ? 'auto' : 'none'
+                  pointerEvents: beat2Opacity > 0.05 ? 'auto' : 'none'
                 }}
               >
                 <span
@@ -416,7 +431,7 @@ export function HomePage() {
                 </div>
               </div>
 
-              {/* BEAT 3: Living Salon Interior Reveal (s = 0.52 to 0.82) */}
+              {/* BEAT 3: Living Salon Interior Reveal (s = 0.54 to 0.81) */}
               <div
                 className="story-card"
                 inert={beat3Opacity <= .05}
@@ -434,9 +449,11 @@ export function HomePage() {
                   color: '#FFFFFF',
                   boxShadow: '0 24px 48px rgba(0,0,0,0.5)',
                   opacity: beat3Opacity,
+                  visibility: beat3Opacity > 0 ? 'visible' : 'hidden',
+                  display: beat3Opacity > 0 ? 'block' : 'none',
                   transform: `translateY(${s < 0.55 ? 20 : s > 0.78 ? -20 : 0}px)`,
                   transition: 'opacity 160ms ease-out',
-                  pointerEvents: beat3Opacity > 0.1 ? 'auto' : 'none'
+                  pointerEvents: beat3Opacity > 0.05 ? 'auto' : 'none'
                 }}
               >
                 <span
@@ -477,7 +494,7 @@ export function HomePage() {
                 </Link>
               </div>
 
-              {/* BEAT 4: Balcony Horizon & Release (s >= 0.80) */}
+              {/* BEAT 4: Balcony Horizon & Release (s >= 0.83) */}
               <div
                 className="story-card"
                 inert={beat4Opacity <= .05}
@@ -495,9 +512,11 @@ export function HomePage() {
                   color: '#FFFFFF',
                   boxShadow: '0 20px 40px rgba(0,0,0,0.45)',
                   opacity: beat4Opacity,
+                  visibility: beat4Opacity > 0 ? 'visible' : 'hidden',
+                  display: beat4Opacity > 0 ? 'block' : 'none',
                   transform: `translateY(${s < 0.82 ? 15 : 0}px)`,
                   transition: 'opacity 160ms ease-out',
-                  pointerEvents: beat4Opacity > 0.1 ? 'auto' : 'none'
+                  pointerEvents: beat4Opacity > 0.05 ? 'auto' : 'none'
                 }}
               >
                 <span
@@ -536,18 +555,21 @@ export function HomePage() {
                 </div>
               </div>
 
-              {/* Bottom Nav / Skip Link (Gracefully fades out before pin release) */}
+              {/* Bottom Nav / Skip Link (Fades out cleanly as user begins architectural reveal scroll) */}
               <div
                 className="story-controls"
+                inert={controlsOpacity <= .05}
+                aria-hidden={controlsOpacity <= .05}
                 style={{
-                  display: 'flex',
+                  display: controlsOpacity > 0 ? 'flex' : 'none',
+                  visibility: controlsOpacity > 0 ? 'visible' : 'hidden',
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   color: 'rgba(255, 255, 255, 0.75)',
                   fontSize: '12px',
-                  opacity: Math.max(0, Math.min(1, (0.88 - s) * 10)),
-                  pointerEvents: s < 0.86 ? 'auto' : 'none',
-                  transition: 'opacity 200ms ease'
+                  opacity: controlsOpacity,
+                  pointerEvents: controlsOpacity > 0.05 ? 'auto' : 'none',
+                  transition: 'opacity 140ms ease'
                 }}
               >
                 <span>Scroll to explore architectural reveal</span>
