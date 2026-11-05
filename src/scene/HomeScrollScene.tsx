@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { BuildingProcedural } from './BuildingProcedural';
 import { InteriorModel } from './InteriorScene';
+import { StudioLighting } from './StudioLighting';
 
 interface HomeScrollSceneProps {
   scrollProgress: number; // 0.0 to 1.0
@@ -12,10 +13,10 @@ interface HomeScrollSceneProps {
 // Pre-allocated static scratch vectors to eliminate runtime garbage collection
 const targetPosScratch = new THREE.Vector3();
 const targetLookScratch = new THREE.Vector3();
-const extStartPos = new THREE.Vector3(54, 25, 58);
+const extStartPos = new THREE.Vector3(70, 31, 76);
 const extMidPos = new THREE.Vector3(34, 28, 42);
 const extEndPos = new THREE.Vector3(20, 31, 26);
-const extStartLook = new THREE.Vector3(-7, 22, 0);
+const extStartLook = new THREE.Vector3(-15, 23, 0);
 const extMidLook = new THREE.Vector3(-3, 25, 0);
 const extEndLook = new THREE.Vector3(2.5, 29.5, 6.0);
 
@@ -24,15 +25,15 @@ const intLivingEndPos = new THREE.Vector3(3.6, 1.45, 10.4);
 const intLivingStartLook = new THREE.Vector3(5.2, 1.10, 14.8);
 const intLivingEndLook = new THREE.Vector3(5.8, 1.10, 15.6);
 
-const intBalconyStartPos = new THREE.Vector3(5.6, 1.42, 15.4);
-const intBalconyEndPos = new THREE.Vector3(6.0, 1.42, 16.4);
-const intBalconyStartLook = new THREE.Vector3(6.0, 1.20, 24.0);
-const intBalconyEndLook = new THREE.Vector3(6.0, 1.20, 32.0);
+const intBalconyStartPos = new THREE.Vector3(4.4, 1.55, 16.3);
+const intBalconyEndPos = new THREE.Vector3(4.8, 1.6, 16.8);
+const intBalconyStartLook = new THREE.Vector3(9.1, 1.05, 19.2);
+const intBalconyEndLook = new THREE.Vector3(8.7, 1.2, 20.5);
 
 function HomeScrollCamera({ scrollProgress, isReducedMotion = false }: { scrollProgress: number; isReducedMotion?: boolean }) {
   const { camera } = useThree();
-  const currentPos = useRef(new THREE.Vector3(54, 25, 58));
-  const currentLook = useRef(new THREE.Vector3(-7, 22, 0));
+  const currentPos = useRef(extStartPos.clone());
+  const currentLook = useRef(extStartLook.clone());
   const previousMode = useRef<'exterior' | 'interior'>('exterior');
   const lastFov = useRef(40);
 
@@ -150,7 +151,7 @@ export function HomeScrollScene({ scrollProgress, isReducedMotion = false }: Hom
     >
       <Canvas
         shadows="soft"
-        camera={{ position: [54, 25, 58], fov: 40, near: 0.2, far: 240 }}
+        camera={{ position: [70, 31, 76], fov: 40, near: 0.2, far: 240 }}
         gl={{
           antialias: true,
           alpha: true,
@@ -161,16 +162,18 @@ export function HomeScrollScene({ scrollProgress, isReducedMotion = false }: Hom
         dpr={[1, 1.5]}
       >
         <HomeScrollCamera scrollProgress={scrollProgress} isReducedMotion={isReducedMotion} />
+        <StudioLighting />
 
         {!isInterior ? (
           <>
             <fog attach="fog" args={['#23302B', 80, 240]} />
-            <ambientLight intensity={0.42} color="#D2DDD8" />
+            <ambientLight intensity={0.65} color="#D2DDD8" />
+            <hemisphereLight args={['#E3EAE6', '#4B5142', 0.75]} />
 
             {/* Directional Sun from South-East (Raking golden light hitting South & East facades) */}
             <directionalLight
               position={[48, 56, 42]}
-              intensity={1.45}
+              intensity={1.8}
               castShadow
               shadow-camera-left={-28}
               shadow-camera-right={28}

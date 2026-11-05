@@ -51,6 +51,7 @@ export function Header({ variant = 'light', isOverlay = false, activeSection }: 
 
   return (
     <header
+      className={`site-header ${isDark ? 'site-header--dark' : ''}`}
       style={{
         height: 'var(--header-height)',
         padding: '0 var(--gutter)',
@@ -60,8 +61,8 @@ export function Header({ variant = 'light', isOverlay = false, activeSection }: 
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        backgroundColor: isDark ? 'rgba(16, 24, 21, 0.55)' : 'rgba(244, 240, 232, 0.96)',
-        backdropFilter: 'blur(12px)',
+        backgroundColor: isDark ? '#101e19' : 'rgba(244, 240, 232, 0.98)',
+        backdropFilter: mobileMenuOpen ? 'none' : 'blur(12px)',
         borderBottom: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.08)' : 'var(--color-line)'}`,
         color: isDark ? 'var(--color-white)' : 'var(--color-ink)',
         transition: 'background-color 300ms ease, border-color 300ms ease, color 300ms ease'
@@ -118,12 +119,12 @@ export function Header({ variant = 'light', isOverlay = false, activeSection }: 
         >
           Vision
         </button>
-        <Link
-          to="/explore/building"
+        <button
+          onClick={() => scrollToSection('residences')}
           style={getLinkStyle('residences')}
         >
           Residences
-        </Link>
+        </button>
         <button
           onClick={() => scrollToSection('location')}
           style={getLinkStyle('location')}
@@ -210,6 +211,7 @@ export function Header({ variant = 'light', isOverlay = false, activeSection }: 
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Navigation Menu'}
+          aria-expanded={mobileMenuOpen}
           style={{
             padding: '8px',
             color: 'inherit',
@@ -229,7 +231,7 @@ export function Header({ variant = 'light', isOverlay = false, activeSection }: 
           aria-label="Navigation Menu"
           style={{
             position: 'fixed',
-            inset: '80px 0 0 0',
+            inset: 'var(--header-height) 0 0 0',
             backgroundColor: 'var(--color-paper)',
             color: 'var(--color-ink)',
             zIndex: 99,

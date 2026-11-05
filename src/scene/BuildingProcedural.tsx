@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react';
 import * as THREE from 'three';
+import { FacadeDetails } from './FacadeDetails';
+import { ArrivalGarden } from './ArrivalGarden';
+import { TreeCanopy } from './TreeCanopy';
 import { getTravertineTexture, getBronzeTexture } from './textureGenerators';
 
 interface BuildingProceduralProps {
@@ -36,6 +39,8 @@ export function BuildingProcedural({
     return {
       stone: new THREE.MeshStandardMaterial({
         map: travertineTex,
+        bumpMap: travertineTex,
+        bumpScale: .035,
         roughness: 0.65,
         metalness: 0.04
       }),
@@ -76,13 +81,13 @@ export function BuildingProcedural({
       }),
       // Warm amber interior occupied illumination
       glassLit: new THREE.MeshStandardMaterial({
-        color: '#E29E52',
+        color: '#C5B392',
         roughness: 0.20,
         metalness: 0.12,
-        emissive: '#B87228',
-        emissiveIntensity: 0.65,
+        emissive: '#D8BA87',
+        emissiveIntensity: 0.22,
         transparent: true,
-        opacity: 0.85
+        opacity: 0.30
       }),
       foliage: new THREE.MeshStandardMaterial({
         color: '#1F3827',
@@ -112,11 +117,13 @@ export function BuildingProcedural({
 
   return (
     <group name="aurel-tower" position={[0, 0, 0]}>
+      <FacadeDetails bronze={materials.bronze} reveal={materials.stoneReveal} stone={materials.stone} />
+      <ArrivalGarden />
       {/* ================================================================== */}
       {/* 1. GROUND LANDSCAPING, REFLECTING POOLS & BASE PLINTH              */}
       {/* ================================================================== */}
       <mesh position={[0, -0.2, 0]} receiveShadow material={materials.darkStone}>
-        <boxGeometry args={[68, 0.4, 56]} />
+        <boxGeometry args={[52, 0.4, 44]} />
       </mesh>
 
       {/* Arrival Courtyard Travertine Paving (Rotated horizontally with normal +Y) */}
@@ -231,13 +238,23 @@ export function BuildingProcedural({
               <boxGeometry args={[1.4, floorHeight - 0.32, 1.4]} />
             </mesh>
 
-            {/* Side Shear Walls (East & West Facades) */}
-            <mesh position={[-width / 2 + 0.3, 0, 0]} castShadow receiveShadow material={materials.stone}>
-              <boxGeometry args={[0.6, floorHeight - 0.32, depth - 4]} />
-            </mesh>
-            <mesh position={[width / 2 - 0.3, 0, 0]} castShadow receiveShadow material={materials.stone}>
-              <boxGeometry args={[0.6, floorHeight - 0.32, depth - 4]} />
-            </mesh>
+            {/* Recessed side windows framed by genuine stone piers, rather than a blank wall. */}
+            {[-1, 1].map(side => <group key={side}>
+              {[-6, -2, 2, 6].map(z => <group key={z}>
+                <mesh position={[side * 13.55, 0, z]} material={materials.glass}>
+                  <boxGeometry args={[.08, 2.7, 3.25]} />
+                </mesh>
+                <mesh position={[side * 13.9, 0, z - 1.88]} castShadow receiveShadow material={materials.stone}>
+                  <boxGeometry args={[.65, 3.08, .55]} />
+                </mesh>
+                <mesh position={[side * 13.7, -1.35, z]} castShadow material={materials.stone}>
+                  <boxGeometry args={[.8, .16, 3.35]} />
+                </mesh>
+                <mesh position={[side * 13.63, 0, z]} material={materials.bronze}>
+                  <boxGeometry args={[.09, 2.7, .065]} />
+                </mesh>
+              </group>)}
+            </group>)}
 
             {/* East Facade Architectural Bronze Shading Fins */}
             {[-4, 0, 4].map((z) => (
@@ -426,32 +443,44 @@ export function BuildingProcedural({
         </mesh>
 
         {/* Bronze Cantilevered Pergola Beams */}
+        {[-1,1].map(side=><group key={side}>
+          <mesh position={[0,.25,side*9.7]} material={materials.glass}><boxGeometry args={[27,.95,.04]}/></mesh>
+          <mesh position={[0,.75,side*9.7]} material={materials.bronze}><boxGeometry args={[27,.05,.07]}/></mesh>
+          <mesh position={[side*13.5,.25,0]} material={materials.glass}><boxGeometry args={[.04,.95,19.4]}/></mesh>
+          <mesh position={[side*13.5,.75,0]} material={materials.bronze}><boxGeometry args={[.07,.05,19.4]}/></mesh>
+        </group>)}
         {[-9, -5.5, -2, 2, 5.5, 9].map((x) => (
-          <mesh key={x} position={[x, 1.2, 0]} castShadow material={materials.bronze}>
+          <mesh key={x} position={[x, 2.6, 0]} castShadow material={materials.bronze}>
             <boxGeometry args={[0.35, 0.45, depth - 2]} />
           </mesh>
         ))}
 
         {/* Bronze Pergola Cross-Purlins */}
         {[-6, -2, 2, 6].map((z) => (
-          <mesh key={`cross-${z}`} position={[0, 1.45, z]} castShadow material={materials.darkBronze}>
+          <mesh key={`cross-${z}`} position={[0, 2.85, z]} castShadow material={materials.darkBronze}>
             <boxGeometry args={[width - 3, 0.15, 0.25]} />
           </mesh>
         ))}
 
         {/* Lush Sky Garden Landscaping Deck */}
-        <mesh position={[0, 0.05, 0]} receiveShadow material={materials.foliage}>
-          <boxGeometry args={[width - 5, 0.6, depth - 5]} />
+        <mesh position={[0, -0.25, 0]} receiveShadow material={materials.stone}>
+          <boxGeometry args={[width - 2, 0.2, depth - 2]} />
         </mesh>
+        {[-6,6].map(x=><group key={x} position={[x,0,0]}>
+          <mesh position={[0,.05,0]} castShadow receiveShadow material={materials.darkBronze}><boxGeometry args={[3.8,.12,1.6]}/></mesh>
+          <mesh position={[0,.27,0]} castShadow receiveShadow material={materials.stone}><boxGeometry args={[3.7,.3,1.5]}/></mesh>
+          <mesh position={[0,.64,-.6]} castShadow material={materials.stone}><boxGeometry args={[3.7,.45,.2]}/></mesh>
+        </group>)}
+        <mesh position={[0,.25,0]} castShadow receiveShadow material={materials.darkBronze}><cylinderGeometry args={[1.1,1,.7,32]}/></mesh>
+        {[-1,1].map(side=><mesh key={side} position={[side*11,.12,0]} castShadow receiveShadow material={materials.foliage}><boxGeometry args={[1.2,.5,14]}/></mesh>)}
         {/* Rooftop Specimen Plants */}
         {[-8, -3, 3, 8].map((x, idx) => (
           <group key={`roof-plant-${x}`} position={[x, 0.4, (idx % 2 === 0 ? 4 : -4)]}>
             <mesh castShadow receiveShadow material={materials.stone}>
               <cylinderGeometry args={[0.6, 0.5, 0.7, 16]} />
             </mesh>
-            <mesh position={[0, 0.7, 0]} castShadow material={materials.foliage}>
-              <sphereGeometry args={[0.65, 12, 12]} />
-            </mesh>
+            <mesh position={[0,.8,0]} castShadow material={materials.darkBronze}><cylinderGeometry args={[.06,.09,1.2,8]}/></mesh>
+            <TreeCanopy position={[0,1.4,0]} scale={.65}/>
           </group>
         ))}
       </group>

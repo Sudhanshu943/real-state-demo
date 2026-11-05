@@ -12,7 +12,11 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "validate:assets": "node scripts/validate-assets.mjs",
-    "capture:stills": "node scripts/capture-stills.mjs"
+    "capture:stills": "node scripts/capture-stills.mjs",
+    "model:inspect": "gltf-transform inspect",
+    "model:validate": "gltf-transform validate",
+    "model:optimize": "gltf-transform optimize",
+    "model:jsx": "gltfjsx"
   },
   "dependencies": {
     "@react-three/drei": "^10.0.4",
@@ -23,13 +27,18 @@
     "react-router-dom": "^7.3.0",
     "three": "^0.174.0"
   },
+  "overrides": {
+    "sharp": "^0.35.5"
+  },
   "devDependencies": {
+    "@gltf-transform/cli": "^4.5.1",
     "@playwright/test": "^1.50.1",
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/three": "^0.174.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "gltfjsx": "^6.5.3",
     "happy-dom": "^21.0.4",
     "typescript": "^5.7.3",
     "vite": "^6.2.0",

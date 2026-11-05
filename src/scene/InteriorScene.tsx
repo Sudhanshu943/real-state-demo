@@ -1,6 +1,9 @@
 import { useMemo, useRef, useEffect, useCallback } from 'react';
 import * as THREE from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
+import { SkylineBackdrop } from './SkylineBackdrop';
+import { TerraceDetails } from './TerraceDetails';
+import { SalonDetails } from './SalonDetails';
 import type { RoomId } from '../domain/types';
 import { getTravertineTexture, getBronzeTexture, getOakTexture } from './textureGenerators';
 
@@ -8,12 +11,14 @@ export interface InteriorModelProps {
   roomId?: RoomId;
   onRoomChange?: (roomId: RoomId) => void;
   showHotspots?: boolean;
+  furnished?: boolean;
 }
 
 export function InteriorModel({
   roomId = 'living',
   onRoomChange = () => {},
-  showHotspots = false
+  showHotspots = false,
+  furnished = true
 }: InteriorModelProps) {
   // Architectural PBR Materials with Procedural Textures
   const materials = useMemo(() => {
@@ -119,8 +124,8 @@ export function InteriorModel({
   return (
     <group name="skyline-show-residence" position={[0, 0, 0]}>
       {/* Architectural Lighting */}
-      <ambientLight intensity={0.80} color="#FFF5E6" />
-      <directionalLight position={[6, 10, 24]} intensity={1.1} castShadow color="#FFE4C4" />
+      <ambientLight intensity={1.05} color="#FFF5E6" />
+      <directionalLight position={[6, 10, 24]} intensity={1.8} castShadow shadow-camera-left={-18} shadow-camera-right={18} shadow-camera-top={18} shadow-camera-bottom={-18} shadow-mapSize={[2048,2048]} shadow-bias={-0.0002} color="#FFE4C4" />
       {/* Living Room Downlight */}
       <pointLight position={[4.8, 2.7, 13.5]} intensity={0.8} color="#FFE3C2" distance={12} />
       {/* Bedroom Downlight */}
@@ -136,22 +141,22 @@ export function InteriorModel({
         <boxGeometry args={[12, 0.1, 16]} />
       </mesh>
 
-      <mesh position={[6, 2.9, 8]} material={materials.ceiling}>
+      <mesh position={[6, 2.9, 8]} castShadow receiveShadow material={materials.ceiling}>
         <boxGeometry args={[12, 0.08, 16]} />
       </mesh>
 
-      <mesh position={[0, 1.45, 8]} material={materials.wall}>
+      <mesh position={[0, 1.45, 8]} castShadow receiveShadow material={materials.wall}>
         <boxGeometry args={[0.2, 2.9, 16]} />
       </mesh>
 
-      <mesh position={[12, 1.45, 8]} material={materials.wall}>
+      <mesh position={[12, 1.45, 8]} castShadow receiveShadow material={materials.wall}>
         <boxGeometry args={[0.2, 2.9, 16]} />
       </mesh>
       <mesh position={[11.88, 1.45, 12]} material={materials.flutedWood}>
         <boxGeometry args={[0.04, 2.7, 6]} />
       </mesh>
 
-      <mesh position={[6, 1.45, 0]} material={materials.wall}>
+      <mesh position={[6, 1.45, 0]} castShadow receiveShadow material={materials.wall}>
         <boxGeometry args={[12, 2.9, 0.2]} />
       </mesh>
 
@@ -207,86 +212,7 @@ export function InteriorModel({
         <boxGeometry args={[0.08, 1.05, 3]} />
       </mesh>
 
-      {/* 3. LIVING SALON FURNITURE (Architecturally proportioned with rounded cushions, seam bevels, and honest joinery) */}
-      <group position={[4.8, 0, 14.0]}>
-        {/* Floor Rug with Thickness and Rounded Proportions */}
-        <mesh position={[0, 0.06, 0]} receiveShadow material={materials.rug}>
-          <boxGeometry args={[4.4, 0.03, 3.6]} />
-        </mesh>
-
-        {/* L-Shaped Sectional Sofa */}
-        {/* Main Sofa Base / Plinth */}
-        <mesh position={[0, 0.12, 0.8]} castShadow receiveShadow material={materials.darkBronze}>
-          <boxGeometry args={[3.3, 0.10, 0.96]} />
-        </mesh>
-        {/* Main Sofa Seat Cushion */}
-        <mesh position={[0, 0.32, 0.8]} castShadow receiveShadow material={materials.sofaFabric}>
-          <boxGeometry args={[3.25, 0.30, 0.94]} />
-        </mesh>
-        {/* Main Sofa Backrest */}
-        <mesh position={[0, 0.62, 1.15]} castShadow receiveShadow material={materials.sofaFabric}>
-          <boxGeometry args={[3.25, 0.38, 0.28]} />
-        </mesh>
-        {/* Accent Throw Cushions */}
-        <mesh position={[-0.8, 0.56, 0.98]} rotation={[0.1, 0.15, 0]} castShadow material={materials.cushionFabric}>
-          <boxGeometry args={[0.55, 0.35, 0.16]} />
-        </mesh>
-        <mesh position={[0.8, 0.56, 0.98]} rotation={[0.1, -0.15, 0]} castShadow material={materials.cushionFabric}>
-          <boxGeometry args={[0.55, 0.35, 0.16]} />
-        </mesh>
-
-        {/* Chaise Return Base & Cushion */}
-        <mesh position={[-1.3, 0.12, -0.2]} castShadow receiveShadow material={materials.darkBronze}>
-          <boxGeometry args={[0.96, 0.10, 1.3]} />
-        </mesh>
-        <mesh position={[-1.3, 0.32, -0.2]} castShadow receiveShadow material={materials.sofaFabric}>
-          <boxGeometry args={[0.94, 0.30, 1.25]} />
-        </mesh>
-        <mesh position={[-1.65, 0.55, -0.2]} castShadow receiveShadow material={materials.sofaFabric}>
-          <boxGeometry args={[0.22, 0.32, 1.25]} />
-        </mesh>
-
-        {/* Honed Travertine Cocktail Table (Dual sculpted pedestals + beveled tabletop) */}
-        <group position={[0.2, 0, -0.2]}>
-          {/* Beveled Travertine Top */}
-          <mesh position={[0, 0.32, 0]} castShadow receiveShadow material={materials.travertine}>
-            <boxGeometry args={[1.5, 0.08, 0.8]} />
-          </mesh>
-          {/* Dual Fluted Stone Pedestals */}
-          <mesh position={[-0.45, 0.14, 0]} castShadow receiveShadow material={materials.travertine}>
-            <cylinderGeometry args={[0.18, 0.22, 0.28, 24]} />
-          </mesh>
-          <mesh position={[0.45, 0.14, 0]} castShadow receiveShadow material={materials.travertine}>
-            <cylinderGeometry args={[0.18, 0.22, 0.28, 24]} />
-          </mesh>
-        </group>
-
-        {/* Slender Floor Lamp */}
-        <group position={[2.2, 0, 1.1]}>
-          <mesh position={[0, 0.02, 0]} material={materials.darkBronze}>
-            <cylinderGeometry args={[0.16, 0.18, 0.04, 16]} />
-          </mesh>
-          <mesh position={[0, 0.9, 0]} castShadow material={materials.lampBronze}>
-            <cylinderGeometry args={[0.018, 0.018, 1.76, 12]} />
-          </mesh>
-          <mesh position={[0, 1.75, 0]} material={materials.duvetLinen}>
-            <cylinderGeometry args={[0.14, 0.24, 0.32, 24]} />
-          </mesh>
-        </group>
-
-        {/* Travertine Corner Planter with Foliage */}
-        <group position={[-2.0, 0, 1.2]}>
-          <mesh position={[0, 0.35, 0]} castShadow receiveShadow material={materials.travertine}>
-            <cylinderGeometry args={[0.26, 0.22, 0.7, 24]} />
-          </mesh>
-          <mesh position={[0, 0.85, 0]} castShadow material={materials.foliage}>
-            <sphereGeometry args={[0.32, 16, 16]} />
-          </mesh>
-          <mesh position={[0.08, 1.05, 0.04]} castShadow material={materials.foliage}>
-            <sphereGeometry args={[0.24, 12, 12]} />
-          </mesh>
-        </group>
-      </group>
+      {furnished && <SalonDetails />}
 
       {/* 4. PRIMARY BEDROOM SUITE */}
       <group position={[3.6, 0, 3.0]}>
@@ -352,112 +278,9 @@ export function InteriorModel({
         </group>
       </group>
 
-      {/* 5. OUTDOOR BALCONY LOGGIA (Architecturally composed, zero foreground camera obstruction) */}
-      <group position={[0, 0, 0]}>
-        {/* Left Lounge Wing */}
-        <group position={[2.0, 0, 17.5]}>
-          <mesh position={[0, 0.35, 0]} castShadow receiveShadow material={materials.sofaFabric}>
-            <boxGeometry args={[1.0, 0.65, 0.9]} />
-          </mesh>
-          <mesh position={[-1.0, 0.3, 0.2]} castShadow receiveShadow material={materials.travertine}>
-            <cylinderGeometry args={[0.24, 0.20, 0.6, 16]} />
-          </mesh>
-          <mesh position={[-1.0, 0.72, 0.2]} castShadow material={materials.foliage}>
-            <sphereGeometry args={[0.28, 12, 12]} />
-          </mesh>
-        </group>
+      <TerraceDetails />
 
-        {/* Right Lounge Wing */}
-        <group position={[10.0, 0, 17.5]}>
-          <mesh position={[0, 0.35, 0]} castShadow receiveShadow material={materials.sofaFabric}>
-            <boxGeometry args={[1.0, 0.65, 0.9]} />
-          </mesh>
-          <mesh position={[-1.1, 0.22, 0]} castShadow receiveShadow material={materials.travertine}>
-            <boxGeometry args={[0.6, 0.4, 0.6]} />
-          </mesh>
-          <mesh position={[1.0, 0.3, 0.2]} castShadow receiveShadow material={materials.travertine}>
-            <cylinderGeometry args={[0.24, 0.20, 0.6, 16]} />
-          </mesh>
-          <mesh position={[1.0, 0.72, 0.2]} castShadow material={materials.foliage}>
-            <sphereGeometry args={[0.28, 12, 12]} />
-          </mesh>
-        </group>
-
-        {/* Terrace Loggia Sunset Influx Light */}
-        <directionalLight position={[6, 5, 30]} intensity={1.2} color="#FFD29D" />
-      </group>
-
-      {/* 6. SUNSET HORIZON & RICH CITYSCAPE PANORAMA */}
-      <group position={[6, 8, 48]}>
-        {/* Sky Atmosphere Layers */}
-        <mesh position={[0, 12, 0]}>
-          <planeGeometry args={[140, 16]} />
-          <meshBasicMaterial color="#121C18" side={THREE.DoubleSide} />
-        </mesh>
-        <mesh position={[0, 5, 0]}>
-          <planeGeometry args={[140, 12]} />
-          <meshBasicMaterial color="#2B3E36" side={THREE.DoubleSide} />
-        </mesh>
-        <mesh position={[0, -0.5, 0]}>
-          <planeGeometry args={[140, 9]} />
-          <meshBasicMaterial color="#C25F33" side={THREE.DoubleSide} />
-        </mesh>
-        <mesh position={[0, -5.5, 0]}>
-          <planeGeometry args={[140, 7]} />
-          <meshBasicMaterial color="#EFA058" side={THREE.DoubleSide} />
-        </mesh>
-        <mesh position={[0, -9.0, 0]}>
-          <planeGeometry args={[140, 6]} />
-          <meshBasicMaterial color="#FCD289" side={THREE.DoubleSide} />
-        </mesh>
-
-        {/* Distant Urban Towers (Silhouetted against the golden horizon) */}
-        <mesh position={[-28, -5.5, 2]}>
-          <boxGeometry args={[16, 11, 0.5]} />
-          <meshBasicMaterial color="#1E2824" />
-        </mesh>
-        <mesh position={[-14, -4.5, 2]}>
-          <boxGeometry args={[12, 13, 0.5]} />
-          <meshBasicMaterial color="#1A221F" />
-        </mesh>
-        <mesh position={[2, -6.0, 2]}>
-          <boxGeometry args={[18, 10, 0.5]} />
-          <meshBasicMaterial color="#1E2824" />
-        </mesh>
-        <mesh position={[18, -4.0, 2]}>
-          <boxGeometry args={[14, 14, 0.5]} />
-          <meshBasicMaterial color="#18201D" />
-        </mesh>
-        <mesh position={[34, -5.5, 2]}>
-          <boxGeometry args={[16, 11, 0.5]} />
-          <meshBasicMaterial color="#1E2824" />
-        </mesh>
-
-        {/* Illuminated Twilight City Windows */}
-        {[-26, -22, -14, -10, 2, 6, 16, 20, 32].map((x, i) => (
-          <mesh key={x} position={[x, -5.2 + (i % 4) * 1.4, 4.5]}>
-            <boxGeometry args={[0.8, 0.5, 0.1]} />
-            <meshBasicMaterial color="#FFE4AC" />
-          </mesh>
-        ))}
-
-        {/* Midground Skyline */}
-        <mesh position={[-20, -6.5, 4]}>
-          <boxGeometry args={[16, 7, 0.5]} />
-          <meshBasicMaterial color="#18201C" />
-        </mesh>
-        <mesh position={[24, -7.0, 4]}>
-          <boxGeometry args={[18, 6, 0.5]} />
-          <meshBasicMaterial color="#18201C" />
-        </mesh>
-
-        {[-22, -18, -6, 2, 8, 16, 26].map((x, i) => (
-          <mesh key={x} position={[x, -4.5 + (i % 3) * 1.2, 4.5]}>
-            <boxGeometry args={[0.7, 0.45, 0.1]} />
-            <meshBasicMaterial color="#FFDC9E" />
-          </mesh>
-        ))}
-      </group>
+      <SkylineBackdrop />
 
       {/* 7. HOTSPOTS (Only rendered during interactive show residence tour) */}
       {showHotspots && roomId === 'living' && (

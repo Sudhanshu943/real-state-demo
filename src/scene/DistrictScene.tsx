@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import * as THREE from 'three';
 import { useExperience } from '../app/providers';
+import { DistrictDetails } from './DistrictDetails';
 
 interface DistrictSceneProps {
   selectedLandmarkId?: string;
@@ -23,7 +24,7 @@ export function DistrictScene({
         metalness: 0.04
       }),
       streets: new THREE.MeshStandardMaterial({
-        color: '#BBB4A4',
+        color: '#9C9F91',
         roughness: 0.85,
         metalness: 0.08
       }),
@@ -81,6 +82,7 @@ export function DistrictScene({
 
   return (
     <group name="aurel-district" position={[0, 0, 0]}>
+      <DistrictDetails />
       {/* ================================================================== */}
       {/* 1. TERRAIN & PAVED STREET GRID                                     */}
       {/* ================================================================== */}
@@ -107,7 +109,7 @@ export function DistrictScene({
       {/* 2. CURVED WATER CANAL & BRIDGES                                    */}
       {/* ================================================================== */}
       {/* Scenic Urban Waterway Canal */}
-      <mesh position={[0, 0.02, -95]} receiveShadow material={materials.canalWater}>
+      <mesh position={[0, 0.15, -95]} material={materials.canalWater}>
         <boxGeometry args={[600, 0.04, 24]} />
       </mesh>
       {/* Canal Bridges */}
