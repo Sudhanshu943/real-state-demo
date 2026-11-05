@@ -324,7 +324,7 @@ export function getPBRTravertineTextures() {
     colorTex.colorSpace = THREE.SRGBColorSpace;
     colorTex.wrapS = THREE.RepeatWrapping;
     colorTex.wrapT = THREE.RepeatWrapping;
-    colorTex.repeat.set(1.5, 1.5);
+    colorTex.repeat.set(1, 1);
     colorTex.anisotropy = 4;
     pbrTextureCache.set('pbr_trav_diff', colorTex);
   }
@@ -339,7 +339,7 @@ export function getPBRTravertineTextures() {
     norTex.colorSpace = THREE.NoColorSpace;
     norTex.wrapS = THREE.RepeatWrapping;
     norTex.wrapT = THREE.RepeatWrapping;
-    norTex.repeat.set(1.5, 1.5);
+    norTex.repeat.set(1, 1);
     norTex.anisotropy = 4;
     pbrTextureCache.set('pbr_trav_nor', norTex);
   }
@@ -354,7 +354,7 @@ export function getPBRTravertineTextures() {
     roughTex.colorSpace = THREE.NoColorSpace;
     roughTex.wrapS = THREE.RepeatWrapping;
     roughTex.wrapT = THREE.RepeatWrapping;
-    roughTex.repeat.set(1.5, 1.5);
+    roughTex.repeat.set(1, 1);
     roughTex.anisotropy = 4;
     pbrTextureCache.set('pbr_trav_rough', roughTex);
   }

@@ -518,7 +518,7 @@ export function TourCameraController({ roomId }: { roomId: RoomId }) {
 }
 
 export function SceneReadinessReporter({ roomId }: { roomId?: string }) {
-  const { gl } = useThree();
+  const { gl, scene } = useThree();
   const frameCount = useRef(0);
 
   useEffect(() => {
@@ -544,6 +544,7 @@ export function SceneReadinessReporter({ roomId }: { roomId?: string }) {
         geometries: gl.info.memory.geometries,
         textures: gl.info.memory.textures
       };
+      (window as any).__AUREL_SCENE__ = scene;
     }
   });
 

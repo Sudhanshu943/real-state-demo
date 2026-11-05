@@ -17,10 +17,11 @@ const targetPosScratch = new THREE.Vector3();
 const targetLookScratch = new THREE.Vector3();
 const extStartPos = new THREE.Vector3(70, 31, 76);
 const extMidPos = new THREE.Vector3(34, 28, 42);
-const extEndPos = new THREE.Vector3(20, 31, 26);
+// Refined Level 8 genuine close-up camera pose focusing directly on Unit A0801 West Bay & Terrace
+const extEndPos = new THREE.Vector3(-3.5, 33.0, 20.5);
 const extStartLook = new THREE.Vector3(-15, 23, 0);
 const extMidLook = new THREE.Vector3(-3, 25, 0);
-const extEndLook = new THREE.Vector3(2.5, 29.5, 6.0);
+const extEndLook = new THREE.Vector3(-6.8, 31.4, 9.7);
 
 const intLivingStartPos = new THREE.Vector3(3.0, 1.45, 9.2);
 const intLivingEndPos = new THREE.Vector3(3.6, 1.45, 10.4);
@@ -171,7 +172,7 @@ export function HomeScrollScene({ scrollProgress, isReducedMotion = false }: Hom
         <HomeScrollCamera scrollProgress={scrollProgress} isReducedMotion={isReducedMotion} />
         {!isInterior ? (
           <Suspense fallback={<StudioLighting />}>
-            <Environment files="/assets/hdri/kloofendal_48d_1k.hdr" background={false} />
+            <Environment files="/assets/hdri/cape_hill_1k.hdr" background={false} />
           </Suspense>
         ) : (
           <StudioLighting />

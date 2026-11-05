@@ -85,34 +85,39 @@ export function BuildingProcedural({
       }),
       // Exterior tinted glazing: restrained smoke-green, dielectric reflective PBR approximation
       exteriorGlazing: new THREE.MeshStandardMaterial({
-        color: '#1A2420',
-        roughness: 0.055,
-        metalness: 0.03, // dielectric physics: F0 ~0.04
-        envMapIntensity: 1.55
+        color: '#283832',
+        roughness: 0.038,
+        metalness: 0.04, // dielectric physics: F0 ~0.04
+        emissive: '#161D19',
+        emissiveIntensity: 0.22,
+        envMapIntensity: 2.65
       }),
       // Window-to-window subtle tone variation (cooler bronze-slate tone)
       exteriorGlazingVariation: new THREE.MeshStandardMaterial({
-        color: '#1E2723',
-        roughness: 0.065,
-        metalness: 0.025,
-        envMapIntensity: 1.50
+        color: '#2B3B34',
+        roughness: 0.046,
+        metalness: 0.035,
+        emissive: '#181F1A',
+        emissiveIntensity: 0.20,
+        envMapIntensity: 2.50
       }),
       // Subtle occupied window treatment: gentle warm ambient depth without full internal geometry
       exteriorGlazingOccupied: new THREE.MeshStandardMaterial({
-        color: '#222B27',
-        roughness: 0.075,
-        metalness: 0.02,
-        emissive: '#1A1812',
-        emissiveIntensity: 0.22,
-        envMapIntensity: 1.35
+        color: '#324238',
+        roughness: 0.060,
+        metalness: 0.03,
+        emissive: '#26241C',
+        emissiveIntensity: 0.28,
+        envMapIntensity: 2.40
       }),
       // Balcony & rooftop acoustic balustrades: preserve authentic transparency
       balustradeGlass: new THREE.MeshStandardMaterial({
-        color: '#7A9690',
-        roughness: 0.04,
+        color: '#90AAA2',
+        roughness: 0.02,
         metalness: 0.04,
         transparent: true,
-        opacity: 0.38
+        opacity: 0.40,
+        envMapIntensity: 1.85
       }),
       foliage: new THREE.MeshStandardMaterial({
         color: '#1F3827',

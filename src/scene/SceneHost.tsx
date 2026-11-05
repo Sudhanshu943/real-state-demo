@@ -111,7 +111,7 @@ export function SceneHost({
               ) : (
                 <>
                   <Suspense fallback={<StudioLighting />}>
-                    <Environment files="/assets/hdri/kloofendal_48d_1k.hdr" background={false} />
+                    <Environment files="/assets/hdri/cape_hill_1k.hdr" background={false} />
                   </Suspense>
                   <fog attach="fog" args={['#23302B', 70, 220]} />
                   <ambientLight intensity={0.38} color="#E6EDED" />
