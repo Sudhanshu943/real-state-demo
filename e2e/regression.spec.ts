@@ -213,40 +213,57 @@ test.describe('Architectural & Interior Verification Regressions', () => {
     expect(canvasScreenshot.length).toBeGreaterThan(80000);
   });
 
-  test('R07: Exterior botanical assets load or fall back seamlessly without blanking arrival plaza', async ({ page }) => {
+  test('R07: Exterior botanical assets load or fall back seamlessly without blanking arrival plaza', async ({ browser, baseURL }) => {
     test.setTimeout(75000);
 
-    // Intercept and abort botanical GLB models to test robust fallback
-    await page.route('**/tree_small_02.glb', (route) => route.abort('failed'));
-    await page.route('**/shrub_01.glb', (route) => route.abort('failed'));
+    // 1. Independent tree failure: tree aborted, shrub allowed
+    const context1 = await browser.newContext({ baseURL });
+    const page1 = await context1.newPage();
+    await page1.route('**/tree_small_02.glb', (route) => route.abort('failed'));
+    await page1.goto('/#/');
 
-    await page.goto('/#/');
+    await page1.waitForFunction(() => {
+      const c = document.querySelector('canvas');
+      return c && c.dataset.sceneReady === 'true' && c.dataset.exteriorTrees === 'fallback';
+    }, undefined, { timeout: 25000 });
 
-    // Verify scene readiness with local procedural botanical fallback
-    await page.waitForFunction(() => {
+    const treeFallbackStatus = await page1.evaluate(() => document.querySelector('canvas')?.dataset.exteriorTrees);
+    expect(treeFallbackStatus).toBe('fallback');
+    await context1.close();
+
+    // 2. Both aborted: robust fallback on full arrival garden
+    const context2 = await browser.newContext({ baseURL });
+    const page2 = await context2.newPage();
+    await page2.route('**/tree_small_02.glb', (route) => route.abort('failed'));
+    await page2.route('**/shrub_01.glb', (route) => route.abort('failed'));
+    await page2.goto('/#/');
+
+    await page2.waitForFunction(() => {
       const c = document.querySelector('canvas');
       if (!c) return false;
       return (
         c.dataset.sceneReady === 'true' &&
         c.dataset.activeRoom === 'exterior' &&
-        c.dataset.exteriorVegetation === 'fallback'
+        c.dataset.exteriorVegetation === 'fallback' &&
+        c.dataset.exteriorShrubs === 'fallback'
       );
     }, undefined, { timeout: 25000 });
 
-    const vegetationStatus = await page.evaluate(() => document.querySelector('canvas')?.dataset.exteriorVegetation);
+    const vegetationStatus = await page2.evaluate(() => document.querySelector('canvas')?.dataset.exteriorVegetation);
     expect(vegetationStatus).toBe('fallback');
 
     // Canvas renders successfully with architectural procedural fallback (>100KB)
-    const canvasScreenshot = await page.locator('canvas').screenshot();
+    const canvasScreenshot = await page2.locator('canvas').screenshot();
     expect(canvasScreenshot.length).toBeGreaterThan(100000);
 
     // Hero actions remain visible and interactive
-    await expect(page.locator('a:has-text("Explore Building")')).toBeVisible();
-    await expect(page.locator('a:has-text("View Level 8")')).toBeVisible();
+    await expect(page2.locator('a:has-text("Explore Building")')).toBeVisible();
+    await expect(page2.locator('a:has-text("View Level 8")')).toBeVisible();
+    await context2.close();
   });
 
   test('R08: Mobile hero layout maintains badge clearance, CTA visibility, and zero horizontal overflow across 360px, 390px, and 430px', async ({ page }) => {
-    test.setTimeout(60000);
+    test.setTimeout(75000);
 
     const mobileViewports = [
       { width: 360, height: 740 },
@@ -292,9 +309,35 @@ test.describe('Architectural & Interior Verification Regressions', () => {
       expect(level8Box).not.toBeNull();
       expect(level8Box!.y).toBeLessThan(vp.height);
 
-      // 4. Verify mobile menu button is operational
-      const menuBtn = page.locator('button[aria-label*="navigation" i], button[aria-label*="menu" i]').first();
+      // 4. Test actual mobile menu opening, links, and closing
+      const menuBtn = page.locator('button.mobile-toggle, button[aria-label*="Menu" i]').first();
       await expect(menuBtn).toBeVisible();
+      await menuBtn.click();
+      const menuDialog = page.locator('div[role="dialog"][aria-label="Navigation Menu"]');
+      await expect(menuDialog).toBeVisible();
+      await expect(menuDialog.locator('text=Explore Building')).toBeVisible();
+      await expect(menuDialog.locator('text=Vision')).toBeVisible();
+
+      // Close menu
+      await menuBtn.click();
+      await expect(menuDialog).toBeHidden();
+
+      // 5. Test forward and reverse story scrolling
+      await page.evaluate(() => {
+        window.scrollTo({ top: window.innerHeight * 1.0, behavior: 'instant' });
+        window.dispatchEvent(new Event('scroll'));
+      });
+      await page.waitForTimeout(1000);
+      await expect(page.locator('text=02/04').first()).toBeVisible();
+
+      // Scroll reverse back to hero
+      await page.evaluate(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        window.dispatchEvent(new Event('scroll'));
+      });
+      await page.waitForTimeout(1000);
+      await expect(page.locator('text=01/04').first()).toBeVisible();
+      await expect(exploreBtn).toBeVisible();
     }
   });
 });

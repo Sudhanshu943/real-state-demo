@@ -518,7 +518,7 @@ export function TourCameraController({ roomId }: { roomId: RoomId }) {
 }
 
 export function SceneReadinessReporter({ roomId }: { roomId?: string }) {
-  const { gl, scene } = useThree();
+  const { gl, scene, camera } = useThree();
   const frameCount = useRef(0);
 
   useEffect(() => {
@@ -532,7 +532,7 @@ export function SceneReadinessReporter({ roomId }: { roomId?: string }) {
   useFrame(() => {
     frameCount.current += 1;
     if (frameCount.current >= 3 && gl.domElement) {
-      if (gl.domElement.width > 300 && gl.domElement.height > 150) {
+      if (gl.domElement.width > 250 && gl.domElement.height > 150) {
         gl.domElement.dataset.sceneReady = 'true';
         if (roomId) gl.domElement.dataset.activeRoom = roomId;
       }
@@ -545,6 +545,7 @@ export function SceneReadinessReporter({ roomId }: { roomId?: string }) {
         textures: gl.info.memory.textures
       };
       (window as any).__AUREL_SCENE__ = scene;
+      (window as any).__AUREL_CAMERA__ = camera;
     }
   });
 

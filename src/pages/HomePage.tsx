@@ -207,6 +207,7 @@ export function HomePage() {
 
             {/* Left Protective Dark Gradient Scrim to ensure crisp typography contrast */}
             <div
+              className="hero-scrim-left"
               style={{
                 position: 'absolute',
                 top: 0,
@@ -221,6 +222,7 @@ export function HomePage() {
 
             {/* Protective Bottom Gradient Scrim for crisp typography contrast across mobile & desktop viewports */}
             <div
+              className="hero-scrim-bottom"
               style={{
                 position: 'absolute',
                 bottom: 0,

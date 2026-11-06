@@ -125,25 +125,60 @@ async function capture() {
     await waitForVegetationLoaded(desktopPage);
     await saveScreenshot(desktopPage, 'stage67-hero-desktop.png');
 
-    // 2. Arrival Plaza Close-up
-    console.log('[Evidence] 2. Arrival Plaza Close-up...');
-    // Scroll slightly to bring camera down towards the arrival court
+    // 2. Genuine Arrival Plaza Close-up (Inspection Camera at Arrival Court)
+    console.log('[Evidence] 2. Genuine Arrival Plaza Close-up...');
+    await desktopPage.goto(`${baseUrl}/#/explore/building`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await waitForSceneReady(desktopPage, 'building');
+    await waitForVegetationLoaded(desktopPage);
+    // Position inspection camera at eye level overlooking entrance, paving, curbs, pools, and shadow reveal
     await desktopPage.evaluate(() => {
-      window.scrollTo({ top: window.innerHeight * 0.12, behavior: 'instant' });
-      window.dispatchEvent(new Event('scroll'));
+      const cam = (window).__AUREL_CAMERA__;
+      const ctrl = (window).__AUREL_CONTROLS__;
+      if (cam) {
+        cam.position.set(20, 3.8, 30);
+        cam.lookAt(0, 1.2, 12);
+        if (ctrl) {
+          ctrl.target.set(0, 1.2, 12);
+          ctrl.update();
+        }
+      }
     });
     await desktopPage.waitForTimeout(1500);
     await saveScreenshot(desktopPage, 'stage67-arrival-plaza-closeup.png');
 
-    // 3. Tree & Shrub Detail Close-up
+    // 3. Genuine Tree & Shrub Detail Close-up
     console.log('[Evidence] 3. Botanical Tree & Shrub Detail...');
     await desktopPage.evaluate(() => {
-      window.scrollTo({ top: window.innerHeight * 0.22, behavior: 'instant' });
-      window.dispatchEvent(new Event('scroll'));
+      const cam = (window).__AUREL_CAMERA__;
+      const ctrl = (window).__AUREL_CONTROLS__;
+      if (cam) {
+        cam.position.set(13, 2.6, 23);
+        cam.lookAt(9, 2.2, 17);
+        if (ctrl) {
+          ctrl.target.set(9, 2.2, 17);
+          ctrl.update();
+        }
+      }
     });
     await desktopPage.waitForTimeout(1500);
     await saveScreenshot(desktopPage, 'stage67-tree-shrub-detail.png');
 
+    // 3b. Genuine Soil / Planter Ground Contact Close-up
+    console.log('[Evidence] 3b. Soil / Planter Ground Contact Detail...');
+    await desktopPage.evaluate(() => {
+      const cam = (window).__AUREL_CAMERA__;
+      const ctrl = (window).__AUREL_CONTROLS__;
+      if (cam) {
+        cam.position.set(11.2, 1.2, 20.5);
+        cam.lookAt(9.8, 0.35, 17.8);
+        if (ctrl) {
+          ctrl.target.set(9.8, 0.35, 17.8);
+          ctrl.update();
+        }
+      }
+    });
+    await desktopPage.waitForTimeout(1500);
+    await saveScreenshot(desktopPage, 'stage67-soil-ground-contact.png');
     await desktopContext.close();
 
     // 4. Mobile Hero (360px - Small viewport)
@@ -183,7 +218,32 @@ async function capture() {
     });
     await m390Page.waitForTimeout(1800);
     await saveScreenshot(m390Page, 'stage67-mobile-badge-clearance.png');
+
+    // 6b. Mobile Menu Active Interaction
+    console.log('[Evidence] 6b. Mobile Menu Active Interaction...');
+    await m390Page.evaluate(() => window.scrollTo(0, 0));
+    await m390Page.waitForTimeout(600);
+    const menuBtn = m390Page.locator('button.mobile-toggle, button[aria-label*="Menu" i]').first();
+    await menuBtn.click();
+    await m390Page.waitForTimeout(500);
+    await saveScreenshot(m390Page, 'stage67-mobile-menu-active.png');
+    await menuBtn.click(); // close menu
     await m390Context.close();
+
+    // 6c. Mobile Hero on Short Viewport (360x640)
+    console.log('[Evidence] 6c. Mobile Hero on Short Viewport (360x640)...');
+    const mShortContext = await browser.newContext({
+      viewport: { width: 360, height: 640 },
+      isMobile: true,
+      hasTouch: true,
+      deviceScaleFactor: 1
+    });
+    const mShortPage = await mShortContext.newPage();
+    await mShortPage.goto(`${baseUrl}/#/`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await waitForSceneReady(mShortPage, 'exterior');
+    await waitForVegetationLoaded(mShortPage);
+    await saveScreenshot(mShortPage, 'stage67-hero-mobile-short-360x640.png');
+    await mShortContext.close();
 
     // 7. Mobile Hero (430px - Large iPhone Pro Max viewport)
     console.log('[Evidence] 7. Mobile Hero at 430px...');

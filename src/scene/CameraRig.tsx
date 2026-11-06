@@ -107,6 +107,9 @@ export function CameraRig({
     if (camera.position.distanceTo(targetCamPos.current) < 0.2) {
       isAnimating.current = false;
     }
+    if (typeof window !== 'undefined' && controlsRef.current) {
+      (window as any).__AUREL_CONTROLS__ = controlsRef.current;
+    }
   });
 
   // Tour mode manages its own dedicated eye-level fixed viewpoint controller

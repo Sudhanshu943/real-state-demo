@@ -165,6 +165,7 @@ export function BotanicalTrees({ instances }: { instances: VegetationInstance[] 
     const canvas = document.querySelector('canvas');
     if (canvas) {
       canvas.dataset.exteriorVegetation = status;
+      canvas.dataset.exteriorTrees = status;
     }
   }, [status]);
 
@@ -249,7 +250,7 @@ export function BotanicalShrubs({ instances }: { instances: VegetationInstance[]
   // Update canvas dataset attribute for test inspection
   useEffect(() => {
     const canvas = document.querySelector('canvas');
-    if (canvas && status === 'glb') {
+    if (canvas) {
       canvas.dataset.exteriorShrubs = status;
     }
   }, [status]);

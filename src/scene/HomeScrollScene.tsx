@@ -23,11 +23,11 @@ const extStartLook = new THREE.Vector3(-15, 23, 0);
 const extMidLook = new THREE.Vector3(-3, 25, 0);
 const extEndLook = new THREE.Vector3(-6.8, 31.4, 9.7);
 
-// Responsive mobile exterior poses (calibrated for 360px-430px viewports to eliminate right-edge crop)
-const extStartPosMobile = new THREE.Vector3(56, 28, 62);
-const extMidPosMobile = new THREE.Vector3(28, 27, 36);
-const extStartLookMobile = new THREE.Vector3(-2.2, 22.0, 1.2);
-const extMidLookMobile = new THREE.Vector3(-1.8, 24.5, 1.0);
+// Responsive mobile exterior poses (calibrated for 360px-430px viewports to eliminate right-edge crop and separate tower from copy)
+const extStartPosMobile = new THREE.Vector3(66, 31, 72);
+const extMidPosMobile = new THREE.Vector3(26, 28, 36);
+const extStartLookMobile = new THREE.Vector3(1.2, 24.5, -0.5);
+const extMidLookMobile = new THREE.Vector3(-1.8, 26.0, 1.2);
 
 const intLivingStartPos = new THREE.Vector3(3.0, 1.45, 9.2);
 const intLivingEndPos = new THREE.Vector3(3.6, 1.45, 10.4);
