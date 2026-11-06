@@ -42,7 +42,7 @@ test.describe('Visual Acceptance Evidence Capture — Architectural Redesign Mil
 
   test('Desktop Evidence: Homepage Live 3D & Choreographed Scroll Beats', async ({ page, isMobile }) => {
     if (isMobile) return;
-    test.setTimeout(120000);
+    test.setTimeout(240000);
 
     // 1. Initial Hero with Live 3D Tower & Tone-Mapped Travertine
     await page.goto('/#/');

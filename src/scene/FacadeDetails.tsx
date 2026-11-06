@@ -36,26 +36,7 @@ export function FacadeDetails({ bronze, reveal, stone }: { bronze: THREE.Materia
     const lights: Piece[] = [];
     for (let floor = 1; floor <= 12; floor++) {
       const base = 4.6 + (floor - 1) * 3.4;
-      // Recessed subdivisions add human scale to the otherwise broad glazed bays.
       for (const side of [-1, 1]) {
-        // Skip Level 8 West bay to prevent overlapping geometry with the dedicated FacadeBayModule
-        const isLevel8WestBay = floor === 8 && side === -1;
-
-        if (!isLevel8WestBay) {
-          for (const offset of [-3.6, 0, 3.6]) {
-            frames.push({ position: [side * 7 + offset, base + 1.7, 10.04], scale: [0.055, 2.86, 0.12] });
-          }
-          frames.push({ position: [side * 7, base + 2.82, 10.05], scale: [10.9, 0.045, 0.12] });
-          // Individual balcony end posts and slender bottom channels.
-          for (const x of [side * 7 - 5.65, side * 7, side * 7 + 5.65]) {
-            frames.push({ position: [x, base + 0.68, 12.15], scale: [0.045, 1.05, 0.065] });
-          }
-          planters.push({ position: [side * 12, base + 0.38, 11.65], scale: [1.65, 0.48, 0.85] });
-          // Balcony return rails complete the ends of the balustrades.
-          for (const x of [side*7-5.65,side*7+5.65]) {
-            frames.push({position:[x,base+1.1,11.1],scale:[.06,.045,2.15]});
-          }
-        }
         // Quiet stone panel joints on both side elevations.
         for (const z of [-6, -2, 2, 6]) {
           joints.push({ position: [side * 14.012, base + 1.7, z], scale: [0.018, 2.96, 0.026] });

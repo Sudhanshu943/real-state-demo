@@ -111,16 +111,18 @@ async function run() {
     // 3. Homepage Interior Beat
     console.log('[Measure] 3. Measuring Homepage Interior Beat (s=0.65)...');
     await page.evaluate(() => {
-      window.scrollTo({ top: window.innerHeight * 1.7, behavior: 'instant' });
+      window.scrollTo({ top: window.innerHeight * 1.8, behavior: 'instant' });
       window.dispatchEvent(new Event('scroll'));
     });
     await waitForSceneReady(page, 'living');
-    await page.waitForTimeout(1000);
+    // Allow requestAnimationFrame scroll damping to settle into the furnished room
+    await page.waitForTimeout(2500);
     results.push(await sampleMetrics(page, 'Homepage Interior Beat (s=0.65)'));
 
     // 4. Standalone Living Tour
     console.log('[Measure] 4. Measuring Standalone Tour: Living...');
     await page.goto(`${baseUrl}/#/explore/homes/A0801/tour/living`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.evaluate(() => window.scrollTo(0, 0));
     await waitForSceneReady(page, 'living');
     results.push(await sampleMetrics(page, 'Standalone Tour: Living'));
 

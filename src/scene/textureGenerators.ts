@@ -426,3 +426,64 @@ export function getPBRBronzeTextures() {
     roughnessMap: pbrTextureCache.get('pbr_bronze_rough')!
   };
 }
+
+/**
+ * Real PBR Concrete Pavers Textures (Poly Haven concrete_pavers_02, CC0).
+ * Color: sRGBColorSpace
+ * Normal: NoColorSpace (OpenGL +Y)
+ * Roughness: NoColorSpace
+ */
+export function getPBRPavingTextures(repeatX = 8, repeatY = 8) {
+  const loader = new THREE.TextureLoader();
+
+  if (!pbrTextureCache.has('pbr_paver_diff')) {
+    const colorTex = loader.load(
+      '/assets/textures/paving/concrete_pavers_02_1k_color.webp',
+      undefined,
+      undefined,
+      (err) => console.warn('[PBR] Failed loading paver color', err)
+    );
+    colorTex.colorSpace = THREE.SRGBColorSpace;
+    colorTex.wrapS = THREE.RepeatWrapping;
+    colorTex.wrapT = THREE.RepeatWrapping;
+    colorTex.repeat.set(repeatX, repeatY);
+    colorTex.anisotropy = 4;
+    pbrTextureCache.set('pbr_paver_diff', colorTex);
+  }
+
+  if (!pbrTextureCache.has('pbr_paver_nor')) {
+    const norTex = loader.load(
+      '/assets/textures/paving/concrete_pavers_02_1k_normal.webp',
+      undefined,
+      undefined,
+      (err) => console.warn('[PBR] Failed loading paver normal', err)
+    );
+    norTex.colorSpace = THREE.NoColorSpace;
+    norTex.wrapS = THREE.RepeatWrapping;
+    norTex.wrapT = THREE.RepeatWrapping;
+    norTex.repeat.set(repeatX, repeatY);
+    norTex.anisotropy = 4;
+    pbrTextureCache.set('pbr_paver_nor', norTex);
+  }
+
+  if (!pbrTextureCache.has('pbr_paver_rough')) {
+    const roughTex = loader.load(
+      '/assets/textures/paving/concrete_pavers_02_1k_roughness.webp',
+      undefined,
+      undefined,
+      (err) => console.warn('[PBR] Failed loading paver roughness', err)
+    );
+    roughTex.colorSpace = THREE.NoColorSpace;
+    roughTex.wrapS = THREE.RepeatWrapping;
+    roughTex.wrapT = THREE.RepeatWrapping;
+    roughTex.repeat.set(repeatX, repeatY);
+    roughTex.anisotropy = 4;
+    pbrTextureCache.set('pbr_paver_rough', roughTex);
+  }
+
+  return {
+    map: pbrTextureCache.get('pbr_paver_diff')!,
+    normalMap: pbrTextureCache.get('pbr_paver_nor')!,
+    roughnessMap: pbrTextureCache.get('pbr_paver_rough')!
+  };
+}

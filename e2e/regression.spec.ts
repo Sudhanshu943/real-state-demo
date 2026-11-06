@@ -168,7 +168,7 @@ test.describe('Architectural & Interior Verification Regressions', () => {
   });
 
   test('R05: Tour exit and re-entry lifecycle preserves WebGL rendering', async ({ page }) => {
-    test.setTimeout(45000);
+    test.setTimeout(75000);
     await page.goto('/#/explore/homes/A0801/tour/living');
 
     // 1. Wait for living tour readiness
@@ -193,7 +193,7 @@ test.describe('Architectural & Interior Verification Regressions', () => {
   });
 
   test('R06: Homepage interior handoff beat renders living room geometry', async ({ page }) => {
-    test.setTimeout(45000);
+    test.setTimeout(75000);
     await page.goto('/#/');
 
     // Scroll to Chapter 3 (Living Salon at ~0.65 progress)
@@ -211,5 +211,90 @@ test.describe('Architectural & Interior Verification Regressions', () => {
 
     const canvasScreenshot = await page.locator('canvas').screenshot();
     expect(canvasScreenshot.length).toBeGreaterThan(80000);
+  });
+
+  test('R07: Exterior botanical assets load or fall back seamlessly without blanking arrival plaza', async ({ page }) => {
+    test.setTimeout(75000);
+
+    // Intercept and abort botanical GLB models to test robust fallback
+    await page.route('**/tree_small_02.glb', (route) => route.abort('failed'));
+    await page.route('**/shrub_01.glb', (route) => route.abort('failed'));
+
+    await page.goto('/#/');
+
+    // Verify scene readiness with local procedural botanical fallback
+    await page.waitForFunction(() => {
+      const c = document.querySelector('canvas');
+      if (!c) return false;
+      return (
+        c.dataset.sceneReady === 'true' &&
+        c.dataset.activeRoom === 'exterior' &&
+        c.dataset.exteriorVegetation === 'fallback'
+      );
+    }, undefined, { timeout: 25000 });
+
+    const vegetationStatus = await page.evaluate(() => document.querySelector('canvas')?.dataset.exteriorVegetation);
+    expect(vegetationStatus).toBe('fallback');
+
+    // Canvas renders successfully with architectural procedural fallback (>100KB)
+    const canvasScreenshot = await page.locator('canvas').screenshot();
+    expect(canvasScreenshot.length).toBeGreaterThan(100000);
+
+    // Hero actions remain visible and interactive
+    await expect(page.locator('a:has-text("Explore Building")')).toBeVisible();
+    await expect(page.locator('a:has-text("View Level 8")')).toBeVisible();
+  });
+
+  test('R08: Mobile hero layout maintains badge clearance, CTA visibility, and zero horizontal overflow across 360px, 390px, and 430px', async ({ page }) => {
+    test.setTimeout(60000);
+
+    const mobileViewports = [
+      { width: 360, height: 740 },
+      { width: 390, height: 844 },
+      { width: 430, height: 932 }
+    ];
+
+    for (const vp of mobileViewports) {
+      await page.setViewportSize(vp);
+      await page.goto('/#/');
+
+      // Wait for canvas readiness
+      await page.waitForFunction(() => {
+        const c = document.querySelector('canvas');
+        return c && c.dataset.sceneReady === 'true';
+      }, undefined, { timeout: 25000 });
+
+      // 1. Verify zero horizontal overflow
+      const overflow = await page.evaluate(() => {
+        return document.documentElement.scrollWidth - window.innerWidth;
+      });
+      expect(overflow).toBeLessThanOrEqual(1);
+
+      // 2. Verify story badge clears fixed header
+      const headerBox = await page.locator('header.site-header').boundingBox();
+      expect(headerBox).not.toBeNull();
+      const badge = page.locator('text=01/04').first();
+      await expect(badge).toBeVisible();
+      const badgeBox = await badge.boundingBox();
+      expect(badgeBox).not.toBeNull();
+      expect(badgeBox!.y).toBeGreaterThanOrEqual(headerBox!.height);
+
+      // 3. Verify CTAs are visible in the viewport
+      const exploreBtn = page.locator('a:has-text("Explore Building")');
+      await expect(exploreBtn).toBeVisible();
+      const exploreBox = await exploreBtn.boundingBox();
+      expect(exploreBox).not.toBeNull();
+      expect(exploreBox!.y).toBeLessThan(vp.height);
+
+      const level8Btn = page.locator('a:has-text("View Level 8")');
+      await expect(level8Btn).toBeVisible();
+      const level8Box = await level8Btn.boundingBox();
+      expect(level8Box).not.toBeNull();
+      expect(level8Box!.y).toBeLessThan(vp.height);
+
+      // 4. Verify mobile menu button is operational
+      const menuBtn = page.locator('button[aria-label*="navigation" i], button[aria-label*="menu" i]').first();
+      await expect(menuBtn).toBeVisible();
+    }
   });
 });

@@ -23,6 +23,12 @@ const extStartLook = new THREE.Vector3(-15, 23, 0);
 const extMidLook = new THREE.Vector3(-3, 25, 0);
 const extEndLook = new THREE.Vector3(-6.8, 31.4, 9.7);
 
+// Responsive mobile exterior poses (calibrated for 360px-430px viewports to eliminate right-edge crop)
+const extStartPosMobile = new THREE.Vector3(56, 28, 62);
+const extMidPosMobile = new THREE.Vector3(28, 27, 36);
+const extStartLookMobile = new THREE.Vector3(-2.2, 22.0, 1.2);
+const extMidLookMobile = new THREE.Vector3(-1.8, 24.5, 1.0);
+
 const intLivingStartPos = new THREE.Vector3(3.0, 1.45, 9.2);
 const intLivingEndPos = new THREE.Vector3(3.6, 1.45, 10.4);
 const intLivingStartLook = new THREE.Vector3(5.2, 1.10, 14.8);
@@ -34,11 +40,12 @@ const intBalconyStartLook = new THREE.Vector3(9.1, 1.05, 19.2);
 const intBalconyEndLook = new THREE.Vector3(8.7, 1.2, 20.5);
 
 function HomeScrollCamera({ scrollProgress, isReducedMotion = false }: { scrollProgress: number; isReducedMotion?: boolean }) {
-  const { camera } = useThree();
-  const currentPos = useRef(extStartPos.clone());
-  const currentLook = useRef(extStartLook.clone());
+  const { camera, size } = useThree();
+  const isMobile = size.width < 768;
+  const currentPos = useRef(isMobile ? extStartPosMobile.clone() : extStartPos.clone());
+  const currentLook = useRef(isMobile ? extStartLookMobile.clone() : extStartLook.clone());
   const previousMode = useRef<'exterior' | 'interior'>('exterior');
-  const lastFov = useRef(40);
+  const lastFov = useRef(isMobile ? 44 : 40);
 
   useFrame((_, delta) => {
     const s = THREE.MathUtils.clamp(scrollProgress, 0, 1);
@@ -76,24 +83,30 @@ function HomeScrollCamera({ scrollProgress, isReducedMotion = false }: { scrollP
       previousMode.current = mode;
     }
 
-    let targetFov = 40;
+    const sPos = isMobile ? extStartPosMobile : extStartPos;
+    const sLook = isMobile ? extStartLookMobile : extStartLook;
+    const mPos = isMobile ? extMidPosMobile : extMidPos;
+    const mLook = isMobile ? extMidLookMobile : extMidLook;
+    const baseFov = isMobile ? 44 : 40;
+
+    let targetFov = baseFov;
 
     if (isReducedMotion) {
-      targetPosScratch.copy(extStartPos);
-      targetLookScratch.copy(extStartLook);
-      targetFov = 40;
+      targetPosScratch.copy(sPos);
+      targetLookScratch.copy(sLook);
+      targetFov = baseFov;
     } else if (s < 0.25) {
-      // Chapter 1: Exterior establishing shot (Full 12-storey tower, plinth & sky in right 55%, negative space left)
+      // Chapter 1: Exterior establishing shot (Desktop: tower right 55%; Mobile: centered-right with full height & clearance)
       const t = s / 0.25;
-      targetPosScratch.lerpVectors(extStartPos, extMidPos, t);
-      targetLookScratch.lerpVectors(extStartLook, extMidLook, t);
-      targetFov = 40;
+      targetPosScratch.lerpVectors(sPos, mPos, t);
+      targetLookScratch.lerpVectors(sLook, mLook, t);
+      targetFov = baseFov;
     } else if (s < 0.51) {
       // Chapter 2: Craft & Terrace (Crane up to Level 8 Skyline Terrace facade reveal)
       const t = (s - 0.25) / (0.51 - 0.25);
-      targetPosScratch.lerpVectors(extMidPos, extEndPos, t);
-      targetLookScratch.lerpVectors(extMidLook, extEndLook, t);
-      targetFov = THREE.MathUtils.lerp(40, 45, t);
+      targetPosScratch.lerpVectors(mPos, extEndPos, t);
+      targetLookScratch.lerpVectors(mLook, extEndLook, t);
+      targetFov = THREE.MathUtils.lerp(baseFov, 45, t);
     } else if (s < 0.82) {
       // Chapter 3: Living Salon (Composed eye-level view with sofa, cocktail table, fluted wall, and garden terrace depth)
       const t = (s - 0.51) / (0.82 - 0.51);

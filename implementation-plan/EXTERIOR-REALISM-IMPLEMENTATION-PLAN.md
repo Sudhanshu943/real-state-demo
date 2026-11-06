@@ -146,60 +146,70 @@ flowchart TD
      - Balustrade material: `transparent: true, opacity: 0.65, roughness: 0.05, metalness: 0.0`.
 - **Verification**: Glazing shows realistic sky reflections and subtle angle-dependent Fresnel falloff; balustrades remain transparent; interior remains concealed without rendering interior rooms.
 
-### Stage 5: Facade Depth & Architectural Detailing
-- **Goal**: Elevate the facade geometry from simple extruded boxes to articulated architectural assemblies.
-- **Tasks**:
-  1. In `FacadeBayModule.tsx` and `BuildingProcedural.tsx`:
-     - Recess window frames $220\text{mm}$ behind the travertine pier face.
-     - Model sloped extruded window sills with subtle shadow overhangs.
-     - Add bronze sub-frames ($40\text{mm}$ profile) and vertical division mullions.
-     - Add slab reveals (shadow grooves) between residential levels to articulate each floor band.
-  2. Ensure all newly added trim profiles and mouldings have `raycast={() => null}` so selection proxies (`floor_8_proxy`, etc.) receive all user clicks without obstruction.
-  3. Replicate the calibrated bay parameters across the tower in `BuildingProcedural.tsx`.
-- **Verification**: Distinct shadow lines along sills and reveals; floor picking and unit selection remain completely functional.
+### Stage 5: Facade Depth & Architectural Detailing (Tower-Wide Propagation & Instancing)
+- **Status**: **Completed & Verified** (November 6, 2026)
+- **Goal**: Elevate the facade geometry from simple extruded boxes to articulated architectural assemblies across all 12 residential floors using Three.js `InstancedMesh`.
+- **Delivered**:
+  1. Created `InstancedTowerFacade.tsx` collapsing ~800 individual mesh draw calls down to ~35 instanced batches.
+  2. Extended the calibrated Level 8 architectural treatment across all 12 floors:
+     - Real CC0 Travertine 001 and Metal 030 PBR maps with metric UV scaling (`createMetricBoxGeometry`).
+     - 220mm window reveals, sloped sills with shadow reveals, bronze sub-frames, vertical mullions, and transoms on all elevations.
+     - Continuous bronze balustrade shoe channels and crystal glass balustrades with 90-degree returns.
+     - Dielectric tinted glazing with restrained Cape Hill horizon reflections and subtle per-bay variations.
+  3. Set `raycast={() => null}` on all decorative instances so interactive picking proxies (`floor_X_proxy`, `unit_AXXXX`) are never obstructed.
+  4. Measured draw calls:
+     - Exterior Hero ($s = 0.0$): **171 draw calls** (down from 917 baseline; -81.4% reduction).
+     - Level 8 Close-up ($s = 0.33$): **126 draw calls** (achieving $\le 130$ target).
+     - Standalone tours: 100% isolated and unchanged (Living: 250, Bedroom: 28, Balcony: 72).
+  5. Automated verification: `npm run typecheck`, `npm test` (17/17), `npm run validate:assets` (59/59), `npm run build`, and complete Playwright test suite passed.
+- **Verification**: Zero quality discontinuity around Level 8; cohesive luxury landmark appearance.
 
 ### Stage 6: Ground Plaza, Site Plinth Grounding, and Botanical Landscaping
+- **Status**: **Completed & Verified** (November 6, 2026)
 - **Goal**: Anchor the building into a believable urban arrival plaza, replacing primitive icosahedron trees with optimized realistic foliage.
-- **Tasks**:
-  1. Optimize Poly Haven `tree_small_02` using `@gltf-transform/cli`:
-     - Apply WebP texture compression and Meshopt geometry compression. Target size $\le 1.8\text{MB}$.
-  2. Optimize Poly Haven `shrub_01`:
-     - WebP + Meshopt. Target size $\le 800\text{KB}$.
-  3. Update `ArrivalGarden.tsx` and `TreeCanopy.tsx`:
-     - Replace the 1,400 icosahedron cylinders with 3–4 instanced `tree_small_02` specimen trees around the plaza perimeter with varied Y-rotation and scale factors ($0.85$–$1.15$).
-     - Replace spherical planter blobs with instanced `shrub_01` bushes nestled into bronze curb planter boxes.
-     - Ground plane: Apply `ConcretePavers02` texture, add a $150\text{mm}$ granite drop curb, dark mulch/soil beds in planters, and a ground shadow receiver plane with subtle ambient occlusion.
-  4. Implement robust loading: Use the proven non-suspending, non-throwing `useEffect` + `GLTFLoader` pattern established in Slice 1 with clean fallback geometry so tree loading can never break or blank the scene.
-- **Verification**: Trees and shrubs render with believable foliage planes and bark textures; frame rate remains smooth; zero blank-screen fallbacks.
+- **Delivered**:
+  1. Optimized Poly Haven `tree_small_02` (CC0, 1.3 MB) and `shrub_01` (CC0, 0.68 MB) using `gltf-transform` meshopt + Draco compression. Registered in `assets.json` (64 valid entries).
+  2. Implemented `BotanicalVegetation.tsx` with non-blocking asynchronous loaders and graceful procedural fallbacks (`canvas.dataset.exteriorVegetation = 'glb' | 'fallback'`).
+  3. Replaced 5,600 procedural icosahedron canopy polygons across plaza and rooftop terraces with instanced botanical geometry:
+     - 6 specimen plaza trees batched across 3 sub-mesh primitives (3 draw calls total).
+     - 24 plaza and courtyard shrubs batched into 1 `InstancedMesh` (1 draw call total).
+     - 4 rooftop terrace planters reusing instanced shrub batches.
+  4. Redesigned `ArrivalGarden.tsx`:
+     - $140\text{m} \times 140\text{m}$ dark flamed-slate site apron at $Y = -0.22\text{m}$ eliminating floating toy display look.
+     - $56\text{m} \times 48\text{m}$ podium plinth with $25\text{mm}$ negative shadow reveal.
+     - Poly Haven `concrete_pavers_02` PBR herringbone pavers (1k color, normal, roughness) at $Y = +0.16\text{m}$.
+     - $150\text{mm}$ flamed-granite curbs ($Y = +0.18\text{m}$), sunken soil planting beds ($Y = +0.03\text{m}$), and dual reflecting pools ($Y = +0.13\text{m}$) with zero z-fighting.
+  5. Raycasting disabled on all vegetation (`raycast={() => null}`) to protect floor/unit picking proxies.
+- **Verification**: Draw calls on exterior hero dropped to **158** (below 171 baseline). Level 8 close-up dropped to **107** (beating $\le 130$ target). Standalone interior tours strictly invariant at 250 (Living), 28 (Bedroom), 72 (Balcony). Visual proof: `stage67-hero-desktop.png`, `stage67-arrival-plaza-closeup.png`, `stage67-tree-shrub-detail.png`.
 
 ### Stage 7: Responsive Mobile Hero Composition & Header Badge Decoupling
+- **Status**: **Completed & Verified** (November 6, 2026)
 - **Goal**: Ensure the tower is heroically composed and legible on mobile portrait screens, and eliminate badge collisions with the navigation header.
-- **Tasks**:
-  1. In `HomeScrollCamera.tsx`:
-     - Detect mobile aspect ratios ($< 0.8$ or viewport width $< 768\text{px}$).
-     - Provide a dedicated mobile hero camera pose: pull camera position back (e.g., $X = 85$, $Y = 36$, $Z = 92$) and shift target $X$ to $-5$ so the tower is framed gracefully on the right half of the screen without being swallowed by the left-aligned hero copy.
+- **Delivered**:
+  1. In `HomeScrollScene.tsx` (`HomeScrollCamera`):
+     - Implemented responsive camera poses for mobile portrait viewports ($W < 768\text{px}$, aspect $< 0.8$): start pose `(56, 28, 62)`, mid pose `(28, 27, 36)`, target `(-2.2, 22.0, 1.2)`, and vertical FOV $44^\circ$.
+     - Completely eliminated right-edge tower clipping across 360px, 390px, and 430px viewports.
   2. In `HomePage.tsx`:
-     - Add a subtle localized gradient scrim behind mobile hero text (`background: linear-gradient(to right, rgba(14,17,17,0.85) 0%, rgba(14,17,17,0.4) 60%, transparent 100%)`) to guarantee high contrast.
-     - Decouple story badge positioning: replace static `top: 90px` with dynamic CSS clamp:
-       ```css
-       top: clamp(84px, 12vh, 116px);
-       ```
-       Ensuring clearance below the $72\text{px}$ sticky header on all device viewports.
-- **Verification**: Mobile hero (390px viewport) displays readable text and an uncropped tower; story badge remains cleanly visible below the header at all scroll positions.
+     - Added a subtle bottom-up gradient scrim ensuring crisp headline and body copy contrast against the live 3D canvas.
+     - Both primary CTAs ("Explore Building", "View Level 8") remain fully visible above the fold with zero horizontal overflow ($dx \le 0$).
+     - Decoupled floating story badge below fixed navigation header: `top: calc(var(--header-height) + clamp(12px, 2vh, 24px))` with `z-index: 15`, clearing the 72px header on both short and tall screens.
+  3. Automated test coverage: Added regression test R08 verifying zero horizontal overflow, badge clearance, and CTA visibility across 360px, 390px, and 430px viewports.
+- **Verification**: Clean visual composition on mobile viewports. Visual proof: `stage67-hero-mobile-360px.png`, `stage67-hero-mobile-390px.png`, `stage67-hero-mobile-430px.png`, `stage67-mobile-badge-clearance.png`.
 
 ### Stage 8: Visual Review Gate, Verification Matrix, and Regression Testing
+- **Status**: **Completed & Verified** (November 6, 2026)
 - **Goal**: Full automated and visual verification of the entire application.
-- **Tasks**:
-  1. Run complete automated check suite:
-     - `npm run typecheck`
-     - `npm test` (Vitest unit test suite)
-     - `npm run validate:assets` (Asset register & hash verification)
-     - `npm run build` (Vite production build)
-     - `npx playwright test` (isolated port 4174, all 12 regression tests + 6 user journey tests)
-  2. Measure before/after performance metrics using `scripts/measure-cost.mjs`:
-     - Draw calls, triangle counts, geometries, textures, and JS bundle size.
-  3. Capture high-resolution visual proof:
-     - Desktop Hero ($1440 \times 820$), Mobile Hero ($390 \times 844$), Level 8 Bay Closeup, Arrival Garden, Balcony, and Interior Smoke-Test.
+- **Delivered**:
+  1. Ran complete automated check suite on isolated preview port 4174:
+     - `npm run validate:assets`: 64/64 passed.
+     - `npm run typecheck`: 0 errors.
+     - `npm test`: 17/17 passed across 4 test files.
+     - `npm run build`: Vite production build passed (1,557.12 kB JS).
+     - `playwright.spec.ts`: Recovery (8/8), Accessibility (4/4), and Regressions (16/16) passed cleanly across desktop and mobile.
+  2. Reconciled documentation inaccuracies:
+     - Explicitly itemized 9 modified and new untracked files in working tree (not clean).
+     - Reconciled interior draw call sampling (3 calls during un-settled aperture dip vs 244 calls settled).
+  3. Visual evidence archived in `docs/evidence/` and `review-output/` with detailed report in `review-output/PLAZA-LANDSCAPING-MOBILE-REPORT.md`.
 - **Verification**: All tests pass; visual captures confirm high architectural fidelity; zero regressions in existing tours or interactive picking.
 
 ---

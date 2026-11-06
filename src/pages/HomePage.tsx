@@ -219,11 +219,25 @@ export function HomePage() {
               }}
             />
 
+            {/* Protective Bottom Gradient Scrim for crisp typography contrast across mobile & desktop viewports */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 'min(520px, 68vh)',
+                background: 'linear-gradient(to top, rgba(14, 21, 18, 0.94) 0%, rgba(14, 21, 18, 0.72) 45%, rgba(14, 21, 18, 0) 100%)',
+                zIndex: 2,
+                pointerEvents: 'none'
+              }}
+            />
+
             {/* Subtle Synchronized Chapter Indicator (e.g. 01/04 · Exterior) */}
             <div
               style={{
                 position: 'absolute',
-                top: '90px',
+                top: 'calc(var(--header-height) + clamp(12px, 2vh, 24px))',
                 right: 'var(--gutter)',
                 zIndex: 20,
                 display: 'flex',
@@ -258,7 +272,7 @@ export function HomePage() {
                 maxWidth: 'var(--max-width)',
                 width: '100%',
                 margin: '0 auto',
-                padding: '96px var(--gutter) 40px var(--gutter)',
+                padding: 'calc(var(--header-height) + 16px) var(--gutter) 32px var(--gutter)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between'
@@ -279,7 +293,7 @@ export function HomePage() {
                   pointerEvents: beat1Opacity > 0.05 ? 'auto' : 'none',
                   maxWidth: '680px',
                   marginTop: 'auto',
-                  marginBottom: '28px'
+                  marginBottom: '20px'
                 }}
               >
                 <span
@@ -287,7 +301,7 @@ export function HomePage() {
                   style={{
                     color: 'var(--color-bronze-light)',
                     display: 'inline-block',
-                    marginBottom: '16px'
+                    marginBottom: '14px'
                   }}
                 >
                   AUREL / A GARDEN ADDRESS
@@ -296,10 +310,10 @@ export function HomePage() {
                 <h1
                   className="font-serif"
                   style={{
-                    fontSize: 'clamp(44px, 6.2vw, 84px)',
-                    lineHeight: 1.02,
+                    fontSize: 'clamp(36px, 5.5vw, 84px)',
+                    lineHeight: 1.04,
                     letterSpacing: '-0.02em',
-                    marginBottom: '20px',
+                    marginBottom: '18px',
                     fontWeight: 500,
                     color: '#FFFFFF',
                     textShadow: '0 4px 20px rgba(0,0,0,0.5)'
@@ -310,10 +324,10 @@ export function HomePage() {
 
                 <p
                   style={{
-                    fontSize: 'clamp(17px, 1.8vw, 21px)',
+                    fontSize: 'clamp(15px, 1.6vw, 21px)',
                     lineHeight: 1.5,
                     color: 'rgba(244, 240, 232, 0.95)',
-                    marginBottom: '32px',
+                    marginBottom: '24px',
                     maxWidth: '560px',
                     textShadow: '0 2px 10px rgba(0,0,0,0.4)'
                   }}
@@ -321,14 +335,14 @@ export function HomePage() {
                   Private terraces. Considered interiors. A little more room to breathe.
                 </p>
 
-                <div className="hero-actions" style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <div className="hero-actions" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
                   <Link
                     to="/explore/building"
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '8px',
-                      padding: '14px 28px',
+                      padding: '13px 24px',
                       backgroundColor: 'var(--color-green)',
                       color: '#FFFFFF',
                       borderRadius: 'var(--radius-sm)',
@@ -347,7 +361,7 @@ export function HomePage() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '8px',
-                      padding: '14px 24px',
+                      padding: '13px 22px',
                       border: '1px solid rgba(255, 255, 255, 0.35)',
                       backgroundColor: 'rgba(24, 34, 31, 0.75)',
                       backdropFilter: 'blur(8px)',
